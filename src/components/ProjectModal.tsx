@@ -42,7 +42,7 @@ export function ProjectModal({ project, onClose }: Props) {
         {/* Close */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/50 flex items-center justify-center text-white/60 hover:text-white hover:bg-black/80 transition-colors"
+          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/50 flex items-center justify-center text-white/60 hover:text-white hover:bg-black/80 transition-colors cursor-pointer"
           aria-label={t('proj.close')}
         >
           <X size={18} />
@@ -74,7 +74,7 @@ export function ProjectModal({ project, onClose }: Props) {
                 <button
                   key={idx}
                   onClick={() => setActiveImage(img)}
-                  className={`w-14 h-10 sm:w-16 sm:h-12 rounded-lg overflow-hidden border-2 transition-all ${
+                  className={`w-14 h-10 sm:w-16 sm:h-12 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
                     activeImage === img ? 'border-primary-container' : 'border-white/10 opacity-60 hover:opacity-100'
                   }`}
                 >

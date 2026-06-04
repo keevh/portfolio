@@ -16,8 +16,12 @@ export function Projects() {
   const [currentPage, setCurrentPage]          = useState(0);
   const [direction, setDirection]              = useState(1);
   const scrollTargetRef                        = useRef<number | null>(null);
+  const cancelScrollRef                        = useRef<(() => void) | null>(null);
+  const gridRef                                = useRef<HTMLDivElement>(null);
+  const [gridMinHeight, setGridMinHeight]      = useState<number | undefined>(undefined);
 
   const goToPage = useCallback((next: number) => {
+    if (gridRef.current) setGridMinHeight(gridRef.current.offsetHeight);
     const el = document.getElementById('projects');
     scrollTargetRef.current = el ? el.getBoundingClientRect().top + window.scrollY : null;
     setDirection(next > currentPage ? 1 : -1);
@@ -25,7 +29,7 @@ export function Projects() {
   }, [currentPage]);
 
 
-  const projects = useMemo(() => resolveProjects(t, language), [t, language]);
+  const projects = useMemo(() => resolveProjects(t as (key: string) => string, language), [t, language]);
   const filtered = useMemo(
     () => projects.filter((p) => activeFilter === 'all' || p.category === activeFilter),
     [projects, activeFilter],
@@ -33,6 +37,16 @@ export function Projects() {
 
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
   const paginated  = filtered.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE);
+
+  useEffect(() => {
+    const cancel = () => { cancelScrollRef.current?.(); cancelScrollRef.current = null; };
+    window.addEventListener('wheel',      cancel, { passive: true });
+    window.addEventListener('touchstart', cancel, { passive: true });
+    return () => {
+      window.removeEventListener('wheel',      cancel);
+      window.removeEventListener('touchstart', cancel);
+    };
+  }, []);
 
   const openProject  = useCallback((p: Project) => setSelectedProject(p), []);
   const closeProject = useCallback(() => setSelectedProject(null), []);
@@ -97,28 +111,8 @@ export function Projects() {
       </motion.div>
 
       {/* Grid */}
-      <div className="overflow-hidden">
-        <AnimatePresence mode="wait" custom={direction}>
-          <motion.div
-            key={`${activeFilter}-${currentPage}`}
-            custom={direction}
-            variants={{
-              enter:  (d: number) => ({ opacity: 0, x: d * 40 }),
-              center: { opacity: 1, x: 0 },
-              exit:   (d: number) => ({ opacity: 0, x: d * -40 }),
-            }}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-            onAnimationComplete={() => {
-              if (scrollTargetRef.current === null) return;
-              const target = scrollTargetRef.current;
-              scrollTargetRef.current = null;
-              setTimeout(() => smoothScrollTo(target), 120);
-            }}
-          >
+      <div ref={gridRef} style={{ minHeight: gridMinHeight }} className="grid grid-cols-1 md:grid-cols-2 gap-6 content-start">
+        <AnimatePresence mode="popLayout">
           {filtered.length === 0 && (
             <motion.div
               key="empty"
@@ -134,13 +128,30 @@ export function Projects() {
           )}
           {paginated.map((project, index) => (
             <motion.div
-              key={project.id}
+              key={`${activeFilter}-${currentPage}-${project.id}`}
+              layout
               className="glass-panel rounded-[24px] overflow-hidden flex flex-col cursor-pointer group"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
+              custom={direction}
+              variants={{
+                enter:  (d: number) => ({ opacity: 0, x: d * 30 }),
+                center: { opacity: 1, x: 0 },
+                exit:   (d: number) => ({ opacity: 0, x: d * -30 }),
+              }}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.25, delay: index * 0.04, ease: [0.4, 0, 0.2, 1] }}
               whileHover={{ y: -6, boxShadow: '0 0 40px rgba(0,242,255,0.12)' }}
               onClick={() => openProject(project)}
+              onAnimationComplete={() => {
+                if (index !== paginated.length - 1 || scrollTargetRef.current === null) return;
+                const target = scrollTargetRef.current;
+                scrollTargetRef.current = null;
+                setTimeout(() => {
+                  cancelScrollRef.current = smoothScrollTo(target);
+                  setGridMinHeight(undefined);
+                }, 120);
+              }}
             >
               {/* Thumbnail */}
               <div className="h-52 overflow-hidden relative flex-shrink-0">
@@ -192,7 +203,6 @@ export function Projects() {
               </div>
             </motion.div>
           ))}
-          </motion.div>
         </AnimatePresence>
       </div>
 
@@ -207,7 +217,7 @@ export function Projects() {
           <motion.button
             onClick={() => goToPage(currentPage - 1)}
             disabled={currentPage === 0}
-            className="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-on-surface-variant disabled:opacity-30 hover:text-on-surface transition-colors"
+            className="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-on-surface-variant disabled:opacity-30 hover:text-on-surface transition-colors cursor-pointer disabled:cursor-default"
             whileTap={{ scale: 0.9 }}
           >
             ‹
@@ -217,7 +227,7 @@ export function Projects() {
             <motion.button
               key={i}
               onClick={() => goToPage(i)}
-              className={`w-9 h-9 rounded-full font-code-sm text-xs transition-colors ${
+              className={`w-9 h-9 rounded-full font-code-sm text-xs transition-colors cursor-pointer ${
                 currentPage === i
                   ? 'bg-primary-container text-on-primary-container'
                   : 'glass-panel text-on-surface-variant hover:text-on-surface'
@@ -231,7 +241,7 @@ export function Projects() {
           <motion.button
             onClick={() => goToPage(currentPage + 1)}
             disabled={currentPage === totalPages - 1}
-            className="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-on-surface-variant disabled:opacity-30 hover:text-on-surface transition-colors"
+            className="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-on-surface-variant disabled:opacity-30 hover:text-on-surface transition-colors cursor-pointer disabled:cursor-default"
             whileTap={{ scale: 0.9 }}
           >
             ›
