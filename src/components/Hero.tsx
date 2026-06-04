@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import { smoothScrollTo } from '../utils/scroll';
 
 const PHOTO_SRC =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuBzKThiuJBg63w6hkaDjTrb92nzpD5xBh9l5BfqNlLW5HVYEJJHIAQ7icbM4F4meNyfc8f7YjcDEPq2N5A-M-dYtED2DPh_86KqSmYqzleqYKAEZneCy6GXeEHmfyvaTq5qrF1uqqW-SM2bVKOXkeH2o0gpW3L3DcUPfTU6RwqCsOg2EZ4-JxzfsFOu7WUNoBb823NfLdN-JRWoMV4rU6TBvAB1ktRlLiHEvrZuD_PXB199egvCHqHCyElgy3rqTzTzD0rleIH6y8x_';
@@ -133,6 +134,7 @@ export function Hero() {
             <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
               <motion.a
                 href="#projects"
+                onClick={(e) => { e.preventDefault(); const el = document.getElementById('projects'); if (el) smoothScrollTo(el.getBoundingClientRect().top + window.scrollY); }}
                 className="inline-flex items-center justify-center h-12 px-8 rounded-full font-label-caps text-xs bg-primary-container text-on-primary-container shadow-[0_0_20px_rgba(0,242,255,0.2)]"
                 whileHover={{ opacity: 0.9 }}
                 whileTap={{ y: 4, scale: 0.97 }}
@@ -142,6 +144,7 @@ export function Hero() {
               </motion.a>
               <motion.a
                 href="#contact"
+                onClick={(e) => { e.preventDefault(); const el = document.getElementById('contact'); if (el) smoothScrollTo(el.getBoundingClientRect().top + window.scrollY); }}
                 className="inline-flex items-center justify-center h-12 px-8 rounded-full font-label-caps text-xs border border-primary-container/30 text-primary-container"
                 whileHover={{ backgroundColor: 'rgba(0,242,255,0.08)' }}
                 whileTap={{ y: 4, scale: 0.97 }}

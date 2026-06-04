@@ -1,22 +1,38 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion, AnimatePresence } from 'motion/react';
+import { smoothScrollTo } from '../utils/scroll';
 import { ProjectModal } from './ProjectModal';
-import { PROJECT_DATA, resolveProjects } from '../data/projects';
+import { resolveProjects } from '../data/projects';
 import type { Category, Project } from '../data/projects';
 
-const FILTERS: Category[] = ['all', 'fullstack', 'frontend', 'backend'];
+const FILTERS: Category[] = ['all', 'fullstack', 'frontend', 'backend', 'hardware'];
+const PAGE_SIZE = 4;
 
 export function Projects() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeFilter, setActiveFilter]        = useState<Category>('all');
+  const [currentPage, setCurrentPage]          = useState(0);
+  const [direction, setDirection]              = useState(1);
+  const scrollTargetRef                        = useRef<number | null>(null);
 
-  const projects = useMemo(() => resolveProjects(PROJECT_DATA, t), [t]);
+  const goToPage = useCallback((next: number) => {
+    const el = document.getElementById('projects');
+    scrollTargetRef.current = el ? el.getBoundingClientRect().top + window.scrollY : null;
+    setDirection(next > currentPage ? 1 : -1);
+    setCurrentPage(next);
+  }, [currentPage]);
+
+
+  const projects = useMemo(() => resolveProjects(t, language), [t, language]);
   const filtered = useMemo(
     () => projects.filter((p) => activeFilter === 'all' || p.category === activeFilter),
     [projects, activeFilter],
   );
+
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+  const paginated  = filtered.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE);
 
   const openProject  = useCallback((p: Project) => setSelectedProject(p), []);
   const closeProject = useCallback(() => setSelectedProject(null), []);
@@ -44,7 +60,7 @@ export function Projects() {
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.6 }}
       >
-        <span className="font-code-sm text-sm text-secondary uppercase tracking-widest">{t('proj.subtitle')}</span>
+        <span className="font-code-sm text-secondary uppercase tracking-widest block">{t('proj.subtitle')}</span>
         <h2 className="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface">{t('proj.title')}</h2>
       </motion.div>
 
@@ -59,7 +75,7 @@ export function Projects() {
         {FILTERS.map((cat) => (
           <motion.button
             key={cat}
-            onClick={() => setActiveFilter(cat)}
+            onClick={() => { setActiveFilter(cat); setCurrentPage(0); setDirection(1); }}
             className={`relative px-5 py-2 rounded-full font-label-caps text-xs transition-colors ${
               activeFilter === cat
                 ? 'text-on-primary-container'
@@ -81,17 +97,48 @@ export function Projects() {
       </motion.div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <AnimatePresence mode="popLayout">
-          {filtered.map((project, index) => (
+      <div className="overflow-hidden">
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.div
+            key={`${activeFilter}-${currentPage}`}
+            custom={direction}
+            variants={{
+              enter:  (d: number) => ({ opacity: 0, x: d * 40 }),
+              center: { opacity: 1, x: 0 },
+              exit:   (d: number) => ({ opacity: 0, x: d * -40 }),
+            }}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            onAnimationComplete={() => {
+              if (scrollTargetRef.current === null) return;
+              const target = scrollTargetRef.current;
+              scrollTargetRef.current = null;
+              setTimeout(() => smoothScrollTo(target), 120);
+            }}
+          >
+          {filtered.length === 0 && (
+            <motion.div
+              key="empty"
+              className="col-span-full flex flex-col items-center justify-center py-20 gap-4 text-on-surface-variant"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <span className="text-4xl">{'{ }'}</span>
+              <p className="font-code-sm text-sm">{t('proj.filter.empty')}</p>
+            </motion.div>
+          )}
+          {paginated.map((project, index) => (
             <motion.div
               key={project.id}
-              layout
               className="glass-panel rounded-[24px] overflow-hidden flex flex-col cursor-pointer group"
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.35, delay: index * 0.06 }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
               whileHover={{ y: -6, boxShadow: '0 0 40px rgba(0,242,255,0.12)' }}
               onClick={() => openProject(project)}
             >
@@ -145,8 +192,52 @@ export function Projects() {
               </div>
             </motion.div>
           ))}
+          </motion.div>
         </AnimatePresence>
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <motion.div
+          className="flex items-center justify-center gap-3 mt-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <motion.button
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 0}
+            className="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-on-surface-variant disabled:opacity-30 hover:text-on-surface transition-colors"
+            whileTap={{ scale: 0.9 }}
+          >
+            ‹
+          </motion.button>
+
+          {Array.from({ length: totalPages }, (_, i) => (
+            <motion.button
+              key={i}
+              onClick={() => goToPage(i)}
+              className={`w-9 h-9 rounded-full font-code-sm text-xs transition-colors ${
+                currentPage === i
+                  ? 'bg-primary-container text-on-primary-container'
+                  : 'glass-panel text-on-surface-variant hover:text-on-surface'
+              }`}
+              whileTap={{ scale: 0.9 }}
+            >
+              {i + 1}
+            </motion.button>
+          ))}
+
+          <motion.button
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={currentPage === totalPages - 1}
+            className="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-on-surface-variant disabled:opacity-30 hover:text-on-surface transition-colors"
+            whileTap={{ scale: 0.9 }}
+          >
+            ›
+          </motion.button>
+        </motion.div>
+      )}
 
       {/* Modal */}
       <AnimatePresence mode="wait">

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { smoothScrollTo } from '../utils/scroll';
 import { AnimatePresence, motion } from 'motion/react';
 import { Menu, X, Globe } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -17,6 +18,14 @@ export function Header() {
 
   const closeMenu = () => setMenuOpen(false);
 
+  const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const top = id
+      ? (document.getElementById(id)?.getBoundingClientRect().top ?? 0) + window.scrollY
+      : 0;
+    smoothScrollTo(top);
+  };
+
   return (
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-white/10">
       {/* Top bar */}
@@ -24,6 +33,7 @@ export function Header() {
         {/* Logo */}
         <a
           href="#"
+          onClick={(e) => scrollTo(e, '')}
           className="font-headline-md text-base lg:text-xl font-bold text-on-surface flex items-center gap-1 shrink-0 whitespace-nowrap"
         >
           <span className="text-primary-container">&lt;</span>
@@ -37,6 +47,7 @@ export function Header() {
             <motion.a
               key={href}
               href={href}
+              onClick={(e) => scrollTo(e, href.slice(1))}
               className="text-on-surface-variant hover:text-primary-container transition-colors duration-200 whitespace-nowrap"
               whileTap={{ y: 2, scale: 0.92 }}
               transition={{ type: 'spring', stiffness: 400, damping: 15 }}
@@ -104,7 +115,7 @@ export function Header() {
                 <motion.a
                   key={href}
                   href={href}
-                  onClick={closeMenu}
+                  onClick={(e) => { scrollTo(e, href.slice(1)); closeMenu(); }}
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05, duration: 0.2 }}
