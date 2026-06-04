@@ -114,35 +114,41 @@ export function Hero() {
 
 
             {/* Heading */}
-            <div className="flex flex-col gap-2 text-center lg:text-left">
-              <h1 className="font-display-lg text-4xl sm:text-5xl lg:text-6xl text-on-surface leading-tight">
+            <div className="flex flex-col gap-3 text-center lg:text-left">
+              <h1 className="font-display-lg text-5xl sm:text-6xl lg:text-7xl text-on-surface leading-tight">
                 {t('hero.greeting')} {t('hero.im')}
                 <span className="text-primary-container">.</span>
               </h1>
-              <h2 className="font-display-lg text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gradient pb-1">
+              <h2 className="font-display-lg text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gradient pb-1">
                 {t('hero.specialty')}
               </h2>
             </div>
 
             {/* Description */}
-            <p className="font-code-sm text-sm text-on-surface-variant border-l-2 border-primary-container pl-4 max-w-md mx-auto lg:mx-0 text-left">
+            <p className="font-code-sm text-base text-on-surface-variant border-l-2 border-primary-container pl-4 max-w-md mx-auto lg:mx-0 text-left leading-relaxed">
               {t('hero.desc')}
             </p>
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-              <a
+              <motion.a
                 href="#projects"
-                className="inline-flex items-center justify-center h-11 px-7 rounded-full font-label-caps text-xs bg-primary-container text-on-primary-container hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(0,242,255,0.2)]"
+                className="inline-flex items-center justify-center h-12 px-8 rounded-full font-label-caps text-xs bg-primary-container text-on-primary-container shadow-[0_0_20px_rgba(0,242,255,0.2)]"
+                whileHover={{ opacity: 0.9 }}
+                whileTap={{ y: 4, scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 15 }}
               >
                 {t('hero.btn.projects')}
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href="#contact"
-                className="inline-flex items-center justify-center h-11 px-7 rounded-full font-label-caps text-xs border border-primary-container/30 text-primary-container hover:bg-primary-container/10 transition-colors"
+                className="inline-flex items-center justify-center h-12 px-8 rounded-full font-label-caps text-xs border border-primary-container/30 text-primary-container"
+                whileHover={{ backgroundColor: 'rgba(0,242,255,0.08)' }}
+                whileTap={{ y: 4, scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 15 }}
               >
                 {t('hero.btn.contact')}
-              </a>
+              </motion.a>
             </div>
           </motion.div>
 

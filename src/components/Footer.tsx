@@ -14,10 +14,10 @@ export function Footer() {
       </p>
       
       <div className="flex items-center gap-6">
-        <a className="font-code-sm text-on-surface-variant hover:text-primary transition-colors hover:glow-primary" href="#">
+        <a className="font-code-sm text-on-surface-variant hover:text-primary transition-colors" href="https://github.com/Keevh" target="_blank" rel="noopener noreferrer">
           Github
         </a>
-        <a className="font-code-sm text-on-surface-variant hover:text-primary transition-colors hover:glow-primary" href="#">
+        <a className="font-code-sm text-on-surface-variant hover:text-primary transition-colors" href="https://www.linkedin.com/in/keevh/" target="_blank" rel="noopener noreferrer">
           LinkedIn
         </a>
       </div>

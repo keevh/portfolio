@@ -64,9 +64,9 @@ export function Contact() {
           </p>
           <div className="flex flex-col gap-3 mt-4">
             {[
-              { href: 'mailto:andreskevin2606@gmail.com', icon: <Mail size={20} />, label: 'andreskevin2606@gmail.com' },
-              { href: '#', icon: <Github size={20} />, label: 'github.com/kevingallardo' },
-              { href: '#', icon: <Linkedin size={20} />, label: 'linkedin.com/in/kevingallardo' },
+              { href: 'mailto:kevin@keevh.dev', icon: <Mail size={20} />, label: 'kevin@keevh.dev' },
+              { href: 'https://github.com/Keevh', icon: <Github size={20} />, label: 'github.com/Keevh' },
+              { href: 'https://www.linkedin.com/in/keevh/', icon: <Linkedin size={20} />, label: 'linkedin.com/in/keevh' },
             ].map(({ href, icon, label }) => (
               <a
                 key={label}
@@ -124,13 +124,13 @@ export function Contact() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     onBlur={() => setTouched(t => ({ ...t, name: true }))}
-                    placeholder="Tu nombre"
+                    placeholder={t('contact.placeholder.name')}
                     className="min-w-0 flex-1 bg-[#252526]/60 border border-transparent rounded px-2 py-1 text-[#98c379] focus:outline-none focus:border-white/20 transition-colors placeholder:text-gray-600"
                   />
                   <span className="text-[#98c379] shrink-0">",</span>
                 </div>
                 {(touched.name || submitted) && isNameEmpty && (
-                  <p className="text-[#ff5f56]"><span className="text-gray-600 mr-1">//</span>nombre requerido</p>
+                  <p className="text-[#ff5f56]"><span className="text-gray-600 mr-1">//</span>{t('contact.error.name')}</p>
                 )}
               </div>
 
@@ -146,16 +146,16 @@ export function Contact() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     onBlur={() => setTouched(t => ({ ...t, email: true }))}
-                    placeholder="tu@email.com"
+                    placeholder={t('contact.placeholder.email')}
                     className="min-w-0 flex-1 bg-[#252526]/60 border border-transparent rounded px-2 py-1 text-[#98c379] focus:outline-none focus:border-white/20 transition-colors placeholder:text-gray-600"
                   />
                   <span className="text-[#98c379] shrink-0">",</span>
                 </div>
                 {(touched.email || submitted) && isEmailEmpty && (
-                  <p className="text-[#ff5f56]"><span className="text-gray-600 mr-1">//</span>correo requerido</p>
+                  <p className="text-[#ff5f56]"><span className="text-gray-600 mr-1">//</span>{t('contact.error.email')}</p>
                 )}
                 {(touched.email || submitted) && !isEmailEmpty && !isEmailValid && (
-                  <p className="text-[#ff5f56]"><span className="text-gray-600 mr-1">//</span>formato inválido</p>
+                  <p className="text-[#ff5f56]"><span className="text-gray-600 mr-1">//</span>{t('contact.error.email.invalid')}</p>
                 )}
               </div>
 
@@ -170,12 +170,12 @@ export function Contact() {
                   onChange={(e) => setMessage(e.target.value)}
                   onBlur={() => setTouched(t => ({ ...t, message: true }))}
                   rows={4}
-                  placeholder="Hola, me gustaría trabajar contigo..."
+                  placeholder={t('contact.placeholder.message')}
                   className="w-full bg-[#252526]/60 border border-transparent rounded px-2 py-2 text-[#98c379] focus:outline-none focus:border-white/20 transition-colors resize-none placeholder:text-gray-600"
                 />
                 <span className="text-[#98c379]">`</span>
                 {(touched.message || submitted) && isMessageEmpty && (
-                  <p className="text-[#ff5f56]"><span className="text-gray-600 mr-1">//</span>mensaje requerido</p>
+                  <p className="text-[#ff5f56]"><span className="text-gray-600 mr-1">//</span>{t('contact.error.message')}</p>
                 )}
               </div>
             </div>

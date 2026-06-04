@@ -20,7 +20,7 @@ export function Header() {
   return (
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-white/10">
       {/* Top bar */}
-      <div className="flex justify-between items-center h-16 px-4 sm:px-6 lg:px-16 max-w-7xl mx-auto">
+      <div className="flex justify-between items-center gap-8 h-16 px-4 sm:px-6 lg:px-16 max-w-7xl mx-auto">
         {/* Logo */}
         <a
           href="#"
@@ -32,20 +32,22 @@ export function Header() {
         </a>
 
         {/* Desktop nav — lg+ only */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-8 font-label-caps text-xs">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-10 font-label-caps text-xs">
           {navLinks.map(({ href, label }) => (
-            <a
+            <motion.a
               key={href}
               href={href}
-              className="text-on-surface-variant hover:text-primary-container transition-colors duration-200"
+              className="text-on-surface-variant hover:text-primary-container transition-colors duration-200 whitespace-nowrap"
+              whileTap={{ y: 2, scale: 0.92 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
             >
               {label}
-            </a>
+            </motion.a>
           ))}
         </nav>
 
         {/* Desktop actions */}
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-6">
           <button
             onClick={toggleLanguage}
             className="font-label-caps text-xs text-on-surface-variant hover:text-primary-container transition-colors flex items-center gap-2"
