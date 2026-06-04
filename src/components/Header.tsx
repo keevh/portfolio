@@ -24,7 +24,7 @@ export function Header() {
         {/* Logo */}
         <a
           href="#"
-          className="font-headline-md text-base lg:text-xl font-bold text-on-surface flex items-center gap-1 shrink-0"
+          className="font-headline-md text-base lg:text-xl font-bold text-on-surface flex items-center gap-1 shrink-0 whitespace-nowrap"
         >
           <span className="text-primary-container">&lt;</span>
           Kevin Gallardo
