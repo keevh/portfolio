@@ -71,7 +71,9 @@ export function Contact() {
               <a
                 key={label}
                 href={href}
-                className="flex items-center gap-3 text-on-surface-variant hover:text-primary-container transition-colors group"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 w-fit text-on-surface-variant hover:text-primary-container transition-colors group"
               >
                 <div className="shrink-0 w-10 h-10 rounded-full glass-panel flex items-center justify-center group-hover:bg-primary-container/10 transition-colors">
                   {icon}
