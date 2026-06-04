@@ -3,9 +3,12 @@ import { ExternalLink, Github, FlaskConical, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion, AnimatePresence } from 'motion/react';
 
+type Category = 'all' | 'fullstack' | 'frontend' | 'backend';
+
 type Project = {
   id: string;
   title: string;
+  category: Category;
   image: string;
   gallery: string[];
   highlights: string[];
@@ -31,6 +34,7 @@ export function Projects() {
   const { t } = useLanguage();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeImage, setActiveImage] = useState<string>('');
+  const [activeFilter, setActiveFilter] = useState<Category>('all');
 
   const openProject = useCallback((project: Project) => {
     setActiveImage(project.image);
@@ -56,6 +60,7 @@ export function Projects() {
     {
       id: 'facepet',
       title: 'FacePet',
+      category: 'frontend' as Category,
       image: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=2069&auto=format&fit=crop',
       gallery: [
         'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=2069&auto=format&fit=crop',
@@ -81,6 +86,7 @@ export function Projects() {
     {
       id: 'votora',
       title: 'Votora / MQTT',
+      category: 'backend' as Category,
       image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2070',
       gallery: [
         'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2070',
@@ -102,6 +108,7 @@ export function Projects() {
     {
       id: 'shortener',
       title: t('proj.shortener.title') || 'Acortador de Enlaces',
+      category: 'fullstack' as Category,
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070',
       gallery: [
         'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070',
@@ -123,6 +130,7 @@ export function Projects() {
     {
       id: 'nilm',
       title: t('proj.nilm.title') || 'Simulación NILM',
+      category: 'fullstack' as Category,
       image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&q=80&w=2072',
       gallery: [
         'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&q=80&w=2072',
@@ -151,7 +159,7 @@ export function Projects() {
       <div className="absolute left-0 top-1/2 w-[300px] h-[300px] rounded-full bg-primary-container/5 blur-[100px] -z-10 pointer-events-none" />
 
       <motion.div
-        className="flex flex-col items-center text-center gap-4 mb-16"
+        className="flex flex-col items-center text-center gap-4 mb-10"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-50px' }}
@@ -161,16 +169,50 @@ export function Projects() {
         <h2 className="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface">{t('proj.title')}</h2>
       </motion.div>
 
+      {/* Category filter */}
+      <motion.div
+        className="flex flex-wrap justify-center gap-2 mb-10"
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
+        {(['all', 'fullstack', 'frontend', 'backend'] as Category[]).map((cat) => (
+          <motion.button
+            key={cat}
+            onClick={() => setActiveFilter(cat)}
+            className={`relative px-5 py-2 rounded-full font-label-caps text-xs transition-colors ${
+              activeFilter === cat
+                ? 'text-on-primary-container'
+                : 'text-on-surface-variant hover:text-on-surface glass-panel'
+            }`}
+            whileTap={{ scale: 0.94 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+          >
+            {activeFilter === cat && (
+              <motion.span
+                layoutId="filter-pill"
+                className="absolute inset-0 rounded-full bg-primary-container"
+                transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+              />
+            )}
+            <span className="relative z-10">{t(`proj.filter.${cat}`)}</span>
+          </motion.button>
+        ))}
+      </motion.div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {projects.map((project, index) => (
+        <AnimatePresence mode="popLayout">
+        {projects.filter(p => activeFilter === 'all' || p.category === activeFilter).map((project, index) => (
           <motion.div
             key={project.id}
+            layout
             className="glass-panel rounded-[24px] overflow-hidden flex flex-col cursor-pointer group"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.5, delay: 0.08 * index }}
-            whileHover={{ y: -4 }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.35, delay: index * 0.06 }}
+            whileHover={{ y: -6, boxShadow: '0 0 40px rgba(0,242,255,0.12)' }}
             onClick={() => openProject(project)}
           >
             {/* Thumbnail */}
@@ -223,6 +265,7 @@ export function Projects() {
             </div>
           </motion.div>
         ))}
+        </AnimatePresence>
       </div>
 
       {/* Modal */}
