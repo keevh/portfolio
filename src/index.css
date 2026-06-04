@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #050505;
+  --color-surface: #121212;
+  --color-surface-container: #201f1f;
+  --color-surface-dim: #131313;
+  --color-primary: #00dbe7;
+  --color-primary-container: #00f2ff;
+  --color-on-primary-container: #006a71;
+  --color-secondary: #ffb3b0;
+  --color-on-surface: #e5e2e1;
+  --color-on-surface-variant: rgba(255, 255, 255, 0.5);
+
+  --font-sans: 'Geist', sans-serif;
+  --font-display: 'Sora', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(18, 18, 18, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .glow-primary {
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.15);
+  }
+  .glow-primary-hover:hover {
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+  }
+  .text-gradient {
+    background: linear-gradient(90deg, #e1fdff 0%, #00dbe7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  /* Typography classes — only font-family, weight, tracking. Size/leading via Tailwind responsive utilities. */
+  .font-display-lg {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+  }
+  .font-headline-lg {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .font-headline-md {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .font-body-lg {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.6;
+  }
+  .font-body-md {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.6;
+  }
+  .font-code-sm {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .font-label-caps {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+  @apply antialiased overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
