@@ -1,43 +1,75 @@
-import { useRef, Suspense } from 'react';
+import { useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { motion } from 'motion/react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, Environment, MeshDistortMaterial, OrbitControls } from '@react-three/drei';
-import type { Mesh } from 'three';
+import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 
-const PHOTO_SRC = 'https://lh3.googleusercontent.com/aida-public/AB6AXuBzKThiuJBg63w6hkaDjTrb92nzpD5xBh9l5BfqNlLW5HVYEJJHIAQ7icbM4F4meNyfc8f7YjcDEPq2N5A-M-dYtED2DPh_86KqSmYqzleqYKAEZneCy6GXeEHmfyvaTq5qrF1uqqW-SM2bVKOXkeH2o0gpW3L3DcUPfTU6RwqCsOg2EZ4-JxzfsFOu7WUNoBb823NfLdN-JRWoMV4rU6TBvAB1ktRlLiHEvrZuD_PXB199egvCHqHCyElgy3rqTzTzD0rleIH6y8x_';
+const PHOTO_SRC =
+  'https://lh3.googleusercontent.com/aida-public/AB6AXuBzKThiuJBg63w6hkaDjTrb92nzpD5xBh9l5BfqNlLW5HVYEJJHIAQ7icbM4F4meNyfc8f7YjcDEPq2N5A-M-dYtED2DPh_86KqSmYqzleqYKAEZneCy6GXeEHmfyvaTq5qrF1uqqW-SM2bVKOXkeH2o0gpW3L3DcUPfTU6RwqCsOg2EZ4-JxzfsFOu7WUNoBb823NfLdN-JRWoMV4rU6TBvAB1ktRlLiHEvrZuD_PXB199egvCHqHCyElgy3rqTzTzD0rleIH6y8x_';
 
-function AbstractShape() {
-  const meshRef = useRef<Mesh>(null);
+function ParallaxPhoto({ src }: { src: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const rawX = useMotionValue(0.5);
+  const rawY = useMotionValue(0.5);
 
-  useFrame((_state, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x += delta * 0.2;
-      meshRef.current.rotation.y += delta * 0.3;
-    }
-  });
+  const spring = { stiffness: 60, damping: 18, mass: 0.8 };
+  const x = useSpring(useTransform(rawX, [0, 1], [-18, 18]), spring);
+  const y = useSpring(useTransform(rawY, [0, 1], [-12, 12]), spring);
+  const glowX = useSpring(useTransform(rawX, [0, 1], [-8, 8]), spring);
+  const glowY = useSpring(useTransform(rawY, [0, 1], [-5, 5]), spring);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    rawX.set((e.clientX - rect.left) / rect.width);
+    rawY.set((e.clientY - rect.top) / rect.height);
+  };
+
+  const handleMouseLeave = () => {
+    rawX.set(0.5);
+    rawY.set(0.5);
+  };
 
   return (
-    <Float floatIntensity={2} speed={1.5} rotationIntensity={1.5}>
-      <mesh ref={meshRef}>
-        <sphereGeometry args={[2.5, 64, 64]} />
-        <MeshDistortMaterial
-          color="#1e1e1e"
-          emissive="#2a0a00"
-          envMapIntensity={1}
-          clearcoat={1}
-          clearcoatRoughness={0.1}
-          metalness={0.6}
-          roughness={0.2}
-          distort={0.4}
-          speed={2}
-        />
-      </mesh>
-      <mesh scale={[2.8, 2.8, 2.8]}>
-        <icosahedronGeometry args={[1, 1]} />
-        <meshBasicMaterial color="#00f2ff" wireframe transparent opacity={0.12} />
-      </mesh>
-    </Float>
+    <div
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative flex justify-center items-center h-80 sm:h-96 lg:h-[520px] select-none"
+    >
+      {/* Ambient glow */}
+      <motion.div
+        style={{ x: glowX, y: glowY }}
+        className="absolute w-64 h-64 rounded-full bg-gradient-to-tr from-primary-container/20 to-secondary/15 blur-[60px] pointer-events-none"
+      />
+
+      {/* Outer spinning ring */}
+      <div className="absolute w-72 h-72 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px] rounded-full border border-white/5 animate-[spin_60s_linear_infinite] pointer-events-none">
+        <div className="absolute top-0 left-[20%] w-4 h-px bg-primary-container shadow-[0_0_8px_#00f2ff]" />
+        <div className="absolute bottom-0 right-[20%] w-4 h-px bg-secondary shadow-[0_0_8px_#14b8a6]" />
+        <div className="absolute top-1/2 left-0 w-px h-4 bg-white/20" />
+        <div className="absolute top-1/2 right-0 w-px h-4 bg-white/20" />
+      </div>
+
+      {/* Inner counter-spinning ring */}
+      <div className="absolute w-56 h-56 sm:w-64 sm:h-64 lg:w-[320px] lg:h-[320px] rounded-full border border-white/5 animate-[spin_40s_linear_infinite_reverse] pointer-events-none">
+        <div className="absolute top-0 right-[30%] w-2 h-px bg-primary-container/60" />
+        <div className="absolute bottom-0 left-[30%] w-2 h-px bg-secondary/60" />
+      </div>
+
+      {/* Image — parallax layer */}
+      <motion.img
+        style={{ x, y }}
+        src={src}
+        alt="Kevin Gallardo"
+        className="relative h-64 sm:h-72 lg:h-[380px] w-auto object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
+        draggable={false}
+      />
+
+      {/* Ground shadow */}
+      <motion.div
+        style={{ x: glowX }}
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 w-32 h-4 rounded-full bg-black/40 blur-xl pointer-events-none"
+      />
+    </div>
   );
 }
 
@@ -45,98 +77,83 @@ export function Hero() {
   const { t } = useLanguage();
 
   return (
-    <section id="about" className="min-h-screen flex items-center relative pt-20">
+    <section
+      id="about"
+      className="min-h-screen flex items-center relative overflow-hidden pt-16"
+    >
       {/* Background glows */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+      <div className="absolute inset-0 pointer-events-none -z-10">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-primary-container/5 blur-[120px]" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-secondary/5 blur-[100px]" />
-        <div className="absolute left-10 top-1/3 text-surface-container font-code-sm opacity-20 select-none hidden md:block">
+        <div className="absolute left-10 top-1/3 text-surface-container font-code-sm opacity-20 select-none hidden xl:block">
           &lt;html&gt;<br />
           &nbsp;&nbsp;&lt;body&gt;<br />
           &nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;<br />
         </div>
       </div>
 
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-16 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-10 lg:py-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-8 items-center min-h-[calc(100vh-4rem)]">
 
-          {/* LEFT — text content */}
+          {/* ── Text column (includes photo on mobile/tablet) ── */}
           <motion.div
-            className="flex flex-col gap-6 z-10 order-2 lg:order-1"
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex flex-col gap-6 lg:gap-8 z-10 justify-center py-8 lg:py-16"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
           >
-            <div className="flex flex-col gap-2">
-              <h1 className="font-display-lg text-4xl sm:text-5xl lg:text-6xl text-on-surface">
-                {t('hero.greeting')} {t('hero.im')}<span className="text-primary-container">.</span>
+            {/* Avatar — mobile/tablet only */}
+            <motion.div
+              className="lg:hidden"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+            >
+              <ParallaxPhoto src={PHOTO_SRC} />
+            </motion.div>
+
+
+            {/* Heading */}
+            <div className="flex flex-col gap-2 text-center lg:text-left">
+              <h1 className="font-display-lg text-4xl sm:text-5xl lg:text-6xl text-on-surface leading-tight">
+                {t('hero.greeting')} {t('hero.im')}
+                <span className="text-primary-container">.</span>
               </h1>
-              <h2 className="font-display-lg text-2xl sm:text-3xl lg:text-4xl text-gradient pb-2">
+              <h2 className="font-display-lg text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gradient pb-1">
                 {t('hero.specialty')}
               </h2>
             </div>
-            <p className="font-code-sm text-sm text-on-surface-variant max-w-md border-l-2 border-primary-container pl-4">
+
+            {/* Description */}
+            <p className="font-code-sm text-sm text-on-surface-variant border-l-2 border-primary-container pl-4 max-w-md mx-auto lg:mx-0 text-left">
               {t('hero.desc')}
             </p>
-            <div className="flex flex-wrap gap-4">
+
+            {/* CTAs */}
+            <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
               <a
-                className="inline-flex items-center justify-center h-12 px-8 rounded-full font-label-caps text-xs bg-primary-container text-on-primary-container hover:bg-primary transition-colors shadow-[0_0_15px_rgba(0,242,255,0.15)]"
                 href="#projects"
+                className="inline-flex items-center justify-center h-11 px-7 rounded-full font-label-caps text-xs bg-primary-container text-on-primary-container hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(0,242,255,0.2)]"
               >
                 {t('hero.btn.projects')}
               </a>
               <a
-                className="inline-flex items-center justify-center h-12 px-8 rounded-full font-label-caps text-xs border border-primary/30 text-primary-container hover:bg-primary-container/10 transition-colors"
                 href="#contact"
+                className="inline-flex items-center justify-center h-11 px-7 rounded-full font-label-caps text-xs border border-primary-container/30 text-primary-container hover:bg-primary-container/10 transition-colors"
               >
                 {t('hero.btn.contact')}
               </a>
             </div>
           </motion.div>
 
-          {/* RIGHT — photo on mobile, 3D on desktop */}
+          {/* ── Photo column — lg+ ── */}
           <motion.div
-            className="flex justify-center items-center order-1 lg:order-2"
-            initial={{ opacity: 0, scale: 0.9 }}
+            className="hidden lg:flex justify-center items-center"
+            initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
-            {/* Mobile: photo card */}
-            <div className="lg:hidden flex justify-center">
-              <div className="w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden ring-2 ring-primary-container/30 shadow-[0_0_40px_rgba(0,242,255,0.1)]">
-                <img
-                  alt="Kevin Gallardo"
-                  className="w-full h-full object-cover grayscale-[20%]"
-                  src={PHOTO_SRC}
-                />
-              </div>
-            </div>
-
-            {/* Desktop: 3D scene only */}
-            <div className="hidden lg:block relative w-full h-[560px] cursor-grab active:cursor-grabbing">
-              {/* Glow behind 3D */}
-              <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-                <div className="w-[380px] h-[380px] rounded-full bg-gradient-to-tr from-primary-container/15 to-secondary/15 blur-[80px]" />
-              </div>
-              {/* Spinning ring */}
-              <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-                <div className="w-[480px] h-[480px] border border-white/5 rounded-full animate-[spin_60s_linear_infinite]">
-                  <div className="absolute top-0 left-[20%] w-4 h-[1px] bg-primary-container shadow-[0_0_10px_#00f2ff]" />
-                  <div className="absolute bottom-0 right-[20%] w-4 h-[1px] bg-secondary shadow-[0_0_10px_#14b8a6]" />
-                  <div className="absolute top-1/2 left-0 w-[1px] h-4 bg-white/20" />
-                  <div className="absolute top-1/2 right-0 w-[1px] h-4 bg-white/20" />
-                </div>
-              </div>
-              <Canvas camera={{ position: [0, 0, 7], fov: 45 }}>
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[10, 10, 5]} intensity={1} />
-                <Suspense fallback={null}>
-                  <AbstractShape />
-                </Suspense>
-                <Environment preset="city" />
-                <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
-              </Canvas>
-            </div>
+            <ParallaxPhoto src={PHOTO_SRC} />
           </motion.div>
 
         </div>

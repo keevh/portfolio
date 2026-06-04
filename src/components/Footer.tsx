@@ -10,7 +10,7 @@ export function Footer() {
       </div>
       
       <p className="font-body-md text-on-surface-variant text-sm mb-6 md:mb-0 text-center">
-        © {new Date().getFullYear()} Kevin Gallardo. {t('footer.built')}
+        © {new Date().getFullYear()} {t('footer.built')}
       </p>
       
       <div className="flex items-center gap-6">
