@@ -57,7 +57,7 @@ export function Header() {
           </button>
           <a
             href="#"
-            className="inline-flex items-center justify-center h-9 px-5 rounded-full font-label-caps text-xs bg-primary-container text-on-primary-container hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(0,242,255,0.2)]"
+            className="inline-flex items-center justify-center h-9 px-5 rounded-full font-label-caps text-xs bg-primary-container text-on-primary-container hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(0,242,255,0.2)] whitespace-nowrap"
           >
             {t('header.cv')}
           </a>
