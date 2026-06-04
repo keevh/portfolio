@@ -6,15 +6,15 @@
   --color-surface: #121212;
   --color-surface-container: #201f1f;
   --color-surface-dim: #131313;
-  --color-primary: #00dbe7;
-  --color-primary-container: #00f2ff;
-  --color-on-primary-container: #006a71;
-  --color-secondary: #ffb3b0;
+  --color-primary: #ff6200;
+  --color-primary-container: #ff7a1f;
+  --color-on-primary-container: #7a2e00;
+  --color-secondary: #2dd4bf;
   --color-on-surface: #e5e2e1;
   --color-on-surface-variant: rgba(255, 255, 255, 0.5);
 
   --font-sans: 'Geist', sans-serif;
-  --font-display: 'Sora', sans-serif;
+  --font-display: 'Bricolage Grotesque', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -25,13 +25,13 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
   .glow-primary {
-    box-shadow: 0 0 30px rgba(0, 242, 255, 0.15);
+    box-shadow: 0 0 30px rgba(255, 98, 0, 0.15);
   }
   .glow-primary-hover:hover {
-    box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+    box-shadow: 0 0 20px rgba(255, 98, 0, 0.3);
   }
   .text-gradient {
-    background: linear-gradient(90deg, #e1fdff 0%, #00dbe7 100%);
+    background: linear-gradient(90deg, #ffe0cc 0%, #ff6200 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }

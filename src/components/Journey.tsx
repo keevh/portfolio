@@ -54,10 +54,12 @@ export function Journey() {
             <div className="md:hidden absolute left-0 top-0 bottom-0 w-px bg-white/10" />
             <div className={`md:hidden absolute left-[-4px] top-2 w-2 h-2 rounded-full ${item.type === 'edu' ? 'bg-secondary' : 'bg-primary-container'}`} />
 
-            <div className="glass-panel p-6 sm:p-8 rounded-[32px] hover:border-white/10 transition-all duration-300 group relative md:flex justify-between items-start gap-8">
+            <div className={`glass-panel p-6 sm:p-8 rounded-[32px] transition-all duration-300 group relative md:flex justify-between items-start gap-8 border-l-4 ${item.type === 'edu' ? 'border-l-secondary bg-secondary/5 hover:bg-secondary/10' : 'border-l-primary-container bg-primary-container/5 hover:bg-primary-container/10'}`}>
               <div className="md:w-1/3 mb-4 md:mb-0">
                 <div className={`font-code-sm flex items-center gap-2 mb-2 ${item.type === 'edu' ? 'text-secondary' : 'text-primary-container'}`}>
-                  {item.type === 'edu' ? <GraduationCap size={16} /> : <Briefcase size={16} />}
+                  <span className={`p-1.5 rounded-lg ${item.type === 'edu' ? 'bg-secondary/20' : 'bg-primary-container/20'}`}>
+                    {item.type === 'edu' ? <GraduationCap size={16} /> : <Briefcase size={16} />}
+                  </span>
                   {item.period}
                 </div>
                 <div className="font-label-caps text-on-surface-variant uppercase tracking-widest">{item.place}</div>
