@@ -160,7 +160,7 @@
     ],
     "links": [
       { "type": "demo", "url": "https://keevh.github.io/Alien-Monster-Hunter/", "labelKey": "proj.demo", "icon": "ExternalLink" },
-      { "type": "repo", "url": "https://github.com/Keevh/Alien-Monster-Hunter", "labelKey": "proj.repo", "icon": "Github" }
+      { "type": "repo", "url": "https://github.com/keevh/Alien-Monster-Hunter", "labelKey": "proj.repo", "icon": "Github" }
     ],
     "i18n": {
       "es": {

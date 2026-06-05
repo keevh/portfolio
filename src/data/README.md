@@ -81,7 +81,7 @@ Cualquier clase Tailwind de fondo. Ejemplos:
   ],
   "links": [
     { "type": "demo", "url": "https://mi-demo.com", "labelKey": "proj.demo", "icon": "ExternalLink" },
-    { "type": "repo", "url": "https://github.com/Keevh/mi-proyecto", "labelKey": "proj.repo", "icon": "Github" }
+    { "type": "repo", "url": "https://github.com/keevh/mi-proyecto", "labelKey": "proj.repo", "icon": "Github" }
   ],
   "i18n": {
     "es": {

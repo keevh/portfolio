@@ -66,7 +66,7 @@ export function Contact() {
           <div className="flex flex-col gap-3 mt-4">
             {[
               { href: 'mailto:kevin@keevh.dev', icon: <Mail size={20} />, label: 'kevin@keevh.dev' },
-              { href: 'https://github.com/Keevh', icon: <Github size={20} />, label: 'github.com/Keevh' },
+              { href: 'https://github.com/keevh', icon: <Github size={20} />, label: 'github.com/keevh' },
               { href: 'https://www.linkedin.com/in/keevh/', icon: <Linkedin size={20} />, label: 'linkedin.com/in/keevh' },
             ].map(({ href, icon, label }) => (
               <a
