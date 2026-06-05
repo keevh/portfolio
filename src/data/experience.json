@@ -2,8 +2,8 @@
   {
     "id": 1,
     "type": "edu",
-    "place": "Universidad Nacional",
-    "period": "2020 - Presente",
+    "place": "Universidad Industrial de Santander (UIS)",
+    "period": "2019 - Presente",
     "i18n": {
       "es": {
         "title": "Ingeniería de Sistemas",
@@ -28,22 +28,6 @@
       "en": {
         "title": "Freelance Web Developer",
         "desc": "Development of custom web applications for small businesses, integration with services, and full-stack responsive design."
-      }
-    }
-  },
-  {
-    "id": 3,
-    "type": "edu",
-    "place": "Instituto Tecnológico",
-    "period": "2015 - 2019",
-    "i18n": {
-      "es": {
-        "title": "Bachillerato Técnico",
-        "desc": "Fundamentos de programación, lógica computacional y gestión de bases de datos."
-      },
-      "en": {
-        "title": "Technical High School",
-        "desc": "Fundamentals of programming, computational logic, and database management."
       }
     }
   }
