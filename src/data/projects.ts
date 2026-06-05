@@ -16,6 +16,7 @@ type ProjectJSON = {
   category: Exclude<Category, 'all'>;
   image: string;
   gallery: string[];
+  liveUrl?: string;
   tags: { labelKey: string; color: string }[];
   links: { type: string; url: string; labelKey: string; icon: string }[];
   i18n: Record<Lang, { title: string; desc: string; highlights: string[] }>;
@@ -27,6 +28,7 @@ export type Project = {
   category: Exclude<Category, 'all'>;
   image: string;
   gallery: string[];
+  liveUrl?: string;
   highlights: string[];
   tags: { label: string; color: string }[];
   desc: string;
@@ -43,6 +45,7 @@ export function resolveProjects(
     category:   p.category,
     image:      p.image,
     gallery:    p.gallery,
+    liveUrl:    p.liveUrl,
     highlights: p.i18n[lang].highlights,
     tags:       p.tags.map(({ labelKey, color }) => ({ label: t(labelKey), color })),
     desc:       p.i18n[lang].desc,

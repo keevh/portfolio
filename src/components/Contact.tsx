@@ -46,7 +46,8 @@ export function Contact() {
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.6 }}
       >
-        <span className="font-code-sm text-secondary uppercase tracking-widest block">{t('contact.subtitle')}</span>
+        <span className="font-code-sm text-secondary uppercase tracking-widest block lg:hidden">{t('contact.subtitle.mobile')}</span>
+        <span className="font-code-sm text-secondary uppercase tracking-widest hidden lg:block">{t('contact.subtitle')}</span>
         <h2 className="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface">{t('contact.title')}</h2>
         <div className="w-16 h-1 bg-primary-container rounded mt-2"></div>
       </motion.div>

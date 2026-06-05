@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X } from 'lucide-react';
+import { X, MonitorPlay } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
 import type { Project } from '../data/projects';
@@ -18,6 +18,7 @@ const modalVariants = {
 export function ProjectModal({ project, onClose }: Props) {
   const { t } = useLanguage();
   const [activeImage, setActiveImage] = useState(project.image);
+  const [tab, setTab] = useState<'info' | 'live'>('info');
 
   return (
     <motion.div
@@ -48,7 +49,39 @@ export function ProjectModal({ project, onClose }: Props) {
           <X size={18} />
         </button>
 
+        {/* Tabs — only when liveUrl exists */}
+        {project.liveUrl && (
+          <div className="flex border-b border-white/10 px-6 pt-4 gap-1 flex-shrink-0">
+            <button
+              onClick={() => setTab('info')}
+              className={`px-4 py-2 font-label-caps text-xs rounded-t-lg transition-colors cursor-pointer ${tab === 'info' ? 'text-primary-container border-b-2 border-primary-container' : 'text-on-surface-variant hover:text-white'}`}
+            >
+              {t('proj.tab.info')}
+            </button>
+            <button
+              onClick={() => setTab('live')}
+              className={`px-4 py-2 font-label-caps text-xs rounded-t-lg transition-colors flex items-center gap-2 cursor-pointer ${tab === 'live' ? 'text-primary-container border-b-2 border-primary-container' : 'text-on-surface-variant hover:text-white'}`}
+            >
+              <MonitorPlay size={14} /> {t('proj.tab.live')}
+            </button>
+          </div>
+        )}
+
+        {/* Live preview iframe */}
+        {tab === 'live' && project.liveUrl && (
+          <div className="flex-grow h-[60vh] rounded-b-[24px] overflow-hidden">
+            <iframe
+              src={project.liveUrl}
+              title={project.title}
+              className="w-full h-full border-0"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin allow-forms"
+            />
+          </div>
+        )}
+
         {/* Main image */}
+        {tab === 'info' && (
         <div className="h-56 sm:h-72 overflow-hidden relative flex-shrink-0 rounded-t-[24px]">
           <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent z-10 pointer-events-none" />
           <AnimatePresence mode="wait">
@@ -65,8 +98,10 @@ export function ProjectModal({ project, onClose }: Props) {
           </AnimatePresence>
         </div>
 
+        )}
+
         {/* Body */}
-        <div className="p-5 sm:p-8 -mt-12 relative z-20 flex-grow">
+        {tab === 'info' && <div className="p-5 sm:p-8 -mt-12 relative z-20 flex-grow">
           {/* Gallery thumbnails */}
           {project.gallery.length > 1 && (
             <div className="flex gap-2 mb-6">
@@ -145,7 +180,7 @@ export function ProjectModal({ project, onClose }: Props) {
               );
             })}
           </div>
-        </div>
+        </div>}
       </motion.div>
     </motion.div>
   );

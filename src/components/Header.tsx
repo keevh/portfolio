@@ -29,12 +29,12 @@ export function Header() {
   return (
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-white/10">
       {/* Top bar */}
-      <div className="flex justify-between items-center gap-8 h-16 px-4 sm:px-6 lg:px-16 max-w-7xl mx-auto">
+      <div className="flex justify-between items-center gap-4 lg:gap-6 xl:gap-8 h-16 px-4 sm:px-6 lg:px-8 xl:px-16 max-w-7xl mx-auto">
         {/* Logo */}
         <a
           href="#"
           onClick={(e) => scrollTo(e, '')}
-          className="font-headline-md text-base lg:text-xl font-bold text-on-surface flex items-center gap-1 shrink-0 whitespace-nowrap"
+          className="font-headline-md text-lg lg:text-2xl font-bold text-on-surface flex items-center gap-1 shrink-0 whitespace-nowrap"
         >
           <span className="text-primary-container">&lt;</span>
           Kevin Gallardo

@@ -6,9 +6,9 @@
   --color-surface: #121212;
   --color-surface-container: #201f1f;
   --color-surface-dim: #131313;
-  --color-primary: #ff6200;
-  --color-primary-container: #ff7a1f;
-  --color-on-primary-container: #7a2e00;
+  --color-primary: #10b981;
+  --color-primary-container: #34d399;
+  --color-on-primary-container: #065f46;
   --color-secondary: #2dd4bf;
   --color-on-surface: #e5e2e1;
   --color-on-surface-variant: rgba(255, 255, 255, 0.5);
@@ -25,13 +25,13 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
   .glow-primary {
-    box-shadow: 0 0 30px rgba(255, 98, 0, 0.15);
+    box-shadow: 0 0 30px rgba(52, 211, 153, 0.15);
   }
   .glow-primary-hover:hover {
-    box-shadow: 0 0 20px rgba(255, 98, 0, 0.3);
+    box-shadow: 0 0 20px rgba(52, 211, 153, 0.3);
   }
   .text-gradient {
-    background: linear-gradient(90deg, #ffe0cc 0%, #ff6200 100%);
+    background: linear-gradient(90deg, #d1fae5 0%, #10b981 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }

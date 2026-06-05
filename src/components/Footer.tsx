@@ -1,3 +1,4 @@
+import { Heart } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export function Footer() {
@@ -9,8 +10,8 @@ export function Footer() {
         <span className="font-bold">&lt;/&gt;</span> KEVIN GALLARDO
       </div>
       
-      <p className="font-body-md text-on-surface-variant text-sm mb-6 md:mb-0 text-center">
-        © {new Date().getFullYear()} {t('footer.built')}
+      <p className="font-body-md text-on-surface-variant text-sm mb-6 md:mb-0 text-center flex items-center gap-1.5">
+        © {new Date().getFullYear()} {t('footer.built')} <Heart size={13} className="text-primary-container fill-primary-container shrink-0" />
       </p>
       
       <div className="flex items-center gap-6">
