@@ -54,6 +54,32 @@ Cualquier clase Tailwind de fondo. Ejemplos:
 
 ---
 
+## games.json
+
+| Campo | Descripción |
+|-------|-------------|
+| `id` | Identificador único (string, sin espacios) |
+| `name` | Nombre del juego en la UI |
+| `url` | URL del juego — se carga en iframe |
+| `preview` | Miniatura para el selector (800px ancho recomendado) |
+| `gif` | Fondo animado del placeholder (1200px ancho recomendado) |
+| `stack` | Tecnologías mostradas debajo del nombre |
+
+```json
+{
+  "id": "mi-juego",
+  "name": "Mi Juego",
+  "url": "https://keevh.github.io/mi-juego/",
+  "preview": "https://mi-imagen.com/preview.jpg",
+  "gif": "https://mi-imagen.com/preview-wide.jpg",
+  "stack": "HTML5 Canvas · JS"
+}
+```
+
+> El selector de juegos solo aparece cuando hay **más de uno** en el array.
+
+---
+
 ## experience.json
 
 ### `type` — ícono y color de la entrada

@@ -75,8 +75,10 @@ Ver `.github/workflows/deploy.yml`.
 
 ## Agregar contenido
 
-**Proyectos** → editá `src/data/projects.json` (ver `src/data/README.md` para la estructura)
+**Proyectos** → editá `src/data/projects.json`
 
 **Experiencia** → editá `src/data/experience.json`
 
-No hace falta tocar código para agregar o modificar proyectos y experiencia.
+**Juegos (Playground)** → editá `src/data/games.json`
+
+Ver `src/data/README.md` para la estructura completa de cada archivo. No hace falta tocar código.

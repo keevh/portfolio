@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Gamepad2, Maximize2, Volume2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../hooks/useLanguage';
+import gamesJson from '../data/games.json';
 
 type Game = {
   id: string;
@@ -12,16 +13,7 @@ type Game = {
   stack: string;
 };
 
-const GAMES: Game[] = [
-  {
-    id: 'alien',
-    name: 'Alien Monster Hunter',
-    url: 'https://keevh.github.io/Alien-Monster-Hunter/',
-    preview: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800',
-    gif: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1200',
-    stack: 'HTML5 Canvas · JS',
-  },
-];
+const GAMES: Game[] = gamesJson;
 
 export function PlaygroundSection() {
   const { t } = useLanguage();
