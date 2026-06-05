@@ -1,5 +1,5 @@
 import { Heart } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 export function Footer() {
   const { t } = useLanguage();

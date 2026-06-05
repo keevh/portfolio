@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { smoothScrollTo } from '../utils/scroll';
 import { AnimatePresence, motion } from 'motion/react';
 import { Menu, X, Globe } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 export function Header() {
   const { t, toggleLanguage } = useLanguage();

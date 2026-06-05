@@ -1,4 +1,4 @@
-import { ElementType } from 'react';
+import type { ElementType } from 'react';
 import { ExternalLink, Github, FlaskConical } from 'lucide-react';
 import projectsJson from './projects.json';
 

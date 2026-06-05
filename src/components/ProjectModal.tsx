@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { X, MonitorPlay } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 import type { Project } from '../data/projects';
 
 type Props = {

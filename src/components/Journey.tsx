@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Briefcase, GraduationCap } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 import { motion } from 'motion/react';
 import experienceJson from '../data/experience.json';
 

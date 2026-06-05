@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Mail, Github, Linkedin } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 import { motion } from 'motion/react';
 
 export function Contact() {

@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 import { motion, useMotionValue, useSpring, useTransform, useInView } from 'motion/react';
 import { smoothScrollTo } from '../utils/scroll';
 

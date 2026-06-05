@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Gamepad2, Maximize2, Volume2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 type Game = {
   id: string;

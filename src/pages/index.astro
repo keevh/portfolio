@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Header } from '../components/Header';
+import { Hero } from '../components/Hero';
+import { TechStack } from '../components/TechStack';
+import { Projects } from '../components/Projects';
+import { Journey } from '../components/Journey';
+import { PlaygroundSection } from '../components/PlaygroundSection';
+import { Contact } from '../components/Contact';
+import { Footer } from '../components/Footer';
+---
+
+<Layout>
+  <Header client:load />
+  <main>
+    <Hero client:load />
+    <TechStack client:visible />
+    <Projects client:visible />
+    <Journey client:visible />
+    <div class="hidden lg:block">
+      <PlaygroundSection client:visible />
+    </div>
+    <Contact client:visible />
+  </main>
+  <Footer client:visible />
+</Layout>
