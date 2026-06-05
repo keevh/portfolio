@@ -3,7 +3,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import { motion, useMotionValue, useSpring, useTransform, useInView } from 'motion/react';
 import { smoothScrollTo } from '../utils/scroll';
 
-const PHOTO_SRC = '/photo.avif';
+const PHOTO_SRC = `${import.meta.env.BASE_URL}photo.avif`;
 
 function ParallaxPhoto({ src }: { src: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
