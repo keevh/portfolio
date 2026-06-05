@@ -42,17 +42,17 @@ function ParallaxPhoto({ src }: { src: string }) {
       />
 
       {/* Outer spinning ring */}
-      <div className="absolute w-72 h-72 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px] rounded-full border border-white/5 animate-[spin_60s_linear_infinite] pointer-events-none">
-        <div className="absolute top-0 left-[20%] w-4 h-px bg-primary-container shadow-[0_0_8px_#00f2ff]" />
-        <div className="absolute bottom-0 right-[20%] w-4 h-px bg-secondary shadow-[0_0_8px_#14b8a6]" />
-        <div className="absolute top-1/2 left-0 w-px h-4 bg-white/20" />
-        <div className="absolute top-1/2 right-0 w-px h-4 bg-white/20" />
+      <div className="absolute w-72 h-72 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px] rounded-full border border-primary-container/20 animate-[spin_60s_linear_infinite] pointer-events-none shadow-[0_0_20px_rgba(52,211,153,0.08)]">
+        <div className="absolute top-0 left-[20%] w-6 h-px bg-primary-container shadow-[0_0_12px_#34d399]" />
+        <div className="absolute bottom-0 right-[20%] w-6 h-px bg-secondary shadow-[0_0_12px_#2dd4bf]" />
+        <div className="absolute top-1/2 left-0 w-px h-5 bg-white/30" />
+        <div className="absolute top-1/2 right-0 w-px h-5 bg-white/30" />
       </div>
 
       {/* Inner counter-spinning ring */}
-      <div className="absolute w-56 h-56 sm:w-64 sm:h-64 lg:w-[320px] lg:h-[320px] rounded-full border border-white/5 animate-[spin_40s_linear_infinite_reverse] pointer-events-none">
-        <div className="absolute top-0 right-[30%] w-2 h-px bg-primary-container/60" />
-        <div className="absolute bottom-0 left-[30%] w-2 h-px bg-secondary/60" />
+      <div className="absolute w-56 h-56 sm:w-64 sm:h-64 lg:w-[320px] lg:h-[320px] rounded-full border border-secondary/20 animate-[spin_40s_linear_infinite_reverse] pointer-events-none">
+        <div className="absolute top-0 right-[30%] w-4 h-px bg-primary-container/80 shadow-[0_0_8px_#34d399]" />
+        <div className="absolute bottom-0 left-[30%] w-4 h-px bg-secondary/80 shadow-[0_0_8px_#2dd4bf]" />
       </div>
 
       {/* Image — parallax layer */}
