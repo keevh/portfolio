@@ -182,5 +182,44 @@
         ]
       }
     }
+  },
+  {
+    "id": "torres-de-hanoi",
+    "category": "frontend",
+    "image": "https://github.com/keevh/torres-de-hanoi/raw/master/img/tittle.jpg",
+    "gallery": [
+      "https://github.com/keevh/torres-de-hanoi/raw/master/img/tittle.jpg",
+      "https://raw.githubusercontent.com/keevh/torres-de-hanoi/master/img/initial_screen.png",
+      "https://raw.githubusercontent.com/keevh/torres-de-hanoi/master/img/gameplay.png"
+    ],
+    "liveUrl": "https://keevh.github.io/torres-de-hanoi/",
+    "tags": [
+      { "labelKey": "proj.game",     "color": "bg-primary-container" },
+      { "labelKey": "proj.frontend", "color": "bg-secondary" }
+    ],
+    "links": [
+      { "type": "demo", "url": "https://keevh.github.io/torres-de-hanoi/", "labelKey": "proj.demo", "icon": "ExternalLink" },
+      { "type": "repo", "url": "https://github.com/keevh/torres-de-hanoi", "labelKey": "proj.repo", "icon": "Github" }
+    ],
+    "i18n": {
+      "es": {
+        "title": "Torres de Hanoi",
+        "desc": "Juego web interactivo de Torres de Hanoi desarrollado con HTML, CSS y JavaScript vanilla, con drag and drop, ranking y soporte móvil.",
+        "highlights": [
+          "Interacción: Drag and drop con soporte táctil para resolver el puzzle en desktop y móvil",
+          "Gameplay: Cantidad configurable de discos entre 3 y 8, temporizador y estadísticas al ganar",
+          "Persistencia: Ranking y preferencias del jugador guardadas con almacenamiento local y MockAPI"
+        ]
+      },
+      "en": {
+        "title": "Towers of Hanoi",
+        "desc": "Interactive Towers of Hanoi web game built with HTML, CSS, and vanilla JavaScript, featuring drag and drop, rankings, and mobile support.",
+        "highlights": [
+          "Interaction: Drag and drop with touch support to solve the puzzle on desktop and mobile",
+          "Gameplay: Configurable disk count from 3 to 8, timer, and win statistics",
+          "Persistence: Ranking and player preferences saved with local storage and MockAPI"
+        ]
+      }
+    }
   }
 ]
