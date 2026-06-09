@@ -149,9 +149,12 @@
   {
     "id": "alien-monster-hunter",
     "category": "frontend",
-    "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=2070",
+    "image": "https://raw.githubusercontent.com/keevh/Alien-Monster-Hunter/master/img/title.jpg",
+    "imageFit": "contain",
     "gallery": [
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=2070"
+      "https://raw.githubusercontent.com/keevh/Alien-Monster-Hunter/master/img/title.jpg",
+      "https://raw.githubusercontent.com/keevh/Alien-Monster-Hunter/master/img/initial_screen.png",
+      "https://raw.githubusercontent.com/keevh/Alien-Monster-Hunter/master/img/gameplay.png"
     ],
     "liveUrl": "https://keevh.github.io/Alien-Monster-Hunter/",
     "tags": [
@@ -187,6 +190,7 @@
     "id": "torres-de-hanoi",
     "category": "frontend",
     "image": "https://github.com/keevh/torres-de-hanoi/raw/master/img/tittle.jpg",
+    "imageFit": "contain",
     "gallery": [
       "https://github.com/keevh/torres-de-hanoi/raw/master/img/tittle.jpg",
       "https://raw.githubusercontent.com/keevh/torres-de-hanoi/master/img/initial_screen.png",

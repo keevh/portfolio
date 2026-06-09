@@ -89,7 +89,13 @@ export function ProjectModal({ project, onClose }: Props) {
               key={activeImage}
               src={activeImage}
               alt={project.title}
-              className="w-full h-full object-cover"
+              className={`w-full h-full ${
+                project.imageFit === 'contain'
+                  ? 'object-contain bg-surface'
+                  : project.imageFit === 'scale-down'
+                    ? 'object-scale-down bg-surface'
+                    : 'object-cover'
+              }`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -113,7 +119,17 @@ export function ProjectModal({ project, onClose }: Props) {
                     activeImage === img ? 'border-primary-container' : 'border-white/10 opacity-60 hover:opacity-100'
                   }`}
                 >
-                  <img src={img} alt="" className="w-full h-full object-cover" />
+                  <img
+                    src={img}
+                    alt=""
+                    className={`w-full h-full ${
+                      project.imageFit === 'contain'
+                        ? 'object-contain bg-surface'
+                        : project.imageFit === 'scale-down'
+                          ? 'object-scale-down bg-surface'
+                          : 'object-cover'
+                    }`}
+                  />
                 </button>
               ))}
             </div>

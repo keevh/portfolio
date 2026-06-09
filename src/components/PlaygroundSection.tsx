@@ -11,6 +11,7 @@ type Game = {
   preview: string;
   gif: string;
   stack: string;
+  previewFit?: 'cover' | 'contain' | 'scale-down';
 };
 
 const GAMES: Game[] = gamesJson;
@@ -150,7 +151,17 @@ export function PlaygroundSection() {
               }`}
               whileTap={{ scale: 0.97 }}
             >
-              <img src={game.preview} alt={game.name} className="w-full h-24 object-cover" />
+              <img
+                src={game.preview}
+                alt={game.name}
+                className={`w-full h-24 ${
+                  game.previewFit === 'contain'
+                    ? 'object-contain bg-surface'
+                    : game.previewFit === 'scale-down'
+                      ? 'object-scale-down bg-surface'
+                      : 'object-cover'
+                }`}
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-2">
                 <p className="font-label-caps text-xs text-white leading-tight">{game.name}</p>

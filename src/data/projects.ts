@@ -15,6 +15,7 @@ type ProjectJSON = {
   id: string;
   category: Exclude<Category, 'all'>;
   image: string;
+  imageFit?: 'cover' | 'contain' | 'scale-down';
   gallery: string[];
   liveUrl?: string;
   tags: { labelKey: string; color: string }[];
@@ -27,6 +28,7 @@ export type Project = {
   title: string;
   category: Exclude<Category, 'all'>;
   image: string;
+  imageFit: 'cover' | 'contain' | 'scale-down';
   gallery: string[];
   liveUrl?: string;
   highlights: string[];
@@ -44,6 +46,7 @@ export function resolveProjects(
     title:      p.i18n[lang].title,
     category:   p.category,
     image:      p.image,
+    imageFit:   p.imageFit ?? 'cover',
     gallery:    p.gallery,
     liveUrl:    p.liveUrl,
     highlights: p.i18n[lang].highlights,

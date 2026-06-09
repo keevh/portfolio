@@ -158,7 +158,13 @@ export function Projects() {
                 <div className="absolute inset-0 bg-surface/40 z-10 group-hover:bg-transparent transition-colors duration-300" />
                 <img
                   alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className={`w-full h-full transition-transform duration-700 ${
+                    project.imageFit === 'contain'
+                      ? 'object-contain bg-surface'
+                      : project.imageFit === 'scale-down'
+                        ? 'object-scale-down bg-surface'
+                        : 'object-cover group-hover:scale-105'
+                  }`}
                   src={project.image}
                   loading="lazy"
                 />
