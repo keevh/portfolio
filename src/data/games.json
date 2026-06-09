@@ -5,7 +5,7 @@
     "url": "https://keevh.github.io/Alien-Monster-Hunter/",
     "preview": "https://raw.githubusercontent.com/keevh/Alien-Monster-Hunter/master/img/title.jpg",
     "gif": "https://raw.githubusercontent.com/keevh/Alien-Monster-Hunter/master/img/gameplay.png",
-    "stack": "HTML5 Canvas · JS",
+    "stack": "HTML · CSS · JS",
     "previewFit": "contain"
   },
   {
@@ -13,7 +13,7 @@
     "name": "Torres de Hanoi",
     "url": "https://keevh.github.io/torres-de-hanoi/",
     "preview": "https://github.com/keevh/torres-de-hanoi/raw/master/img/tittle.jpg",
-    "gif": "https://raw.githubusercontent.com/keevh/torres-de-hanoi/master/img/initial_screen.png",
+    "gif": "https://raw.githubusercontent.com/keevh/torres-de-hanoi/master/img/gameplay.png",
     "stack": "HTML · CSS · JS",
     "previewFit": "contain"
   }
