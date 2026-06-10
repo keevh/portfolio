@@ -20,7 +20,7 @@ import { Footer } from '../components/Footer';
     <div class="hidden lg:block">
       <PlaygroundSection client:visible />
     </div>
-    <Contact client:visible />
+    <Contact client:only="react" />
   </main>
   <Footer client:visible />
 </Layout>
