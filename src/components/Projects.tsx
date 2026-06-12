@@ -6,7 +6,6 @@ import { ProjectModal } from './ProjectModal';
 import { resolveProjects } from '../data/projects';
 import type { Category, Project } from '../data/projects';
 
-const FILTERS: Category[] = ['all', 'fullstack', 'frontend', 'backend', 'hardware'];
 const PAGE_SIZE = 4;
 
 export function Projects() {
@@ -30,6 +29,10 @@ export function Projects() {
 
 
   const projects = useMemo(() => resolveProjects(t as (key: string) => string, language), [t, language]);
+  const availableFilters = useMemo(
+    () => ['all', ...Array.from(new Set(projects.map((p) => p.category)))] as Category[],
+    [projects],
+  );
   const filtered = useMemo(
     () => projects.filter((p) => activeFilter === 'all' || p.category === activeFilter),
     [projects, activeFilter],
@@ -86,7 +89,7 @@ export function Projects() {
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.5, delay: 0.1 }}
       >
-        {FILTERS.map((cat) => (
+        {availableFilters.map((cat) => (
           <motion.button
             key={cat}
             onClick={() => { setActiveFilter(cat); setCurrentPage(0); setDirection(1); }}

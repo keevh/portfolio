@@ -1,79 +1,5 @@
 [
   {
-    "id": "facepet",
-    "category": "frontend",
-    "image": "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=2069&auto=format&fit=crop",
-    "gallery": [
-      "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=2069&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?auto=format&fit=crop&q=80&w=2000",
-      "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=1964"
-    ],
-    "tags": [
-      { "labelKey": "proj.uiux",     "color": "bg-secondary" },
-      { "labelKey": "proj.frontend", "color": "bg-primary-container" }
-    ],
-    "links": [
-      { "type": "demo",  "url": "#", "labelKey": "proj.demo", "icon": "ExternalLink" },
-      { "type": "repo",  "url": "#", "labelKey": "proj.repo", "icon": "Github" }
-    ],
-    "i18n": {
-      "es": {
-        "title": "FacePet",
-        "desc": "Concepto de aplicación social para mascotas. Diseño centrado en el usuario con una interfaz limpia y moderna, enfocada en la interacción comunitaria.",
-        "highlights": [
-          "Problema: El aislamiento social en entornos urbanos afecta el estado de las mascotas",
-          "Solución: Matchmaking algorítmico basado en nivel de energía, tamaño y cercanía",
-          "Impacto: Fomenta grupos de paseo comunitarios y crea una red de rescate local"
-        ]
-      },
-      "en": {
-        "title": "FacePet",
-        "desc": "Pet social network app concept. User-centric design with a clean, modern interface focused on community interaction.",
-        "highlights": [
-          "Problem: Social isolation in urban environments affects pet wellbeing",
-          "Solution: Algorithmic matchmaking based on energy level, size, and proximity",
-          "Impact: Fosters community walking groups and builds a local rescue network"
-        ]
-      }
-    }
-  },
-  {
-    "id": "votora",
-    "category": "hardware",
-    "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2070",
-    "gallery": [
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2070",
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=2072",
-      "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?auto=format&fit=crop&q=80&w=2070"
-    ],
-    "tags": [
-      { "labelKey": "proj.hardware", "color": "bg-[#7318ff]" }
-    ],
-    "links": [
-      { "type": "repo", "url": "#", "labelKey": "proj.repo", "icon": "Github" }
-    ],
-    "i18n": {
-      "es": {
-        "title": "Votora / MQTT",
-        "desc": "Implementación de sistema de comunicación en tiempo real utilizando protocolo MQTT para dispositivos IoT de bajo consumo.",
-        "highlights": [
-          "Desafío: Alta latencia y consumo excesivo de batería en nodos IoT",
-          "Enfoque: Transición de polling HTTP a una arquitectura Pub/Sub orientada a eventos",
-          "Resultado: Reducción drástica del ancho de banda y mayor autonomía de hardware"
-        ]
-      },
-      "en": {
-        "title": "Votora / MQTT",
-        "desc": "Real-time communication system implementation using MQTT protocol for low-power IoT devices.",
-        "highlights": [
-          "Challenge: High latency and excessive battery consumption in IoT nodes",
-          "Approach: Transition from HTTP polling to an event-driven Pub/Sub architecture",
-          "Result: Drastic reduction in bandwidth usage and greater hardware autonomy"
-        ]
-      }
-    }
-  },
-  {
     "id": "shortener",
     "category": "fullstack",
     "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070",
@@ -82,15 +8,28 @@
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2015"
     ],
     "tags": [
-      { "labelKey": "proj.utility", "color": "bg-primary-container" }
+      {
+        "labelKey": "proj.utility",
+        "color": "bg-primary-container"
+      }
     ],
     "links": [
-      { "type": "demo", "url": "#", "labelKey": "proj.demo", "icon": "ExternalLink" },
-      { "type": "repo", "url": "#", "labelKey": "proj.repo", "icon": "Github" }
+      {
+        "type": "demo",
+        "url": "#",
+        "labelKey": "proj.demo",
+        "icon": "ExternalLink"
+      },
+      {
+        "type": "repo",
+        "url": "#",
+        "labelKey": "proj.repo",
+        "icon": "Github"
+      }
     ],
     "i18n": {
       "es": {
-        "title": "Acortador de Enlaces",
+        "title": "Trimly",
         "desc": "Herramienta web rápida y eficiente para acortar URLs largas, con panel de estadísticas de clics e interfaz minimalista.",
         "highlights": [
           "Problema: Enlaces largos sin contexto y seguimiento opaco para los usuarios",
@@ -99,49 +38,12 @@
         ]
       },
       "en": {
-        "title": "URL Shortener",
+        "title": "Trimly",
         "desc": "Fast and efficient web tool for shortening long URLs, featuring a click statistics dashboard and minimalist interface.",
         "highlights": [
           "Problem: Long links without context and opaque tracking for users",
           "Architecture: Ultra-fast redirect engine running in memory cache (< 50ms)",
           "Metrics: Async telemetry collection without penalizing user performance"
-        ]
-      }
-    }
-  },
-  {
-    "id": "nilm",
-    "category": "fullstack",
-    "image": "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&q=80&w=2072",
-    "gallery": [
-      "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&q=80&w=2072",
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070"
-    ],
-    "tags": [
-      { "labelKey": "proj.ds",     "color": "bg-secondary" },
-      { "labelKey": "proj.energy", "color": "bg-[#7318ff]" }
-    ],
-    "links": [
-      { "type": "research", "url": "#", "labelKey": "proj.research", "icon": "FlaskConical" },
-      { "type": "repo",     "url": "#", "labelKey": "proj.repo",     "icon": "Github" }
-    ],
-    "i18n": {
-      "es": {
-        "title": "Simulación NILM",
-        "desc": "Non-Intrusive Load Monitoring. Simulación de algoritmos para desglosar el consumo de energía eléctrica a partir de un medidor único, aplicando técnicas de machine learning.",
-        "highlights": [
-          "Barrera: Monitoreo tradicional requiere costosos sensores por cada electrodoméstico",
-          "Innovación: Uso de Machine Learning para desagregar señales iterativas desde un punto único",
-          "Valor: Democratiza el análisis y ahorro energético sin instalaciones invasivas en el hogar"
-        ]
-      },
-      "en": {
-        "title": "NILM Simulation",
-        "desc": "Non-Intrusive Load Monitoring. Simulation of algorithms to break down electricity consumption from a single meter using machine learning techniques.",
-        "highlights": [
-          "Barrier: Traditional monitoring requires costly sensors for every appliance",
-          "Innovation: ML used to disaggregate iterative signals from a single point",
-          "Value: Democratizes energy analysis and savings without invasive home installations"
         ]
       }
     }
@@ -158,12 +60,28 @@
     ],
     "liveUrl": "https://keevh.github.io/Alien-Monster-Hunter/",
     "tags": [
-      { "labelKey": "proj.game", "color": "bg-primary-container" },
-      { "labelKey": "proj.frontend", "color": "bg-secondary" }
+      {
+        "labelKey": "proj.game",
+        "color": "bg-primary-container"
+      },
+      {
+        "labelKey": "proj.frontend",
+        "color": "bg-secondary"
+      }
     ],
     "links": [
-      { "type": "demo", "url": "https://keevh.github.io/Alien-Monster-Hunter/", "labelKey": "proj.demo", "icon": "ExternalLink" },
-      { "type": "repo", "url": "https://github.com/keevh/Alien-Monster-Hunter", "labelKey": "proj.repo", "icon": "Github" }
+      {
+        "type": "demo",
+        "url": "https://keevh.github.io/Alien-Monster-Hunter/",
+        "labelKey": "proj.demo",
+        "icon": "ExternalLink"
+      },
+      {
+        "type": "repo",
+        "url": "https://github.com/keevh/Alien-Monster-Hunter",
+        "labelKey": "proj.repo",
+        "icon": "Github"
+      }
     ],
     "i18n": {
       "es": {
@@ -198,12 +116,28 @@
     ],
     "liveUrl": "https://keevh.github.io/torres-de-hanoi/",
     "tags": [
-      { "labelKey": "proj.game",     "color": "bg-primary-container" },
-      { "labelKey": "proj.frontend", "color": "bg-secondary" }
+      {
+        "labelKey": "proj.game",
+        "color": "bg-primary-container"
+      },
+      {
+        "labelKey": "proj.frontend",
+        "color": "bg-secondary"
+      }
     ],
     "links": [
-      { "type": "demo", "url": "https://keevh.github.io/torres-de-hanoi/", "labelKey": "proj.demo", "icon": "ExternalLink" },
-      { "type": "repo", "url": "https://github.com/keevh/torres-de-hanoi", "labelKey": "proj.repo", "icon": "Github" }
+      {
+        "type": "demo",
+        "url": "https://keevh.github.io/torres-de-hanoi/",
+        "labelKey": "proj.demo",
+        "icon": "ExternalLink"
+      },
+      {
+        "type": "repo",
+        "url": "https://github.com/keevh/torres-de-hanoi",
+        "labelKey": "proj.repo",
+        "icon": "Github"
+      }
     ],
     "i18n": {
       "es": {
