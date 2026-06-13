@@ -1,5 +1,53 @@
 [
   {
+    "id": "lumen",
+    "category": "fullstack",
+    "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=2070",
+    "gallery": [
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=2070",
+      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=2070"
+    ],
+    "liveUrl": "https://lumen.keevh.dev/",
+    "tags": [
+      {
+        "labelKey": "proj.frontend",
+        "color": "bg-secondary"
+      },
+      {
+        "labelKey": "proj.utility",
+        "color": "bg-primary-container"
+      }
+    ],
+    "links": [
+      {
+        "type": "repo",
+        "url": "https://github.com/keevh/lumen",
+        "labelKey": "proj.repo",
+        "icon": "Github"
+      }
+    ],
+    "i18n": {
+      "es": {
+        "title": "LUMEN",
+        "desc": "Storefront con panel administrativo en Next.js para una demo local de e-commerce en español, con catálogo, carrito, checkout y persistencia en IndexedDB.",
+        "highlights": [
+          "Problema: Demostrar un flujo completo de e-commerce sin depender de un backend real",
+          "Arquitectura: Storefront público y panel administrativo construidos con Next.js 16, React 19, TypeScript y Tailwind CSS",
+          "Persistencia: Catálogo, carrito, pedidos, descuentos y ajustes guardados localmente en IndexedDB"
+        ]
+      },
+      "en": {
+        "title": "LUMEN",
+        "desc": "Next.js storefront with an admin panel for a local Spanish e-commerce demo, featuring catalog, cart, checkout, and IndexedDB persistence.",
+        "highlights": [
+          "Problem: Demonstrate a full e-commerce flow without relying on a real backend",
+          "Architecture: Public storefront and admin panel built with Next.js 16, React 19, TypeScript, and Tailwind CSS",
+          "Persistence: Catalog, cart, orders, discounts, and settings stored locally in IndexedDB"
+        ]
+      }
+    }
+  },
+  {
     "id": "shortener",
     "category": "fullstack",
     "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070",
