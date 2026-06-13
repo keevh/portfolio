@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Header } from '../../components/Header';
+import { Footer } from '../../components/Footer';
+import { ProjectDetailPage } from '../../components/projects/ProjectDetailPage';
+import { getAllProjectSlugs, getProjectRecordBySlug } from '../../data/projects';
+
+export function getStaticPaths() {
+  return getAllProjectSlugs().map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const project = slug ? getProjectRecordBySlug(slug) : undefined;
+
+if (!project) {
+  throw new Error(`Project not found for slug: ${slug}`);
+}
+
+const pageTitle = `${project.i18n.en.title} | Kevin Gallardo`;
+const pageDescription = project.i18n.en.desc;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalPath={`/projects/${project.slug}`}
+  imagePath={project.image}
+  type="article"
+>
+  <Header client:load />
+  <main>
+    <ProjectDetailPage client:load project={project} />
+  </main>
+  <Footer client:visible />
+</Layout>

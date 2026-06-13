@@ -1,25 +1,91 @@
-import { useState } from 'react';
-import { smoothScrollTo } from '../utils/scroll';
+import { useEffect, useState } from 'react';
+import { consumePendingHomeScrollTarget, setPendingHomeScrollTarget, smoothScrollTo } from '../utils/scroll';
 import { AnimatePresence, motion } from 'motion/react';
 import { Menu, X, Globe } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
+
+const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+function getHomeHref() {
+  return BASE_PATH || '/';
+}
+
+function isHomePage() {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
+  const basePath = BASE_PATH || '/';
+  const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+  const normalizedBasePath = basePath.replace(/\/$/, '') || '/';
+  return currentPath === normalizedBasePath;
+}
 
 export function Header() {
   const { t, toggleLanguage } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  useEffect(() => {
+    if (!isHomePage()) {
+      return;
+    }
+
+    const pendingSection = consumePendingHomeScrollTarget();
+    if (!pendingSection) {
+      return;
+    }
+
+    let attempts = 0;
+    let timeoutId: number | undefined;
+    let cancelScroll: (() => void) | undefined;
+
+    const tryScroll = () => {
+      const element = document.getElementById(pendingSection);
+      if (element) {
+        const targetY = element.getBoundingClientRect().top + window.scrollY;
+        cancelScroll = smoothScrollTo(targetY, 700);
+        return;
+      }
+
+      attempts += 1;
+      if (attempts < 30) {
+        timeoutId = window.setTimeout(tryScroll, 150);
+      }
+    };
+
+    tryScroll();
+
+    return () => {
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+      cancelScroll?.();
+    };
+  }, []);
+
   const navLinks = [
-    { href: '#about',    label: t('nav.about') },
-    { href: '#skills',   label: t('nav.skills') },
-    { href: '#projects', label: t('nav.projects') },
-    { href: '#journey',  label: t('nav.journey') },
-    { href: '#contact',  label: t('nav.contact') },
+    { sectionId: 'about', label: t('nav.about') },
+    { sectionId: 'skills', label: t('nav.skills') },
+    { sectionId: 'projects', label: t('nav.projects') },
+    { sectionId: 'journey', label: t('nav.journey') },
+    { sectionId: 'contact', label: t('nav.contact') },
   ];
 
   const closeMenu = () => setMenuOpen(false);
 
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
+
+    if (!isHomePage()) {
+      if (id) {
+        setPendingHomeScrollTarget(id);
+      }
+
+      window.location.href = getHomeHref();
+      closeMenu();
+      return;
+    }
+
     const top = id
       ? (document.getElementById(id)?.getBoundingClientRect().top ?? 0) + window.scrollY
       : 0;
@@ -32,7 +98,7 @@ export function Header() {
       <div className="flex justify-between items-center gap-4 lg:gap-6 xl:gap-8 h-16 px-4 sm:px-6 lg:px-8 xl:px-16 max-w-7xl mx-auto">
         {/* Logo */}
         <a
-          href="#"
+          href={getHomeHref()}
           onClick={(e) => scrollTo(e, '')}
           className="font-headline-md text-lg lg:text-2xl font-bold text-on-surface flex items-center gap-1 shrink-0 whitespace-nowrap"
         >
@@ -43,11 +109,11 @@ export function Header() {
 
         {/* Desktop nav — lg+ only */}
         <nav className="hidden lg:flex items-center gap-6 xl:gap-10 font-label-caps text-xs">
-          {navLinks.map(({ href, label }) => (
+          {navLinks.map(({ sectionId, label }) => (
             <motion.a
-              key={href}
-              href={href}
-              onClick={(e) => scrollTo(e, href.slice(1))}
+              key={sectionId}
+              href={getHomeHref()}
+              onClick={(e) => scrollTo(e, sectionId)}
               className="text-on-surface-variant hover:text-primary-container transition-colors duration-200 whitespace-nowrap"
               whileTap={{ y: 2, scale: 0.92 }}
               transition={{ type: 'spring', stiffness: 400, damping: 15 }}
@@ -111,11 +177,11 @@ export function Header() {
             className="overflow-hidden lg:hidden bg-surface/95 backdrop-blur-xl border-t border-white/8"
           >
             <nav className="flex flex-col px-4 sm:px-6 pt-2 pb-4">
-              {navLinks.map(({ href, label }, i) => (
+              {navLinks.map(({ sectionId, label }, i) => (
                 <motion.a
-                  key={href}
-                  href={href}
-                  onClick={(e) => { scrollTo(e, href.slice(1)); closeMenu(); }}
+                  key={sectionId}
+                  href={getHomeHref()}
+                  onClick={(e) => scrollTo(e, sectionId)}
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05, duration: 0.2 }}

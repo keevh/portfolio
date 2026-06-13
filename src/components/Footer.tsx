@@ -5,7 +5,7 @@ export function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer id="contact" className="w-full py-12 bg-surface-dim border-t border-white/5 flex flex-col md:flex-row justify-between items-center px-4 md:px-16 max-w-7xl mx-auto opacity-80 hover:opacity-100 transition-opacity duration-300 mt-24">
+    <footer className="w-full py-12 bg-surface-dim border-t border-white/5 flex flex-col md:flex-row justify-between items-center px-4 md:px-16 max-w-7xl mx-auto opacity-80 hover:opacity-100 transition-opacity duration-300 mt-24">
       <div className="text-label-caps font-code-sm text-on-surface-variant mb-6 md:mb-0">
         <span className="font-bold">&lt;/&gt;</span> KEVIN GALLARDO
       </div>

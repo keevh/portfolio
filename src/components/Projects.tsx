@@ -2,15 +2,18 @@ import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { motion, AnimatePresence } from 'motion/react';
 import { smoothScrollTo } from '../utils/scroll';
-import { ProjectModal } from './ProjectModal';
 import { resolveProjects } from '../data/projects';
-import type { Category, Project } from '../data/projects';
+import type { Category } from '../data/projects';
 
 const PAGE_SIZE = 4;
+const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+function getProjectHref(slug: string) {
+  return `${BASE_PATH}/projects/${slug}`.replace(/^\/\//, '/');
+}
 
 export function Projects() {
   const { t, language } = useLanguage();
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeFilter, setActiveFilter]        = useState<Category>('all');
   const [currentPage, setCurrentPage]          = useState(0);
   const [direction, setDirection]              = useState(1);
@@ -50,20 +53,6 @@ export function Projects() {
       window.removeEventListener('touchstart', cancel);
     };
   }, []);
-
-  const openProject  = useCallback((p: Project) => setSelectedProject(p), []);
-  const closeProject = useCallback(() => setSelectedProject(null), []);
-
-  useEffect(() => {
-    document.body.style.overflow = selectedProject ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [selectedProject]);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeProject(); };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [closeProject]);
 
   return (
     <section id="projects" className="py-24 px-4 sm:px-6 lg:px-16 max-w-7xl mx-auto relative border-t border-white/5">
@@ -130,10 +119,10 @@ export function Projects() {
             </motion.div>
           )}
           {paginated.map((project, index) => (
-            <motion.div
+            <motion.article
               key={`${activeFilter}-${currentPage}-${project.id}`}
               layout
-              className="glass-panel rounded-[24px] overflow-hidden flex flex-col cursor-pointer group"
+              className="glass-panel rounded-[24px] overflow-hidden flex flex-col cursor-pointer group relative"
               custom={direction}
               variants={{
                 enter:  (d: number) => ({ opacity: 0, x: d * 30 }),
@@ -145,7 +134,6 @@ export function Projects() {
               exit="exit"
               transition={{ duration: 0.25, delay: index * 0.04, ease: [0.4, 0, 0.2, 1] }}
               whileHover={{ y: -6, boxShadow: '0 0 40px rgba(0,242,255,0.12)' }}
-              onClick={() => openProject(project)}
               onAnimationComplete={() => {
                 if (index !== paginated.length - 1 || scrollTargetRef.current === null) return;
                 const target = scrollTargetRef.current;
@@ -156,6 +144,12 @@ export function Projects() {
                 }, 120);
               }}
             >
+              <a
+                href={getProjectHref(project.slug)}
+                aria-label={`Open ${project.title} project page`}
+                className="absolute inset-0 z-10"
+              />
+
               {/* Thumbnail */}
               <div className="h-52 overflow-hidden relative flex-shrink-0">
                 <div className="absolute inset-0 bg-surface/40 z-10 group-hover:bg-transparent transition-colors duration-300" />
@@ -174,7 +168,7 @@ export function Projects() {
               </div>
 
               {/* Content */}
-              <div className="p-6 flex flex-col flex-grow">
+              <div className="p-6 flex flex-col flex-grow relative z-20 pointer-events-none">
                 <div className="flex flex-wrap gap-2 mb-3">
                   {project.tags.map((tag, i) => (
                     <span
@@ -203,6 +197,7 @@ export function Projects() {
                         className={`font-code-sm text-xs transition-colors flex items-center gap-1.5 ${cls}`}
                         target="_blank"
                         rel="noopener noreferrer"
+                        style={{ pointerEvents: 'auto' }}
                       >
                         <Icon size={15} /> {link.label}
                       </a>
@@ -210,7 +205,7 @@ export function Projects() {
                   })}
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </AnimatePresence>
       </div>
@@ -257,17 +252,6 @@ export function Projects() {
           </motion.button>
         </motion.div>
       )}
-
-      {/* Modal */}
-      <AnimatePresence mode="wait">
-        {selectedProject && (
-          <ProjectModal
-            key={selectedProject.id}
-            project={selectedProject}
-            onClose={closeProject}
-          />
-        )}
-      </AnimatePresence>
     </section>
   );
 }
