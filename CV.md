@@ -2,7 +2,7 @@
 
 **Full Stack Developer**
 
-- Email: kevin@keevh.dev
+- Email: andreskevin2606@gmail.com
 - Portafolio: https://keevh.dev
 - GitHub: https://github.com/keevh
 - LinkedIn: https://www.linkedin.com/in/keevh/

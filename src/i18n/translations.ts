@@ -101,6 +101,9 @@ export const translations = {
     'contact.error.email': 'correo requerido',
     'contact.error.email.invalid': 'formato inválido',
     'contact.error.message': 'mensaje requerido',
+    'contact.error.submit': 'no pude enviar tu mensaje, intenta de nuevo o escríbeme al correo directo',
+    'contact.sending': 'Enviando...',
+    'contact.success': 'mensaje enviado correctamente, te responderé pronto',
     'footer.built': 'Desarrollado con',
     'footer.source': 'Código Fuente'
   },
@@ -206,6 +209,9 @@ export const translations = {
     'contact.error.email': 'email required',
     'contact.error.email.invalid': 'invalid format',
     'contact.error.message': 'message required',
+    'contact.error.submit': 'I could not send your message, please try again or email me directly',
+    'contact.sending': 'Sending...',
+    'contact.success': 'message sent successfully, I will reply soon',
     'footer.built': 'Built with',
     'footer.source': 'Source Code'
   }

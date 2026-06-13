@@ -3,6 +3,8 @@ import { Mail, Github, Linkedin } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 import { motion } from 'motion/react';
 
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mbdeqrlw';
+
 export function Contact() {
   const { t } = useLanguage();
   const [name, setName] = useState('');
@@ -10,6 +12,7 @@ export function Contact() {
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [touched, setTouched] = useState({ name: false, email: false, message: false });
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   // Validation logic
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -20,20 +23,45 @@ export function Contact() {
   
   const hasErrors = isNameEmpty || isEmailEmpty || !isEmailValid || isMessageEmpty;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const resetFeedback = () => {
+    if (submitStatus !== 'idle') {
+      setSubmitStatus('idle');
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
     setTouched({ name: true, email: true, message: true });
-    if (!hasErrors) {
-      // Mock submit
-      setTimeout(() => {
-        setSubmitted(false);
-        setTouched({ name: false, email: false, message: false });
-        setName('');
-        setEmail('');
-        setMessage('');
-        alert('Mensaje enviado exitosamente');
-      }, 1000);
+
+    if (hasErrors || submitStatus === 'submitting') {
+      return;
+    }
+
+    setSubmitStatus('submitting');
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Form submission failed');
+      }
+
+      setSubmitStatus('success');
+      setSubmitted(false);
+      setTouched({ name: false, email: false, message: false });
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch {
+      setSubmitStatus('error');
     }
   };
 
@@ -65,7 +93,7 @@ export function Contact() {
           </p>
           <div className="flex flex-col gap-3 mt-4">
             {[
-              { href: 'mailto:kevin@keevh.dev', icon: <Mail size={20} />, label: 'kevin@keevh.dev' },
+              { href: 'mailto:andreskevin2606@gmail.com', icon: <Mail size={20} />, label: 'andreskevin2606@gmail.com' },
               { href: 'https://github.com/keevh', icon: <Github size={20} />, label: 'github.com/keevh' },
               { href: 'https://www.linkedin.com/in/keevh/', icon: <Linkedin size={20} />, label: 'linkedin.com/in/keevh' },
             ].map(({ href, icon, label }) => (
@@ -125,7 +153,10 @@ export function Contact() {
                     type="text"
                     id="name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => {
+                      resetFeedback();
+                      setName(e.target.value);
+                    }}
                     onBlur={() => setTouched(t => ({ ...t, name: true }))}
                     placeholder={t('contact.placeholder.name')}
                     className="min-w-0 flex-1 bg-[#252526]/60 border border-transparent rounded px-2 py-1 text-[#98c379] focus:outline-none focus:border-white/20 transition-colors placeholder:text-gray-600"
@@ -147,7 +178,10 @@ export function Contact() {
                     type="email"
                     id="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      resetFeedback();
+                      setEmail(e.target.value);
+                    }}
                     onBlur={() => setTouched(t => ({ ...t, email: true }))}
                     placeholder={t('contact.placeholder.email')}
                     className="min-w-0 flex-1 bg-[#252526]/60 border border-transparent rounded px-2 py-1 text-[#98c379] focus:outline-none focus:border-white/20 transition-colors placeholder:text-gray-600"
@@ -170,7 +204,10 @@ export function Contact() {
                 <textarea
                   id="message"
                   value={message}
-                  onChange={(e) => setMessage(e.target.value)}
+                  onChange={(e) => {
+                    resetFeedback();
+                    setMessage(e.target.value);
+                  }}
                   onBlur={() => setTouched(t => ({ ...t, message: true }))}
                   rows={4}
                   placeholder={t('contact.placeholder.message')}
@@ -193,13 +230,25 @@ export function Contact() {
               <span className="text-gray-400">(message);</span>
             </p>
 
+            {submitStatus === 'success' && (
+              <p className="mb-4 text-[#27c93f]" role="status" aria-live="polite">
+                <span className="text-gray-600 mr-1">//</span>{t('contact.success')}
+              </p>
+            )}
+
+            {submitStatus === 'error' && (
+              <p className="mb-4 text-[#ff5f56]" role="alert" aria-live="assertive">
+                <span className="text-gray-600 mr-1">//</span>{t('contact.error.submit')}
+              </p>
+            )}
+
             <div className="flex justify-end">
               <button
                 type="submit"
-                disabled={hasErrors}
+                disabled={hasErrors || submitStatus === 'submitting'}
                 className="px-4 sm:px-6 py-2 bg-transparent border border-primary-container text-primary-container disabled:opacity-40 disabled:cursor-not-allowed hover:bg-primary-container/10 transition-all duration-200 rounded-lg uppercase tracking-widest text-xs"
               >
-                {t('contact.send')}
+                {submitStatus === 'submitting' ? t('contact.sending') : t('contact.send')}
               </button>
             </div>
           </form>
