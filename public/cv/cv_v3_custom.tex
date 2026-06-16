@@ -1,0 +1,156 @@
+%-------------------------
+% CV de Kevin Andres Gallardo Robles
+% Version 3: diseno propio.
+%   - Una columna, limpio y moderno, fondo blanco (legible e imprimible / ATS-friendly)
+%   - Acento teal derivado del cian "Kinetic Obsidian" del portafolio
+%   - Fira Sans (misma familia que el FiraMono de la v2, ya instalada)
+% Compilar: lualatex cv_v3_custom.tex
+%-------------------------
+
+\documentclass[a4paper,10.5pt]{article}
+
+\usepackage[
+  top=1.3cm, bottom=1.3cm, left=1.6cm, right=1.6cm
+]{geometry}
+
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fontawesome5}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tabularx}
+\usepackage[spanish]{babel}
+
+% Fira Sans como fuente principal (provista por el paquete fira de TeX Live).
+% Bajo lualatex se carga vía fontspec con UTF-8 nativo, por eso NO se usa
+% fontenc T1 (forzaba interpretación de 8 bits y rompía "·" y "—").
+\usepackage[sfdefault]{FiraSans}
+
+% --- Paleta -------------------------------------------------------------
+% Acento inspirado en el cian #00F2FF del portafolio, oscurecido para
+% mantener contraste sobre fondo blanco.
+\definecolor{accent}{HTML}{0E7C86}
+\definecolor{accentdark}{HTML}{0A5A62}
+\definecolor{ink}{HTML}{1C2229}
+\definecolor{muted}{HTML}{596573}
+\definecolor{rule}{HTML}{D7DEE3}
+
+\color{ink}
+\hypersetup{urlcolor=accentdark, linkcolor=accentdark}
+
+% --- Formato de secciones ----------------------------------------------
+\titleformat{\section}
+  {\large\bfseries\color{accent}}
+  {}{0em}
+  {\MakeUppercase}
+  [{\color{rule}\titlerule[1pt]}]
+\titlespacing{\section}{0pt}{10pt}{5pt}
+
+% --- Listas -------------------------------------------------------------
+\setlist[itemize]{
+  leftmargin=1.1em, itemsep=1.2pt, topsep=2pt, parsep=0pt,
+  label=\textcolor{accent}{\small\textbullet}
+}
+
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+% --- Helpers ------------------------------------------------------------
+% Entrada con titulo a la izquierda y fecha a la derecha
+\newcommand{\entry}[2]{%
+  \noindent\begin{tabularx}{\textwidth}{@{}X@{}r@{}}
+    \textbf{#1} & {\color{muted}\small #2}
+  \end{tabularx}\par
+}
+% Subtitulo en itálica gris
+\newcommand{\subentry}[1]{{\color{muted}\itshape #1}\par\vspace{2pt}}
+% Pildora de stack
+\newcommand{\stack}[1]{{\color{accentdark}\small\itshape #1}\par\vspace{1pt}}
+% Item de la barra de habilidades
+\newcommand{\skillrow}[2]{%
+  \noindent\begin{tabularx}{\textwidth}{@{}p{3.1cm}@{}X@{}}
+    \textbf{\color{ink}#1} & #2
+  \end{tabularx}\par\vspace{2pt}
+}
+
+%-------------------------------------------------------------------------
+\begin{document}
+
+% ============ ENCABEZADO ============
+{\fontsize{26}{30}\selectfont\bfseries\color{ink} Kevin Andrés Gallardo Robles}\\[3pt]
+{\color{accent}\large Desarrollador Web Junior\, \textcolor{muted}{$|$}\, JavaScript \textcolor{muted}{$|$} React \textcolor{muted}{$|$} Node.js}\\[6pt]
+{\color{rule}\rule{\textwidth}{1pt}}\\[5pt]
+{\small
+\faGlobe~\href{https://keevh.dev/}{keevh.dev}\quad
+\faGithub~\href{https://github.com/keevh}{github.com/keevh}\quad
+\faEnvelope~\href{mailto:andreskevin2606@gmail.com}{andreskevin2606@gmail.com}\quad
+\faWhatsapp~3172172768
+}
+
+% ============ PERFIL ============
+\section{Perfil Profesional}
+\small
+Desarrollador web junior y estudiante de \textbf{Ingeniería de Sistemas} en últimos semestres,
+con experiencia práctica construyendo proyectos frontend y full stack con \textbf{JavaScript,
+TypeScript, React, Next.js, Astro, Node.js, Express} y \textbf{Fastify}, además de bases de
+datos relacionales y NoSQL. Oriento mi trabajo a interfaces web, consumo de APIs, lógica de
+negocio, persistencia de datos, rendimiento y diseño responsive, con buen manejo de
+Git/GitHub y disposición para aprender nuevas tecnologías según las necesidades del equipo.
+
+% ============ HABILIDADES ============
+\section{Habilidades Técnicas}
+\small
+\skillrow{Frontend}{JavaScript, TypeScript, React, Next.js, Astro, HTML, CSS, Tailwind CSS}
+\skillrow{Backend}{Node.js, Express, Fastify, APIs REST, autenticación, validación de datos}
+\skillrow{Bases de datos}{MongoDB, PostgreSQL, MySQL}
+\skillrow{Herramientas}{Git, GitHub, Docker, npm, pnpm, despliegue web, documentación técnica}
+\skillrow{Complementario}{Python, Java, IoT, MQTT, IA aplicada, Excel}
+
+% ============ PROYECTOS ============
+\section{Proyectos Destacados}
+
+\entry{Lumen~\textcolor{muted}{\small— Demo de e-commerce con panel administrativo}}{\href{https://lumen.keevh.dev/}{\color{accentdark}\small lumen.keevh.dev}}
+\stack{Next.js 16 · React 19 · TypeScript · Tailwind CSS · IndexedDB}
+\begin{itemize}
+  \small
+  \item Tienda en español con catálogo, detalle de producto, carrito, checkout y panel administrativo para productos, descuentos, pedidos y configuración.
+  \item Persistencia local con \textbf{IndexedDB} para simular un flujo completo de compra y administración sin backend externo.
+  \item Arquitectura por capas (\textbf{Repository Pattern}) que desacopla la UI del almacenamiento y queda lista para evolucionar hacia una API real.
+\end{itemize}
+\vspace{4pt}
+
+\entry{Trimly~\textcolor{muted}{\small— Acortador de URLs open source y autoalojable}}{\href{https://github.com/keevh/trimly}{\color{accentdark}\small github.com/keevh/trimly}}
+\stack{TypeScript · Astro · React · Node.js · PostgreSQL · Docker}
+\begin{itemize}
+  \small
+  \item App full-stack con \textbf{API REST} y \textbf{PostgreSQL}, desplegable con \textbf{Docker Compose}.
+  \item Estadísticas públicas por enlace sin login, alias personalizados y expiración automática configurable.
+  \item Borrado privado mediante token de gestión y \textbf{rate limiting por IP}; redirección separada del registro de analítica para no penalizar la latencia.
+\end{itemize}
+\vspace{4pt}
+
+\entry{Otros proyectos}{\textcolor{muted}{\small juegos web desde cero}}
+\begin{itemize}
+  \small
+  \item \textbf{\href{https://keevh.github.io/Alien-Monster-Hunter/}{\color{ink}Alien Monster Hunter}} \textcolor{accentdark}{\itshape(JavaScript, HTML5 Canvas, Vite, Web Audio API)}: shooter arcade con game loop, colisiones y oleadas construidos desde cero, audio sintetizado en tiempo real y modo de 1 y 2 jugadores.
+  \item \textbf{\href{https://keevh.github.io/torres-de-hanoi/}{\color{ink}Torres de Hanoi}} \textcolor{accentdark}{\itshape(JavaScript, Web Audio API, localStorage, MockAPI)}: puzzle con drag and drop táctil, ranking por dificultad persistente y diseño responsive.
+\end{itemize}
+
+% ============ EXPERIENCIA ============
+\section{Experiencia}
+\entry{Desarrollo Web Independiente}{2024 -- Presente}
+\subentry{Proyectos personales y a medida — Remoto}
+\begin{itemize}
+  \small
+  \item Desarrollo aplicaciones web y prototipos funcionales que integran interfaz de usuario, lógica de negocio, consumo de APIs y persistencia de datos.
+  \item Construyo proyectos de extremo a extremo: definición del problema, implementación, pruebas funcionales, despliegue y documentación técnica.
+  \item Implemento funcionalidades de cliente y servidor: componentes reutilizables, rutas, validaciones, servicios, endpoints y manejo de datos.
+  \item Aplico buenas prácticas de organización de código, separación de responsabilidades, diseño responsive y rendimiento web.
+\end{itemize}
+
+% ============ EDUCACION ============
+\section{Educación}
+\entry{Universidad Industrial de Santander (UIS)}{2019 -- En curso}
+\subentry{Ingeniería de Sistemas — últimos semestres · Bucaramanga, Colombia}
+
+\end{document}
