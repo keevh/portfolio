@@ -216,7 +216,18 @@ export function ProjectDetailPage({ project }: Props) {
 
     if (desktopContainer) {
       const activeButton = desktopContainer.querySelector<HTMLButtonElement>('[data-active="true"]');
-      if (activeButton) activeButton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (activeButton) {
+        const buttonTop = activeButton.offsetTop;
+        const buttonBottom = buttonTop + activeButton.clientHeight;
+        const viewTop = desktopContainer.scrollTop;
+        const viewBottom = viewTop + desktopContainer.clientHeight;
+
+        if (buttonTop < viewTop) {
+          desktopContainer.scrollTo({ top: buttonTop, behavior: 'smooth' });
+        } else if (buttonBottom > viewBottom) {
+          desktopContainer.scrollTo({ top: buttonBottom - desktopContainer.clientHeight, behavior: 'smooth' });
+        }
+      }
     }
   }, [activeGalleryIndex]);
 
