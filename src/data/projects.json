@@ -207,79 +207,55 @@
     "i18n": {
       "es": {
         "title": "Trimly",
-        "desc": "Herramienta web rápida y eficiente para acortar URLs largas, con panel de estadísticas de clics e interfaz minimalista.",
+        "desc": "Acortador de URLs open source y autoalojable, con estadísticas públicas por enlace, expiración automática y despliegue con Docker.",
         "highlights": [
-          "Problema: Enlaces largos sin contexto y seguimiento opaco para los usuarios",
-          "Arquitectura: Motor de redirección ultra-rápido operando en memoria caché (< 50ms)",
-          "Métricas: Recolección asíncrona de telemetría sin penalizar el rendimiento del usuario"
+          "Problema: enlaces largos difíciles de compartir y sin métricas de uso visibles",
+          "Arquitectura: app full-stack con Astro y React sobre una API REST y PostgreSQL, desplegable con Docker",
+          "Privacidad: estadísticas públicas sin login, borrado privado con token y rate limiting por IP"
         ],
         "detail": {
-          "tagline": "Acortador de enlaces orientado a velocidad de redirección y visibilidad de uso.",
-          "role": "Diseño de producto, experiencia frontend y arquitectura del flujo de redirección.",
-          "timeline": "Proyecto conceptual / portfolio",
+          "tagline": "Acortador de URLs open source y autoalojable, con estadísticas públicas, expiración automática y despliegue con Docker.",
+          "role": "Diseño de producto, desarrollo full-stack y arquitectura de despliegue.",
+          "timeline": "Proyecto personal",
           "team": "1 desarrollador",
-          "context": "Trimly explora un caso clásico de producto SaaS liviano: convertir enlaces extensos en recursos compartibles con métricas útiles.",
-          "overview": [
-            "La propuesta combina una interfaz mínima para crear enlaces cortos rápidamente con un dashboard de métricas que prioriza legibilidad y foco operacional.",
-            "El dominio gira alrededor de dos momentos clave: la generación del short link y la resolución de la redirección con captura analítica desacoplada.",
-            "Eso permite explicar decisiones de performance y observabilidad sin sobrecargar la experiencia principal del usuario."
-          ],
-          "problem": "Los enlaces largos son incómodos para compartir y muchas soluciones ocultan cómo se comporta el tráfico detrás de cada URL.",
-          "solution": "Modelé una herramienta de acortamiento con foco en respuesta inmediata, enlaces memorables y telemetría asincrónica para no bloquear la redirección.",
           "features": [
-            "Creación rápida de enlaces acortados",
-            "Panel con métricas de clics y uso",
-            "Arquitectura pensada para resolver redirecciones con baja latencia",
-            "Interfaz visual limpia para tareas repetitivas de sharing"
-          ],
-          "challenges": [
-            "Separar la captura analítica del camino crítico de redirección",
-            "Mantener una UX simple sin perder profundidad en métricas",
-            "Diseñar un modelo escalable para alias, expiración y tracking"
+            "Creación de enlaces cortos desde la interfaz o vía API REST (POST /api/links)",
+            "Alias personalizados y redirección pública en /t/:slug",
+            "Página de estadísticas públicas por enlace en /s/:slug, sin autenticación",
+            "Borrado privado mediante token de gestión y rate limiting por IP",
+            "Expiración automática configurable de enlaces y despliegue con Docker Compose"
           ],
           "outcomes": [
-            "Caso fuerte para explicar tradeoffs entre performance y observabilidad",
-            "Base de datos conceptual útil para expandir a autenticación, workspaces o branded links",
-            "Narrativa clara de producto utilitario con valor inmediato"
+            "Demuestra trabajo full-stack real: API, base de datos PostgreSQL y DevOps con Docker",
+            "Modelo simple y extensible, listo para autenticación, workspaces o enlaces de marca",
+            "Caso claro de equilibrio entre rendimiento de redirección y observabilidad pública"
           ]
         }
       },
       "en": {
         "title": "Trimly",
-        "desc": "Fast and efficient web tool for shortening long URLs, featuring a click statistics dashboard and minimalist interface.",
+        "desc": "Open-source, self-hostable URL shortener with public per-link statistics, automatic expiration, and Docker deployment.",
         "highlights": [
-          "Problem: Long links without context and opaque tracking for users",
-          "Architecture: Ultra-fast redirect engine running in memory cache (< 50ms)",
-          "Metrics: Async telemetry collection without penalizing user performance"
+          "Problem: long links are hard to share and offer no visible usage metrics",
+          "Architecture: full-stack app with Astro and React over a REST API and PostgreSQL, deployable with Docker",
+          "Privacy: public stats without login, private deletion via token, and per-IP rate limiting"
         ],
         "detail": {
-          "tagline": "A link shortener centered on redirect speed and usage visibility.",
-          "role": "Product design, frontend experience, and redirect-flow architecture.",
-          "timeline": "Concept / portfolio project",
+          "tagline": "Open-source, self-hostable URL shortener with public statistics, automatic expiration, and Docker deployment.",
+          "role": "Product design, full-stack development, and deployment architecture.",
+          "timeline": "Personal project",
           "team": "1 developer",
-          "context": "Trimly explores a classic lightweight SaaS case: turning long links into shareable assets with useful analytics.",
-          "overview": [
-            "The concept pairs a minimal interface for fast link creation with a metrics dashboard focused on readability and operational clarity.",
-            "The domain centers on two critical moments: short-link generation and redirect resolution with decoupled analytics capture.",
-            "That makes it a good vehicle for explaining performance and observability decisions without overloading the main user path."
-          ],
-          "problem": "Long links are awkward to share, and many tools hide how traffic behaves behind each URL.",
-          "solution": "I modeled a shortening tool focused on immediate response times, memorable links, and asynchronous telemetry so redirects stay fast.",
           "features": [
-            "Fast short-link creation flow",
-            "Dashboard with click and usage metrics",
-            "Architecture designed for low-latency redirect resolution",
-            "Clean visual interface for repetitive sharing tasks"
-          ],
-          "challenges": [
-            "Keeping analytics capture off the redirect critical path",
-            "Preserving a simple UX without losing analytical depth",
-            "Designing a scalable model for aliases, expiration, and tracking"
+            "Short-link creation from the UI or via REST API (POST /api/links)",
+            "Custom aliases and public redirection at /t/:slug",
+            "Public per-link statistics page at /s/:slug, no authentication required",
+            "Private deletion via a management token and per-IP rate limiting",
+            "Configurable automatic link expiration and Docker Compose deployment"
           ],
           "outcomes": [
-            "A strong case study for performance versus observability tradeoffs",
-            "Conceptual data model ready to grow into auth, workspaces, or branded links",
-            "A clear product story around a utility with immediate value"
+            "Demonstrates real full-stack work: API, PostgreSQL database, and DevOps with Docker",
+            "A simple, extensible model ready for auth, workspaces, or branded links",
+            "A clear case of balancing redirect performance with public observability"
           ]
         }
       }
@@ -291,9 +267,12 @@
     "category": "frontend",
     "year": 2026,
     "stack": [
-      "HTML5 Canvas",
       "JavaScript",
-      "CSS3"
+      "HTML5 Canvas",
+      "Vite",
+      "Tailwind CSS",
+      "Web Audio API",
+      "MockAPI"
     ],
     "image": "https://raw.githubusercontent.com/keevh/Alien-Monster-Hunter/master/img/title.jpg",
     "imageFit": "contain",
@@ -330,79 +309,55 @@
     "i18n": {
       "es": {
         "title": "Alien Monster Hunter",
-        "desc": "Juego de navegador desarrollado en JavaScript vanilla. Mecánicas de disparo, oleadas de enemigos y sistema de puntuación.",
+        "desc": "Shooter arcade de naves para navegador, con modos de 1 y 2 jugadores, oleadas procedurales, sobrecalentamiento de armas y audio sintetizado.",
         "highlights": [
-          "Motor: Lógica de juego construida desde cero sin librerías externas",
-          "Mecánicas: Sistema de oleadas, colisiones y power-ups",
-          "Stack: HTML5 Canvas + JavaScript puro"
+          "Motor: game loop, colisiones y oleadas construidos desde cero, sin engine externo",
+          "Audio: música y efectos generados en tiempo real con la Web Audio API",
+          "Modos: 1 y 2 jugadores locales, 3 dificultades y leaderboard remoto con respaldo"
         ],
         "detail": {
-          "tagline": "Arcade 2D de navegador construido para practicar game loop, colisiones y feedback visual.",
+          "tagline": "Shooter arcade de naves para navegador, con co-op local, oleadas procedurales, sobrecalentamiento de armas y audio sintetizado.",
           "role": "Diseño y desarrollo completo del juego.",
           "timeline": "Proyecto personal",
           "team": "1 desarrollador",
-          "context": "Alien Monster Hunter fue una excusa práctica para entender fundamentos de videojuegos sin frameworks ni engines externos.",
-          "overview": [
-            "El proyecto implementa un loop de juego clásico con actualización de estado, renderizado por frame y manejo manual de colisiones.",
-            "Las mecánicas incluyen disparos, oleadas crecientes de enemigos, power-ups y sistema de puntuación para reforzar progresión y rejugabilidad.",
-            "Todo corre sobre HTML5 Canvas y JavaScript vanilla, priorizando comprensión de base por encima de abstracciones."
-          ],
-          "problem": "Quería practicar fundamentos reales de gameplay y renderizado, no solo armar una interfaz que pareciera un juego.",
-          "solution": "Desarrollé un shooter 2D desde cero manejando estado, físicas simples, colisiones y feedback visual directamente sobre Canvas.",
           "features": [
-            "Loop de juego con renderizado continuo",
-            "Oleadas de enemigos con dificultad progresiva",
-            "Sistema de puntuación y power-ups",
-            "Pantallas de inicio y gameplay con identidad visual propia"
-          ],
-          "challenges": [
-            "Balancear dificultad sin herramientas de tuning avanzadas",
-            "Mantener código organizado en un proyecto sin engine",
-            "Sincronizar animación, input y colisiones en tiempo real"
+            "Modos de 1 y 2 jugadores locales con tres dificultades (Cadete, Capitán, Leyenda)",
+            "Oleadas de enemigos procedurales y un jefe final",
+            "Sobrecalentamiento de armas con ventana de enfriamiento, dash e invulnerabilidad temporal",
+            "Música y efectos de sonido generados en tiempo real con la Web Audio API",
+            "Leaderboard remoto vía MockAPI con respaldo en memoria si la API no responde"
           ],
           "outcomes": [
-            "Mejor comprensión del game loop y del render imperativo",
-            "Proyecto demostrable de lógica interactiva en JavaScript puro",
-            "Base técnica útil para juegos más complejos en navegador"
+            "Demuestra dominio del game loop, las colisiones y la IA de enemigos sin frameworks",
+            "Síntesis de audio procedural como diferenciador técnico del proyecto",
+            "Build de archivo único con Vite, listo para desplegar en GitHub Pages"
           ]
         }
       },
       "en": {
         "title": "Alien Monster Hunter",
-        "desc": "Browser game built in vanilla JavaScript. Shooting mechanics, enemy waves, and scoring system.",
+        "desc": "Arcade spaceship shooter for the browser, with 1 and 2 player modes, procedural enemy waves, weapon overheating, and synthesized audio.",
         "highlights": [
-          "Engine: Game logic built from scratch without external libraries",
-          "Mechanics: Wave system, collisions, and power-ups",
-          "Stack: HTML5 Canvas + vanilla JavaScript"
+          "Engine: game loop, collisions, and waves built from scratch, with no external engine",
+          "Audio: music and sound effects generated in real time with the Web Audio API",
+          "Modes: 1 and 2 local players, 3 difficulties, and a remote leaderboard with fallback"
         ],
         "detail": {
-          "tagline": "A 2D browser arcade built to practice game loops, collisions, and visual feedback.",
+          "tagline": "Arcade spaceship shooter for the browser, with local co-op, procedural waves, weapon overheating, and synthesized audio.",
           "role": "Full game design and development.",
           "timeline": "Personal project",
           "team": "1 developer",
-          "context": "Alien Monster Hunter was a practical exercise to understand game fundamentals without relying on frameworks or external engines.",
-          "overview": [
-            "The project implements a classic game loop with state updates, per-frame rendering, and manual collision handling.",
-            "Core mechanics include shooting, escalating enemy waves, power-ups, and a scoring system to reinforce progression and replayability.",
-            "Everything runs on HTML5 Canvas and vanilla JavaScript, prioritizing foundational understanding over abstractions."
-          ],
-          "problem": "I wanted to practice real gameplay and rendering fundamentals, not just build an interface that looked like a game.",
-          "solution": "I developed a 2D shooter from scratch, handling state, simple physics, collisions, and visual feedback directly on Canvas.",
           "features": [
-            "Continuous game loop and rendering pipeline",
-            "Enemy waves with progressive difficulty",
-            "Scoring and power-up systems",
-            "Custom start and gameplay screens"
-          ],
-          "challenges": [
-            "Balancing difficulty without advanced tuning tools",
-            "Keeping code organized in an engine-free project",
-            "Synchronizing animation, input, and collisions in real time"
+            "1 and 2 local player modes with three difficulties (Cadet, Captain, Legend)",
+            "Procedural enemy waves and a final boss",
+            "Weapon overheating with a vent cooldown window, dash, and temporary invulnerability",
+            "Music and sound effects generated in real time with the Web Audio API",
+            "Remote leaderboard via MockAPI with an in-memory fallback when the API is unavailable"
           ],
           "outcomes": [
-            "Stronger understanding of game loops and imperative rendering",
-            "A demonstrable JavaScript project centered on interactive logic",
-            "A technical base for more complex browser games"
+            "Demonstrates command of the game loop, collisions, and enemy AI without frameworks",
+            "Procedural audio synthesis as the project's technical differentiator",
+            "Single-file Vite build, ready to deploy on GitHub Pages"
           ]
         }
       }
@@ -417,6 +372,7 @@
       "HTML",
       "CSS",
       "JavaScript",
+      "Web Audio API",
       "Local Storage",
       "MockAPI"
     ],
@@ -457,38 +413,26 @@
         "title": "Torres de Hanoi",
         "desc": "Juego web interactivo de Torres de Hanoi desarrollado con HTML, CSS y JavaScript vanilla, con drag and drop, ranking y soporte móvil.",
         "highlights": [
-          "Interacción: Drag and drop con soporte táctil para resolver el puzzle en desktop y móvil",
-          "Gameplay: Cantidad configurable de discos entre 3 y 8, temporizador y estadísticas al ganar",
-          "Persistencia: Ranking y preferencias del jugador guardadas con almacenamiento local y MockAPI"
+          "Interacción: drag and drop con soporte táctil para resolver el puzzle en desktop y móvil",
+          "Gameplay: cantidad configurable de discos entre 3 y 8, temporizador y estadísticas al ganar",
+          "Persistencia: ranking por dificultad y preferencias guardadas con localStorage y MockAPI"
         ],
         "detail": {
           "tagline": "Puzzle clásico llevado a la web con interacción táctil, progresión configurable y ranking persistente.",
           "role": "Diseño de interacción, desarrollo frontend y lógica del juego.",
           "timeline": "Proyecto personal",
           "team": "1 desarrollador",
-          "context": "El proyecto toma un problema algorítmico clásico y lo convierte en una experiencia web jugable con foco en accesibilidad y claridad visual.",
-          "overview": [
-            "La implementación permite jugar con distinta cantidad de discos, midiendo tiempo y movimientos para agregar una capa ligera de competencia.",
-            "El sistema de drag and drop se adaptó para desktop y móvil, cuidando feedback y restricciones válidas del puzzle.",
-            "Además de la lógica central, el juego persiste ranking y preferencias para que cada sesión tenga continuidad."
-          ],
-          "problem": "Muchos ejercicios algorítmicos quedan encerrados en consola o teoría y no muestran cómo se traducen a una experiencia usable.",
-          "solution": "Transformé Torres de Hanoi en una aplicación interactiva con reglas visuales claras, soporte táctil y persistencia de progreso y ranking.",
           "features": [
-            "Drag and drop con validación de movimientos",
-            "Cantidad configurable de discos entre 3 y 8",
-            "Timer, contador de movimientos y pantalla de victoria",
-            "Ranking persistente y preferencias guardadas"
-          ],
-          "challenges": [
-            "Resolver correctamente reglas del puzzle durante interacciones táctiles y con mouse",
-            "Mantener claridad visual al aumentar la complejidad del tablero",
-            "Persistir resultados sin complicar un proyecto liviano"
+            "Drag and drop con validación de movimientos y soporte táctil en móvil",
+            "Cantidad configurable de discos entre 3 y 8, con temporizador y contador de movimientos",
+            "Ranking por dificultad persistido con localStorage y MockAPI",
+            "Música ambiental con control de volumen y efectos de sonido vía Web Audio API",
+            "Preferencias persistentes (apodo, música, volumen) y diseño responsive, incluso en iframes"
           ],
           "outcomes": [
-            "Proyecto útil para mostrar lógica, UX interactiva y estado persistente",
-            "Mejor práctica en eventos de drag and drop y soporte móvil",
-            "Ejemplo claro de cómo convertir teoría algorítmica en producto navegable"
+            "Convierte un problema algorítmico clásico en una experiencia jugable y accesible",
+            "Buen ejemplo de estado persistente, UX interactiva y soporte móvil",
+            "Código modular sin paso de build, servible como ES Modules"
           ]
         }
       },
@@ -496,38 +440,26 @@
         "title": "Towers of Hanoi",
         "desc": "Interactive Towers of Hanoi web game built with HTML, CSS, and vanilla JavaScript, featuring drag and drop, rankings, and mobile support.",
         "highlights": [
-          "Interaction: Drag and drop with touch support to solve the puzzle on desktop and mobile",
-          "Gameplay: Configurable disk count from 3 to 8, timer, and win statistics",
-          "Persistence: Ranking and player preferences saved with local storage and MockAPI"
+          "Interaction: drag and drop with touch support to solve the puzzle on desktop and mobile",
+          "Gameplay: configurable disk count from 3 to 8, timer, and win statistics",
+          "Persistence: per-difficulty ranking and preferences saved with localStorage and MockAPI"
         ],
         "detail": {
           "tagline": "A classic puzzle brought to the web with touch interaction, configurable progression, and persistent rankings.",
           "role": "Interaction design, frontend development, and game logic.",
           "timeline": "Personal project",
           "team": "1 developer",
-          "context": "The project turns a classic algorithmic problem into a playable web experience focused on accessibility and visual clarity.",
-          "overview": [
-            "The implementation supports different disk counts while tracking time and moves to add a lightweight competitive layer.",
-            "The drag-and-drop system was adapted for both desktop and mobile, with careful feedback and strict puzzle-rule validation.",
-            "Alongside the core logic, the game persists rankings and preferences so each session feels continuous."
-          ],
-          "problem": "Many algorithm exercises stay trapped in consoles or theory and never show how they translate into a usable experience.",
-          "solution": "I turned Towers of Hanoi into an interactive application with clear visual rules, touch support, and persistent progress and rankings.",
           "features": [
-            "Drag-and-drop moves with validation",
-            "Configurable disk count from 3 to 8",
-            "Timer, move counter, and victory state",
-            "Persistent rankings and saved preferences"
-          ],
-          "challenges": [
-            "Correctly enforcing puzzle rules across touch and mouse interactions",
-            "Preserving visual clarity as board complexity grows",
-            "Persisting results without overcomplicating a lightweight project"
+            "Drag-and-drop moves with validation and touch support on mobile",
+            "Configurable disk count from 3 to 8, with timer and move counter",
+            "Per-difficulty ranking persisted with localStorage and MockAPI",
+            "Ambient music with volume control and sound effects via the Web Audio API",
+            "Persistent preferences (nickname, music, volume) and responsive design, even inside iframes"
           ],
           "outcomes": [
-            "A useful project to demonstrate logic, interactive UX, and persistent state",
-            "Better practice with drag-and-drop events and mobile support",
-            "A clear example of turning algorithmic theory into a browsable product"
+            "Turns a classic algorithmic problem into a playable, accessible experience",
+            "A solid example of persistent state, interactive UX, and mobile support",
+            "Modular, build-free code served as ES Modules"
           ]
         }
       }

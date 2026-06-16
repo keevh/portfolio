@@ -2,16 +2,42 @@
 
 
 @theme {
-  --color-background: #050505;
-  --color-surface: #121212;
-  --color-surface-container: #201f1f;
-  --color-surface-dim: #131313;
-  --color-primary: #10b981;
-  --color-primary-container: #34d399;
-  --color-on-primary-container: #065f46;
-  --color-secondary: #2dd4bf;
-  --color-on-surface: #e5e2e1;
-  --color-on-surface-variant: rgba(255, 255, 255, 0.5);
+  /* Kinetic Obsidian Refined palette */
+  --color-background: #111316;
+  --color-on-background: #e2e2e6;
+  --color-surface: #111316;
+  --color-surface-dim: #111316;
+  --color-surface-bright: #37393d;
+  --color-surface-container-lowest: #0c0e11;
+  --color-surface-container-low: #1a1c1f;
+  --color-surface-container: #1e2023;
+  --color-surface-container-high: #282a2d;
+  --color-surface-container-highest: #333538;
+  --color-surface-variant: #333538;
+  --color-on-surface: #e2e2e6;
+  --color-on-surface-variant: #bccbb9;
+  --color-inverse-surface: #e2e2e6;
+  --color-inverse-on-surface: #2f3034;
+  --color-outline: #869585;
+  --color-outline-variant: #3d4a3d;
+  --color-surface-tint: #4ae176;
+  --color-primary: #4be277;
+  --color-on-primary: #003915;
+  --color-primary-container: #22c55e;
+  --color-on-primary-container: #004b1e;
+  --color-inverse-primary: #006e2f;
+  --color-secondary: #b9c8dc;
+  --color-on-secondary: #233241;
+  --color-secondary-container: #3c4a5b;
+  --color-on-secondary-container: #abbacd;
+  --color-tertiary: #bfc7d4;
+  --color-on-tertiary: #29313b;
+  --color-tertiary-container: #a4acb8;
+  --color-on-tertiary-container: #38404a;
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
 
   --font-sans: 'Geist', sans-serif;
   --font-display: 'Bricolage Grotesque', sans-serif;
@@ -20,18 +46,18 @@
 
 @layer utilities {
   .glass-panel {
-    background: rgba(18, 18, 18, 0.4);
+    background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(184, 199, 219, 0.1);
   }
   .glow-primary {
-    box-shadow: 0 0 30px rgba(52, 211, 153, 0.15);
+    box-shadow: 0 0 30px rgba(75, 226, 119, 0.15);
   }
   .glow-primary-hover:hover {
-    box-shadow: 0 0 20px rgba(52, 211, 153, 0.3);
+    box-shadow: 0 0 20px rgba(75, 226, 119, 0.3);
   }
   .text-gradient {
-    background: linear-gradient(90deg, #d1fae5 0%, #10b981 100%);
+    background: linear-gradient(90deg, #6bff8f 0%, #22c55e 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
