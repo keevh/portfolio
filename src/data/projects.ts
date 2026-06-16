@@ -10,12 +10,12 @@ export type ProjectDetailContent = {
   role: string;
   timeline: string;
   team: string;
-  context: string;
-  overview: string[];
-  problem: string;
-  solution: string;
+  context?: string;
+  overview?: string[];
+  problem?: string;
+  solution?: string;
   features: string[];
-  challenges: string[];
+  challenges?: string[];
   outcomes: string[];
   credentials?: { label: string; value: string }[];
   diagrams?: {
