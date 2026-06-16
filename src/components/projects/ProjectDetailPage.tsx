@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { ArrowLeft, ChevronLeft, ChevronRight, ExternalLink, Github, Link as LinkIcon, Maximize2, X } from 'lucide-react';
+import {
+  ArrowLeft, ArrowUpRight, BarChart3, Boxes, ChevronLeft, ChevronRight, Container,
+  ExternalLink, Flame, Gamepad2, Github, Hand, LayoutDashboard, Link as LinkIcon,
+  Link2, Maximize2, Server, Settings, ShieldCheck, ShoppingCart, Shuffle, SlidersHorizontal,
+  Sparkles, Store, Swords, Target, Trophy, Volume2, X,
+} from 'lucide-react';
+import type { ElementType } from 'react';
 import { useLanguage } from '../../hooks/useLanguage';
 import { translations } from '../../i18n/translations';
 import type { ProjectRecord } from '../../data/projects';
@@ -59,6 +65,39 @@ function getStackVisual(stackItem: string): StackVisual {
   return { label: stackItem };
 }
 
+const FEATURE_ICONS: Record<string, ElementType> = {
+  store: Store,
+  cart: ShoppingCart,
+  dashboard: LayoutDashboard,
+  server: Server,
+  container: Container,
+  link: Link2,
+  shuffle: Shuffle,
+  chart: BarChart3,
+  shield: ShieldCheck,
+  gamepad: Gamepad2,
+  swords: Swords,
+  flame: Flame,
+  audio: Volume2,
+  trophy: Trophy,
+  hand: Hand,
+  sliders: SlidersHorizontal,
+  settings: Settings,
+  sparkles: Sparkles,
+};
+
+function getFeatureIcon(iconKey?: string): ElementType {
+  return (iconKey && FEATURE_ICONS[iconKey]) || Sparkles;
+}
+
+function getBentoSpan(index: number, total: number): string {
+  const wideFirst = total % 3 !== 0;
+  const wideLast = total % 3 === 1;
+  if (index === 0 && wideFirst) return 'sm:col-span-2';
+  if (index === total - 1 && wideLast && total > 1) return 'sm:col-span-2';
+  return '';
+}
+
 const uiCopy = {
   es: {
     back: 'Volver al portafolio',
@@ -66,7 +105,7 @@ const uiCopy = {
     gallery: 'Galeria del proyecto',
     diagrams: 'Arquitectura y dominio',
     diagramsIntro: 'Vistas que condensan la arquitectura, el modelo de datos y la organizacion interna del proyecto.',
-    capabilities: 'Cobertura funcional',
+    capabilities: 'Funcionalidades',
     credentials: 'Credenciales demo',
     outcomes: 'Conclusiones y resultados',
     expand: 'Ampliar imagen',
@@ -83,7 +122,7 @@ const uiCopy = {
     gallery: 'Project gallery',
     diagrams: 'Architecture and domain',
     diagramsIntro: 'Views that condense the architecture, data model, and internal organization of the project.',
-    capabilities: 'Functional coverage',
+    capabilities: 'Features',
     credentials: 'Demo credentials',
     outcomes: 'Conclusions and results',
     expand: 'Expand image',
@@ -470,14 +509,31 @@ export function ProjectDetailPage({ project }: Props) {
           {detail.features.length > 0 && (
             <section className={`grid gap-8 ${hasCredentials ? 'xl:grid-cols-[minmax(0,1fr)_320px] xl:items-start' : ''}`}>
               <div className="space-y-6">
-                <h2 className={sectionHeadingClass}>{copy.capabilities}</h2>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {detail.features.map((item) => (
-                    <div key={item} className="glass-panel h-full rounded-[24px] p-5">
-                      <span className="block h-1 w-8 rounded-full bg-primary-container/50" />
-                      <p className="mt-4 font-body-md text-sm leading-7 text-on-surface-variant sm:text-base">{item}</p>
-                    </div>
-                  ))}
+                <div className="flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-primary-container/30 bg-primary-container/10 text-primary-container">
+                    <Boxes size={20} />
+                  </span>
+                  <h2 className={sectionHeadingClass}>{copy.capabilities}</h2>
+                </div>
+                <div className="grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {detail.features.map((item, index) => {
+                    const Icon = getFeatureIcon(item.icon);
+                    return (
+                      <motion.div
+                        key={item.text}
+                        className={`flex flex-col gap-4 glass-panel rounded-[24px] p-6 transition-all hover:-translate-y-1 hover:border-primary-container/30 ${getBentoSpan(index, detail.features.length)}`}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: '-40px' }}
+                        transition={{ duration: 0.4, delay: (index % 3) * 0.06 }}
+                      >
+                        <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-primary-container/30 bg-primary-container/10 text-primary-container">
+                          <Icon size={22} />
+                        </span>
+                        <p className="font-body-md text-sm leading-7 text-on-surface-variant sm:text-base">{item.text}</p>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -579,15 +635,30 @@ export function ProjectDetailPage({ project }: Props) {
             </section>
           )}
 
-          {/* §6 Conclusions & results (outcomes) */}
+          {/* §6 Conclusions & results (outcomes) — editorial rows */}
           {detail.outcomes.length > 0 && (
-            <section className={`space-y-6 ${diagrams.length > 0 ? 'border-t border-white/8' : ''} pt-12`}>
-              <h2 className={sectionHeadingClass}>{copy.outcomes}</h2>
-              <div className="grid gap-4 md:grid-cols-3">
-                {detail.outcomes.map((item) => (
-                  <div key={item} className="glass-panel h-full rounded-[24px] border-l-2 border-l-primary-container/60 p-6">
-                    <p className="font-body-md text-sm leading-7 text-on-surface-variant sm:text-base">{item}</p>
-                  </div>
+            <section className={`space-y-8 ${diagrams.length > 0 ? 'border-t border-white/8' : ''} pt-12`}>
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-primary-container/30 bg-primary-container/10 text-primary-container">
+                  <Target size={20} />
+                </span>
+                <h2 className={sectionHeadingClass}>{copy.outcomes}</h2>
+              </div>
+              <div className="divide-y divide-white/8">
+                {detail.outcomes.map((item, index) => (
+                  <motion.div
+                    key={item}
+                    className="flex items-start gap-5 py-6 sm:py-8"
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.45, delay: index * 0.08 }}
+                  >
+                    <span className="mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary-container/10 text-primary-container">
+                      <ArrowUpRight size={18} />
+                    </span>
+                    <p className="font-body-lg text-lg leading-relaxed text-on-surface sm:text-xl">{item}</p>
+                  </motion.div>
                 ))}
               </div>
             </section>

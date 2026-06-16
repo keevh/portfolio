@@ -49,7 +49,7 @@
     ],
     "i18n": {
       "es": {
-        "title": "lumen",
+        "title": "Lumen",
         "desc": "Tienda con panel administrativo en Next.js para una demo local de e-commerce en español, con catálogo, carrito, checkout y persistencia en IndexedDB.",
         "highlights": [
           "Problema: Demostrar un flujo completo de e-commerce sin depender de un backend real",
@@ -62,10 +62,10 @@
           "timeline": "Proyecto personal",
           "team": "1 desarrollador",
           "features": [
-            "Tienda pública con home, categorías, novedades, ofertas y detalle de producto",
-            "Carrito, checkout y confirmación final con estado persistente en el navegador",
-            "Panel administrativo local para gestionar productos, descuentos, ventas, configuración y credenciales demo",
-            "Arquitectura preparada para migrar desde persistencia local hacia servicios remotos"
+            { "text": "Tienda pública con home, categorías, novedades, ofertas y detalle de producto", "icon": "store" },
+            { "text": "Carrito, checkout y confirmación final con estado persistente en el navegador", "icon": "cart" },
+            { "text": "Panel administrativo local para gestionar productos, descuentos, ventas, configuración y credenciales demo", "icon": "dashboard" },
+            { "text": "Arquitectura preparada para migrar desde persistencia local hacia servicios remotos", "icon": "server" }
           ],
           "outcomes": [
             "Caso de estudio sólido para mostrar criterio de producto, arquitectura frontend y modelado del negocio",
@@ -122,10 +122,10 @@
           "timeline": "Personal project",
           "team": "1 developer",
           "features": [
-            "Public storefront with home, categories, new arrivals, offers, and product detail pages",
-            "Cart, checkout, and final confirmation with browser-persisted state",
-            "Local admin panel for products, discounts, sales, settings, and demo credentials",
-            "Architecture ready to migrate from local persistence to remote services"
+            { "text": "Public storefront with home, categories, new arrivals, offers, and product detail pages", "icon": "store" },
+            { "text": "Cart, checkout, and final confirmation with browser-persisted state", "icon": "cart" },
+            { "text": "Local admin panel for products, discounts, sales, settings, and demo credentials", "icon": "dashboard" },
+            { "text": "Architecture ready to migrate from local persistence to remote services", "icon": "server" }
           ],
           "outcomes": [
             "A stronger case study for product thinking, architecture, and business modeling",
@@ -219,11 +219,11 @@
           "timeline": "Proyecto personal",
           "team": "1 desarrollador",
           "features": [
-            "Creación de enlaces cortos desde la interfaz o vía API REST (POST /api/links)",
-            "Alias personalizados y redirección pública en /t/:slug",
-            "Página de estadísticas públicas por enlace en /s/:slug, sin autenticación",
-            "Borrado privado mediante token de gestión y rate limiting por IP",
-            "Expiración automática configurable de enlaces y despliegue con Docker Compose"
+            { "text": "Creación de enlaces cortos desde la interfaz o vía API REST (POST /api/links)", "icon": "link" },
+            { "text": "Alias personalizados y redirección pública en /t/:slug", "icon": "shuffle" },
+            { "text": "Página de estadísticas públicas por enlace en /s/:slug, sin autenticación", "icon": "chart" },
+            { "text": "Borrado privado mediante token de gestión y rate limiting por IP", "icon": "shield" },
+            { "text": "Expiración automática configurable de enlaces y despliegue con Docker Compose", "icon": "container" }
           ],
           "outcomes": [
             "Demuestra trabajo full-stack real: API, base de datos PostgreSQL y DevOps con Docker",
@@ -246,11 +246,11 @@
           "timeline": "Personal project",
           "team": "1 developer",
           "features": [
-            "Short-link creation from the UI or via REST API (POST /api/links)",
-            "Custom aliases and public redirection at /t/:slug",
-            "Public per-link statistics page at /s/:slug, no authentication required",
-            "Private deletion via a management token and per-IP rate limiting",
-            "Configurable automatic link expiration and Docker Compose deployment"
+            { "text": "Short-link creation from the UI or via REST API (POST /api/links)", "icon": "link" },
+            { "text": "Custom aliases and public redirection at /t/:slug", "icon": "shuffle" },
+            { "text": "Public per-link statistics page at /s/:slug, no authentication required", "icon": "chart" },
+            { "text": "Private deletion via a management token and per-IP rate limiting", "icon": "shield" },
+            { "text": "Configurable automatic link expiration and Docker Compose deployment", "icon": "container" }
           ],
           "outcomes": [
             "Demonstrates real full-stack work: API, PostgreSQL database, and DevOps with Docker",
@@ -321,11 +321,11 @@
           "timeline": "Proyecto personal",
           "team": "1 desarrollador",
           "features": [
-            "Modos de 1 y 2 jugadores locales con tres dificultades (Cadete, Capitán, Leyenda)",
-            "Oleadas de enemigos procedurales y un jefe final",
-            "Sobrecalentamiento de armas con ventana de enfriamiento, dash e invulnerabilidad temporal",
-            "Música y efectos de sonido generados en tiempo real con la Web Audio API",
-            "Leaderboard remoto vía MockAPI con respaldo en memoria si la API no responde"
+            { "text": "Modos de 1 y 2 jugadores locales con tres dificultades (Cadete, Capitán, Leyenda)", "icon": "gamepad" },
+            { "text": "Oleadas de enemigos procedurales y un jefe final", "icon": "swords" },
+            { "text": "Sobrecalentamiento de armas con ventana de enfriamiento, dash e invulnerabilidad temporal", "icon": "flame" },
+            { "text": "Música y efectos de sonido generados en tiempo real con la Web Audio API", "icon": "audio" },
+            { "text": "Leaderboard remoto vía MockAPI con respaldo en memoria si la API no responde", "icon": "trophy" }
           ],
           "outcomes": [
             "Demuestra dominio del game loop, las colisiones y la IA de enemigos sin frameworks",
@@ -348,11 +348,11 @@
           "timeline": "Personal project",
           "team": "1 developer",
           "features": [
-            "1 and 2 local player modes with three difficulties (Cadet, Captain, Legend)",
-            "Procedural enemy waves and a final boss",
-            "Weapon overheating with a vent cooldown window, dash, and temporary invulnerability",
-            "Music and sound effects generated in real time with the Web Audio API",
-            "Remote leaderboard via MockAPI with an in-memory fallback when the API is unavailable"
+            { "text": "1 and 2 local player modes with three difficulties (Cadet, Captain, Legend)", "icon": "gamepad" },
+            { "text": "Procedural enemy waves and a final boss", "icon": "swords" },
+            { "text": "Weapon overheating with a vent cooldown window, dash, and temporary invulnerability", "icon": "flame" },
+            { "text": "Music and sound effects generated in real time with the Web Audio API", "icon": "audio" },
+            { "text": "Remote leaderboard via MockAPI with an in-memory fallback when the API is unavailable", "icon": "trophy" }
           ],
           "outcomes": [
             "Demonstrates command of the game loop, collisions, and enemy AI without frameworks",
@@ -423,11 +423,11 @@
           "timeline": "Proyecto personal",
           "team": "1 desarrollador",
           "features": [
-            "Drag and drop con validación de movimientos y soporte táctil en móvil",
-            "Cantidad configurable de discos entre 3 y 8, con temporizador y contador de movimientos",
-            "Ranking por dificultad persistido con localStorage y MockAPI",
-            "Música ambiental con control de volumen y efectos de sonido vía Web Audio API",
-            "Preferencias persistentes (apodo, música, volumen) y diseño responsive, incluso en iframes"
+            { "text": "Drag and drop con validación de movimientos y soporte táctil en móvil", "icon": "hand" },
+            { "text": "Cantidad configurable de discos entre 3 y 8, con temporizador y contador de movimientos", "icon": "sliders" },
+            { "text": "Ranking por dificultad persistido con localStorage y MockAPI", "icon": "trophy" },
+            { "text": "Música ambiental con control de volumen y efectos de sonido vía Web Audio API", "icon": "audio" },
+            { "text": "Preferencias persistentes (apodo, música, volumen) y diseño responsive, incluso en iframes", "icon": "settings" }
           ],
           "outcomes": [
             "Convierte un problema algorítmico clásico en una experiencia jugable y accesible",
@@ -450,11 +450,11 @@
           "timeline": "Personal project",
           "team": "1 developer",
           "features": [
-            "Drag-and-drop moves with validation and touch support on mobile",
-            "Configurable disk count from 3 to 8, with timer and move counter",
-            "Per-difficulty ranking persisted with localStorage and MockAPI",
-            "Ambient music with volume control and sound effects via the Web Audio API",
-            "Persistent preferences (nickname, music, volume) and responsive design, even inside iframes"
+            { "text": "Drag-and-drop moves with validation and touch support on mobile", "icon": "hand" },
+            { "text": "Configurable disk count from 3 to 8, with timer and move counter", "icon": "sliders" },
+            { "text": "Per-difficulty ranking persisted with localStorage and MockAPI", "icon": "trophy" },
+            { "text": "Ambient music with volume control and sound effects via the Web Audio API", "icon": "audio" },
+            { "text": "Persistent preferences (nickname, music, volume) and responsive design, even inside iframes", "icon": "settings" }
           ],
           "outcomes": [
             "Turns a classic algorithmic problem into a playable, accessible experience",

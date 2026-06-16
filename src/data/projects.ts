@@ -14,7 +14,7 @@ export type ProjectDetailContent = {
   overview?: string[];
   problem?: string;
   solution?: string;
-  features: string[];
+  features: { text: string; icon: string }[];
   challenges?: string[];
   outcomes: string[];
   credentials?: { label: string; value: string }[];

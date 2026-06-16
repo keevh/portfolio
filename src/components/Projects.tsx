@@ -55,7 +55,7 @@ export function Projects() {
 
               {/* Image */}
               <div className="md:w-1/2 relative overflow-hidden bg-surface-container-low aspect-video md:aspect-auto flex-shrink-0">
-                <div className="absolute inset-0 bg-surface/30 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                <div className="absolute inset-0 bg-surface/30 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
                 <img
                   alt={project.title}
                   src={project.image}
