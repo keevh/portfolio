@@ -71,7 +71,7 @@ const uiCopy = {
     outcomes: 'Conclusiones y resultados',
     expand: 'Ampliar imagen',
     close: 'Cerrar vista ampliada',
-    year: 'Ano',
+    year: 'Año',
     role: 'Rol',
     team: 'Equipo',
     timeline: 'Timeline',
@@ -499,7 +499,7 @@ export function ProjectDetailPage({ project }: Props) {
 
           {/* §4 Tech pills (centered) */}
           {project.stack.length > 0 && (
-            <section className="space-y-8 border-y border-white/8 py-12 text-center">
+            <section className={`space-y-8 border-y border-white/8 py-12 text-center my-0`}>
               <h2 className={sectionHeadingClass}>{copy.stack}</h2>
               <div className="flex flex-wrap justify-center gap-3">
                 {project.stack.map((item) => {
@@ -573,7 +573,7 @@ export function ProjectDetailPage({ project }: Props) {
 
           {/* §6 Conclusions & results (outcomes) */}
           {detail.outcomes.length > 0 && (
-            <section className="space-y-6 border-t border-white/8 pt-12">
+            <section className={`space-y-6 ${diagrams.length > 0 ? 'border-t border-white/8' : ''} pt-12`}>
               <h2 className={sectionHeadingClass}>{copy.outcomes}</h2>
               <div className="grid gap-4 md:grid-cols-3">
                 {detail.outcomes.map((item) => (

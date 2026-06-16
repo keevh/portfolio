@@ -49,20 +49,20 @@
     ],
     "i18n": {
       "es": {
-        "title": "LUMEN",
-        "desc": "Storefront con panel administrativo en Next.js para una demo local de e-commerce en español, con catálogo, carrito, checkout y persistencia en IndexedDB.",
+        "title": "lumen",
+        "desc": "Tienda con panel administrativo en Next.js para una demo local de e-commerce en español, con catálogo, carrito, checkout y persistencia en IndexedDB.",
         "highlights": [
           "Problema: Demostrar un flujo completo de e-commerce sin depender de un backend real",
-          "Arquitectura: Storefront público y panel administrativo construidos con Next.js 16, React 19, TypeScript y Tailwind CSS",
+          "Arquitectura: Sitio web de tienda y panel administrativo construidos con Next.js 16, React 19, TypeScript y Tailwind CSS",
           "Persistencia: Catálogo, carrito, pedidos, descuentos y ajustes guardados localmente en IndexedDB"
         ],
         "detail": {
-          "tagline": "Demo de e-commerce en espanol con storefront, checkout y panel administrativo local construidos sobre una arquitectura frontend lista para evolucionar.",
+          "tagline": "Demo de e-commerce en español con tienda, checkout y panel administrativo local construidos sobre una arquitectura frontend lista para evolucionar.",
           "role": "Product thinking, frontend architecture y modelado de dominio comercial.",
           "timeline": "Proyecto personal",
           "team": "1 desarrollador",
           "features": [
-            "Storefront publico con home, categorias, novedades, ofertas y detalle de producto",
+            "Tienda publica con home, categorias, novedades, ofertas y detalle de producto",
             "Carrito, checkout y confirmacion final con estado persistente en el navegador",
             "Panel administrativo local para productos, descuentos, ventas, configuracion y credenciales demo",
             "Arquitectura preparada para migrar de persistencia local a servicios remotos"
@@ -102,7 +102,7 @@
         }
       },
       "en": {
-        "title": "LUMEN",
+        "title": "lumen",
         "desc": "Next.js storefront with an admin panel for a local Spanish e-commerce demo, featuring catalog, cart, checkout, and IndexedDB persistence.",
         "highlights": [
           "Problem: Demonstrate a full e-commerce flow without relying on a real backend",
@@ -160,18 +160,21 @@
     "id": "shortener",
     "slug": "trimly",
     "category": "fullstack",
-    "year": 2024,
+    "year": 2026,
     "stack": [
       "TypeScript",
+      "Astro",
       "React",
       "Node.js",
-      "Redis",
-      "Analytics"
+      "PostgreSQL",
+      "Docker"
     ],
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070",
+    "image": "/projects/trimly/hero/screenshot_20260616_015358.png",
     "gallery": [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2015"
+      "/projects/trimly/gallery/screenshot_20260616_015358.png",
+      "/projects/trimly/gallery/screenshot_20260616_015409.png",
+      "/projects/trimly/gallery/screenshot_20260616_015426.png",
+      "/projects/trimly/gallery/screenshot_20260616_015440.png"
     ],
     "liveUrl": "https://trimly.keevh.dev",
     "tags": [
@@ -279,7 +282,7 @@
     "id": "alien-monster-hunter",
     "slug": "alien-monster-hunter",
     "category": "frontend",
-    "year": 2021,
+    "year": 2026,
     "stack": [
       "HTML5 Canvas",
       "JavaScript",
@@ -402,7 +405,7 @@
     "id": "torres-de-hanoi",
     "slug": "towers-of-hanoi",
     "category": "frontend",
-    "year": 2021,
+    "year": 2023,
     "stack": [
       "HTML",
       "CSS",
