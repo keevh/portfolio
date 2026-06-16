@@ -20,7 +20,7 @@ export type ProjectDetailContent = {
   credentials?: { label: string; value: string }[];
   diagrams?: {
     title: string;
-    description: string;
+    description: string | string[];
     image: string;
   }[];
   blocks?: {

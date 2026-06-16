@@ -41,10 +41,10 @@
     ],
     "links": [
       {
-        "type": "repo",
-        "url": "https://github.com/keevh/lumen",
-        "labelKey": "proj.repo",
-        "icon": "Github"
+        "type": "demo",
+        "url": "https://lumen.keevh.dev/",
+        "labelKey": "proj.demo",
+        "icon": "ExternalLink"
       }
     ],
     "i18n": {
@@ -57,20 +57,20 @@
           "Persistencia: Catálogo, carrito, pedidos, descuentos y ajustes guardados localmente en IndexedDB"
         ],
         "detail": {
-          "tagline": "Demo de e-commerce en español con tienda, checkout y panel administrativo local construidos sobre una arquitectura frontend lista para evolucionar.",
-          "role": "Product thinking, frontend architecture y modelado de dominio comercial.",
+          "tagline": "Demo de e-commerce en español con tienda, checkout y panel administrativo, construida sobre una arquitectura frontend lista para evolucionar.",
+          "role": "Definición de producto, arquitectura frontend y modelado del dominio comercial.",
           "timeline": "Proyecto personal",
           "team": "1 desarrollador",
           "features": [
-            "Tienda publica con home, categorias, novedades, ofertas y detalle de producto",
-            "Carrito, checkout y confirmacion final con estado persistente en el navegador",
-            "Panel administrativo local para productos, descuentos, ventas, configuracion y credenciales demo",
-            "Arquitectura preparada para migrar de persistencia local a servicios remotos"
+            "Tienda pública con home, categorías, novedades, ofertas y detalle de producto",
+            "Carrito, checkout y confirmación final con estado persistente en el navegador",
+            "Panel administrativo local para gestionar productos, descuentos, ventas, configuración y credenciales demo",
+            "Arquitectura preparada para migrar desde persistencia local hacia servicios remotos"
           ],
           "outcomes": [
-            "Caso de estudio mas fuerte para mostrar criterio de producto, arquitectura y modelado de negocio",
-            "Base reutilizable para futuras demos con backend real o sincronizacion remota",
-            "Experiencia end to end que comunica alcance tecnico, no solo interfaz"
+            "Caso de estudio sólido para mostrar criterio de producto, arquitectura frontend y modelado del negocio",
+            "Base reutilizable para futuras demos con backend real o sincronización remota",
+            "Experiencia end to end que comunica alcance técnico más allá de la interfaz"
           ],
           "credentials": [
             {
@@ -85,17 +85,24 @@
           "diagrams": [
             {
               "title": "Arquitectura general",
-              "description": "Resume la separacion entre actores, aplicacion, modulos de dominio y persistencia local, mostrando por que las pantallas no dependen directamente de IndexedDB.",
+              "description": "La aplicación sigue una arquitectura por capas que separa la interfaz, los módulos de dominio y la persistencia local. Las pantallas no dependen directamente de IndexedDB, sino de una capa de acceso a datos inspirada en el Repository Pattern, lo que desacopla la UI del almacenamiento y facilita evolucionar el proyecto hacia una API real en el futuro.",
                "image": "/projects/lumen/diagrams/system-architecture.png"
             },
             {
               "title": "Modelo de datos y persistencia local",
-              "description": "Expone las entidades principales del dominio y como se distribuyen sobre IndexedDB, sessionStorage y localStorage dentro del navegador.",
-               "image": "/projects/lumen/diagrams/Lumen_modelo_datos_persistencia.png"
+              "description": [
+                "El sistema modela las entidades principales del dominio comercial, como productos, categorías, carrito, órdenes y configuración administrativa, distribuyéndolas entre IndexedDB, sessionStorage y localStorage según su propósito.", 
+                "IndexedDB se usa para datos estructurados y persistentes, sessionStorage para información temporal de la sesión y localStorage para preferencias o configuraciones simples. Esta separación mantiene la persistencia local organizada y facilita una futura evolución hacia una API real."
+              ],
+              "image": "/projects/lumen/diagrams/Lumen_modelo_datos_persistencia.png"
             },
             {
               "title": "Estructura del proyecto",
-              "description": "Muestra la organizacion por responsabilidades entre rutas, componentes reutilizables, modulos de negocio, datos seed y capa de almacenamiento.",
+              "description": [
+                "La estructura del proyecto está organizada por responsabilidades para mantener una separación clara entre la navegación, la interfaz, la lógica de negocio y la persistencia local.",
+                "Las rutas agrupan las pantallas principales de la tienda, el checkout y el panel administrativo. Los componentes reutilizables concentran piezas comunes de la interfaz, mientras que los módulos de negocio contienen la lógica asociada a productos, categorías, carrito, órdenes y configuración comercial.",
+                "Además, el proyecto incluye datos seed para inicializar el entorno de demostración y una capa de almacenamiento encargada de centralizar el acceso a IndexedDB, sessionStorage y localStorage, evitando que las pantallas dependan directamente de los mecanismos de persistencia del navegador."
+              ],
                "image": "/projects/lumen/diagrams/project-structure.png"
             }
           ]

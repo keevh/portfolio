@@ -544,7 +544,15 @@ export function ProjectDetailPage({ project }: Props) {
                     >
                       <div className={`space-y-3 ${isReversed ? 'lg:order-2' : ''}`}>
                         <h3 className="font-headline-md text-2xl text-white">{diagram.title}</h3>
-                        <p className="font-body-md text-sm leading-7 text-on-surface-variant sm:text-base">{diagram.description}</p>
+                        {Array.isArray(diagram.description) ? (
+                          <div className="space-y-3">
+                            {diagram.description.map((d, i) => (
+                              <p key={`diag-${index}-${i}`} className="font-body-md text-sm leading-7 text-on-surface-variant sm:text-base">{d}</p>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="font-body-md text-sm leading-7 text-on-surface-variant sm:text-base">{diagram.description}</p>
+                        )}
                       </div>
 
                       <div className={`relative overflow-hidden rounded-[28px] border border-white/8 bg-surface/60 p-2 sm:p-4 ${isReversed ? 'lg:order-1' : ''}`}>
