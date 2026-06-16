@@ -217,15 +217,20 @@ export function ProjectDetailPage({ project }: Props) {
     if (desktopContainer) {
       const activeButton = desktopContainer.querySelector<HTMLButtonElement>('[data-active="true"]');
       if (activeButton) {
-        const buttonTop = activeButton.offsetTop;
-        const buttonBottom = buttonTop + activeButton.clientHeight;
-        const viewTop = desktopContainer.scrollTop;
-        const viewBottom = viewTop + desktopContainer.clientHeight;
+        const buttonRect = activeButton.getBoundingClientRect();
+        const containerRect = desktopContainer.getBoundingClientRect();
+        const gap = 12;
 
-        if (buttonTop < viewTop) {
-          desktopContainer.scrollTo({ top: buttonTop, behavior: 'smooth' });
-        } else if (buttonBottom > viewBottom) {
-          desktopContainer.scrollTo({ top: buttonBottom - desktopContainer.clientHeight, behavior: 'smooth' });
+        if (buttonRect.top < containerRect.top + gap) {
+          desktopContainer.scrollBy({
+            top: buttonRect.top - containerRect.top - gap,
+            behavior: 'smooth',
+          });
+        } else if (buttonRect.bottom > containerRect.bottom - gap) {
+          desktopContainer.scrollBy({
+            top: buttonRect.bottom - containerRect.bottom + gap,
+            behavior: 'smooth',
+          });
         }
       }
     }
