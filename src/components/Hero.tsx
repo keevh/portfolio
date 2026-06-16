@@ -1,6 +1,6 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
-import { motion, useMotionValue, useSpring, useTransform, useInView } from 'motion/react';
+import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { smoothScrollTo } from '../utils/scroll';
 
 const PHOTO_SRC = `${import.meta.env.BASE_URL}photo.avif`;
@@ -89,41 +89,6 @@ function ParallaxPhoto({ src }: { src: string }) {
   );
 }
 
-const STATS = {
-  years: 3,
-  projects: 20,
-  techs: 12,
-};
-
-function StatCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-50px' });
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!inView) return;
-    let start = 0;
-    const duration = 1500;
-    const step = 16;
-    const increment = value / (duration / step);
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= value) { setCount(value); clearInterval(timer); }
-      else setCount(Math.floor(start));
-    }, step);
-    return () => clearInterval(timer);
-  }, [inView, value]);
-
-  return (
-    <div ref={ref} className="flex flex-col items-center lg:items-start gap-1">
-      <span className="font-display-lg text-3xl sm:text-4xl text-primary-container">
-        {count}{suffix}
-      </span>
-      <span className="font-code-sm text-[10px] sm:text-xs text-on-surface-variant uppercase tracking-wider sm:tracking-widest">{label}</span>
-    </div>
-  );
-}
-
 export function Hero() {
   const { t } = useLanguage();
 
@@ -203,19 +168,6 @@ export function Hero() {
                 {t('hero.btn.contact')}
               </motion.a>
             </div>
-            {/* Stats */}
-            <motion.div
-              className="flex gap-4 sm:gap-8 justify-center lg:justify-start pt-2 border-t border-white/5 w-full min-w-0"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              <StatCounter value={STATS.years} suffix="+" label={t('hero.stats.years')} />
-              <div className="w-px bg-white/10" />
-              <StatCounter value={STATS.projects} suffix="+" label={t('hero.stats.projects')} />
-              <div className="w-px bg-white/10" />
-              <StatCounter value={STATS.techs} suffix="+" label={t('hero.stats.techs')} />
-            </motion.div>
           </motion.div>
 
           {/* ── Photo column — lg+ ── */}

@@ -1,12 +1,26 @@
 import { useLanguage } from '../hooks/useLanguage';
 import { motion } from 'motion/react';
+import {
+  SiReact, SiNextdotjs, SiNodedotjs, SiTypescript, SiAstro, SiPython,
+  SiTailwindcss, SiPostgresql, SiMongodb, SiDocker, SiMqtt, SiGithub,
+} from 'react-icons/si';
 
 export function TechStack() {
   const { t } = useLanguage();
-  
+
   const skills = [
-    'React', 'Next.js', 'Node.js', 'TypeScript', 'Astro', 'Python', 
-    'Tailwind CSS', 'PostgreSQL', 'MongoDB', 'Docker', 'MQTT', 'Git & GitHub'
+    { name: 'React', Icon: SiReact },
+    { name: 'Next.js', Icon: SiNextdotjs },
+    { name: 'Node.js', Icon: SiNodedotjs },
+    { name: 'TypeScript', Icon: SiTypescript },
+    { name: 'Astro', Icon: SiAstro },
+    { name: 'Python', Icon: SiPython },
+    { name: 'Tailwind CSS', Icon: SiTailwindcss },
+    { name: 'PostgreSQL', Icon: SiPostgresql },
+    { name: 'MongoDB', Icon: SiMongodb },
+    { name: 'Docker', Icon: SiDocker },
+    { name: 'MQTT', Icon: SiMqtt },
+    { name: 'Git & GitHub', Icon: SiGithub },
   ];
 
   return (
@@ -25,15 +39,16 @@ export function TechStack() {
       
       <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-4">
         {skills.map((skill, index) => (
-          <motion.span 
-            key={skill} 
-            className="px-6 py-3 glass-panel rounded-full font-code-sm text-on-surface hover:text-primary-container hover:border-primary-container/50 transition-colors cursor-default"
+          <motion.span
+            key={skill.name}
+            className="px-6 py-3 glass-panel rounded-full font-code-sm text-on-surface hover:text-primary-container hover:border-primary-container/50 transition-colors cursor-default inline-flex items-center gap-2"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: index * 0.05 }}
           >
-            {skill}
+            <skill.Icon className="text-base shrink-0" aria-hidden />
+            {skill.name}
           </motion.span>
         ))}
       </div>
