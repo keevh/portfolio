@@ -11,10 +11,22 @@
       "Tailwind CSS",
       "IndexedDB"
     ],
-    "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=2070",
+    "image": "/projects/lumen/hero/screenshot_20260615_224439.png",
+    "imageFit": "contain",
     "gallery": [
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=2070",
-      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=2070"
+      "/projects/lumen/gallery/screenshot_20260615_224404.png",
+      "/projects/lumen/gallery/screenshot_20260615_224406.png",
+      "/projects/lumen/gallery/screenshot_20260615_224409.png",
+      "/projects/lumen/gallery/screenshot_20260615_224416.png",
+      "/projects/lumen/gallery/screenshot_20260615_224424.png",
+      "/projects/lumen/gallery/screenshot_20260615_224430.png",
+      "/projects/lumen/gallery/screenshot_20260615_224433.png",
+      "/projects/lumen/gallery/screenshot_20260615_224439.png",
+      "/projects/lumen/gallery/screenshot_20260615_224446.png",
+      "/projects/lumen/gallery/screenshot_20260615_224448.png",
+      "/projects/lumen/gallery/screenshot_20260615_224456.png",
+      "/projects/lumen/gallery/screenshot_20260615_224459.png",
+      "/projects/lumen/gallery/screenshot_20260615_224502.png"
     ],
     "liveUrl": "https://lumen.keevh.dev/",
     "tags": [
@@ -45,33 +57,107 @@
           "Persistencia: Catálogo, carrito, pedidos, descuentos y ajustes guardados localmente en IndexedDB"
         ],
         "detail": {
-          "tagline": "Demo de e-commerce full stack-feel con operaciones de tienda y backoffice completamente locales.",
-          "role": "Producto, frontend architecture y modelado de flujos de negocio.",
+          "tagline": "Demo de e-commerce en espanol con storefront, checkout y panel administrativo local construidos sobre una arquitectura frontend lista para evolucionar.",
+          "role": "Product thinking, frontend architecture y modelado de dominio comercial.",
           "timeline": "Proyecto personal",
           "team": "1 desarrollador",
-          "context": "LUMEN nace para mostrar un flujo comercial end to end sin depender de APIs externas ni servicios de terceros.",
+          "context": "LUMEN nace para demostrar un flujo comercial end to end dentro de una aplicacion moderna sin depender de backend real, pero con suficiente estructura tecnica como para evolucionar despues a servicios remotos.",
           "overview": [
-            "La experiencia pública cubre descubrimiento de productos, detalle, carrito y checkout con una narrativa visual pensada para una marca retail moderna.",
-            "En paralelo, el panel administrativo permite gestionar catálogo, precios, descuentos, pedidos y ajustes, reutilizando el mismo dominio de datos en una experiencia separada.",
-            "Toda la información persiste en IndexedDB para simular un entorno realista de operación local, ideal para demos, entrevistas técnicas y validación de UX."
+            "La experiencia publica cubre descubrimiento de catalogo, detalle de producto, carrito, checkout y confirmacion de compra como un recorrido coherente de tienda.",
+            "En paralelo, el panel administrativo permite operar productos, descuentos, pedidos, metricas y configuracion sin salir de la misma aplicacion.",
+            "La persistencia vive completamente en el navegador con IndexedDB, sessionStorage y localStorage para simular una operacion local realista y autocontenida."
           ],
-          "problem": "La mayoría de demos de e-commerce lucen bien pero se quedan cortas cuando hay que demostrar reglas de negocio, persistencia y administración sin backend listo.",
-          "solution": "Construí una aplicación en Next.js con storefront y admin panel integrados, modelando entidades de comercio y persistiendo el estado completo en el navegador.",
+          "problem": "Muchas demos de e-commerce muestran interfaz, pero no prueban reglas de negocio, persistencia, separacion de dominios ni operacion administrativa cuando todavia no existe infraestructura remota.",
+          "solution": "Construí una aplicacion en Next.js con App Router que separa storefront, checkout, admin panel y persistencia local mediante modulos por dominio y repositorios de navegador.",
           "features": [
-            "Catálogo con navegación orientada a conversión y detalle de producto",
-            "Carrito y checkout con estado persistente entre sesiones",
-            "Backoffice para administrar productos, descuentos, pedidos y settings",
-            "Capa local de datos para operar sin infraestructura remota"
+            "Storefront publico con home, categorias, novedades, ofertas y detalle de producto",
+            "Carrito, checkout y confirmacion final con estado persistente en el navegador",
+            "Panel administrativo local para productos, descuentos, ventas, configuracion y credenciales demo",
+            "Arquitectura preparada para migrar de persistencia local a servicios remotos"
           ],
           "challenges": [
-            "Mantener consistencia entre vista pública y panel administrativo usando el mismo modelo de datos",
-            "Simular reglas de negocio reales sin caer en mocks superficiales",
-            "Diseñar persistencia local robusta para catálogos y órdenes"
+            "Mantener separadas la experiencia publica y la administrativa sin duplicar el dominio",
+            "Partir de un catalogo seed estable y luego reflejar cambios locales hechos desde el panel",
+            "Evitar acoplar toda la app a la API nativa del navegador para no bloquear una migracion futura"
           ],
           "outcomes": [
-            "Portafolio más sólido para mostrar criterio de producto y arquitectura frontend",
-            "Base reutilizable para futuras demos con backend real o sincronización remota",
-            "Experiencia completa que comunica alcance, no solo interfaz"
+            "Caso de estudio mas fuerte para mostrar criterio de producto, arquitectura y modelado de negocio",
+            "Base reutilizable para futuras demos con backend real o sincronizacion remota",
+            "Experiencia end to end que comunica alcance tecnico, no solo interfaz"
+          ],
+          "credentials": [
+            {
+              "label": "Admin email",
+              "value": "admin@lumen.local"
+            },
+            {
+              "label": "Admin password",
+              "value": "lumen-demo"
+            }
+          ],
+          "diagrams": [
+            {
+              "title": "Arquitectura general",
+              "description": "Resume la separacion entre actores, aplicacion, modulos de dominio y persistencia local, mostrando por que las pantallas no dependen directamente de IndexedDB.",
+               "image": "/projects/lumen/diagrams/system-architecture.png"
+            },
+            {
+              "title": "Modelo de datos y persistencia local",
+              "description": "Expone las entidades principales del dominio y como se distribuyen sobre IndexedDB, sessionStorage y localStorage dentro del navegador.",
+               "image": "/projects/lumen/diagrams/Lumen_modelo_datos_persistencia.png"
+            },
+            {
+              "title": "Estructura del proyecto",
+              "description": "Muestra la organizacion por responsabilidades entre rutas, componentes reutilizables, modulos de negocio, datos seed y capa de almacenamiento.",
+               "image": "/projects/lumen/diagrams/project-structure.png"
+            }
+          ],
+          "blocks": [
+            {
+              "title": "Cobertura funcional",
+              "intro": "El README organiza el proyecto en tres capas operativas claras.",
+              "items": [
+                "Storefront: inicio, categorias, novedades, ofertas, detalle de producto, carrito, pago y confirmacion.",
+                "Panel administrativo: login local, dashboard, productos, ventas, configuracion y credenciales demo editables.",
+                "Persistencia local: IndexedDB para dominio principal, sessionStorage para sesion admin y borradores, localStorage para credenciales configuradas localmente."
+              ]
+            },
+            {
+              "title": "Arquitectura general",
+              "paragraphs": [
+                "Lumen usa App Router para separar rutas publicas y administrativas dentro de `src/app`, dejando a las paginas como entrypoints delgados y empujando el comportamiento hacia componentes y modulos de dominio.",
+                "La logica de negocio se agrupa en `src/features`, mientras `src/components` concentra la UI reutilizable y `src/shared/storage` encapsula la persistencia local y la creacion de repositorios de navegador.",
+                "El flujo mezcla un catalogo seed desde `src/data/catalog.ts` con hidratacion posterior desde IndexedDB para ofrecer una primera carga estable y, al mismo tiempo, reflejar cambios locales hechos desde el panel administrativo."
+              ]
+            },
+            {
+              "title": "Decisiones tecnicas",
+              "items": [
+                "Persistencia local encapsulada en una capa propia sobre IndexedDB en lugar de acceso directo repartido por toda la aplicacion.",
+                "Repositorios por dominio para catalogo, carrito, pedidos, descuentos y configuracion.",
+                "Organizacion principal por modulos de negocio en `src/features` para mantener juntos tipos, logica y flujos.",
+                "Storefront y admin comparten modelo de datos, pero conservan rutas, componentes y flujos de interfaz separados.",
+                "Creacion de repositorios de navegador centralizada mediante `createBrowserRepositories()` y `getBrowserRepositories()`."
+              ]
+            },
+            {
+              "title": "Modelo de datos",
+              "items": [
+                "Product y ProductImage para catalogo, variantes y assets visuales.",
+                "CartItem y Cart para el estado persistido del flujo de compra.",
+                "Order para checkout, montos, descuento, cliente, direccion y estado operativo.",
+                "Discount y StoreSettings para reglas comerciales y configuracion local de tienda.",
+                "Sesion administrativa efimera en sessionStorage para controlar acceso al panel en el navegador actual."
+              ]
+            },
+            {
+              "title": "Limites actuales y proyeccion",
+              "paragraphs": [
+                "El valor actual de Lumen no esta en simular una tienda multiusuario real, sino en demostrar experiencia de producto, organizacion tecnica y flujos comerciales completos dentro de una aplicacion desplegable y autocontenida.",
+                "La limitacion deliberada es que productos, pedidos, descuentos y configuracion no se comparten entre usuarios ni dispositivos porque toda la persistencia sigue siendo local al navegador.",
+                "Eso deja definido con claridad el siguiente paso natural: reemplazar la persistencia local por una base de datos remota y una capa de servicios sin rehacer por completo la aplicacion."
+              ]
+            }
           ]
         }
       },
@@ -84,33 +170,107 @@
           "Persistence: Catalog, cart, orders, discounts, and settings stored locally in IndexedDB"
         ],
         "detail": {
-          "tagline": "A full-stack-feel e-commerce demo with local storefront and back-office operations.",
-          "role": "Product thinking, frontend architecture, and business-flow modeling.",
+          "tagline": "Spanish e-commerce demo with storefront, checkout, and a local admin panel built on a frontend architecture ready to evolve.",
+          "role": "Product thinking, frontend architecture, and commerce-domain modeling.",
           "timeline": "Personal project",
           "team": "1 developer",
-          "context": "LUMEN was built to demonstrate an end-to-end commerce flow without depending on external APIs or third-party services.",
+          "context": "LUMEN was built to demonstrate an end-to-end commerce flow in a modern application without a real backend, while still keeping enough architectural structure to evolve into remote services later.",
           "overview": [
-            "The public experience covers product discovery, detail pages, cart, and checkout with a visual language tailored to a modern retail brand.",
-            "In parallel, the admin panel manages catalog, pricing, discounts, orders, and settings while reusing the same domain model in a separate experience.",
-            "All data persists in IndexedDB to simulate realistic local operation, making it useful for demos, technical interviews, and UX validation."
+            "The public experience covers catalog discovery, product detail, cart, checkout, and purchase confirmation as a coherent retail journey.",
+            "In parallel, the admin panel operates products, discounts, orders, metrics, and settings without leaving the same application.",
+            "Persistence stays entirely in the browser through IndexedDB, sessionStorage, and localStorage to simulate a realistic self-contained local operation."
           ],
-          "problem": "Most e-commerce demos look good but fall short when they need to prove business rules, persistence, and administration without a ready backend.",
-          "solution": "I built a Next.js application with an integrated storefront and admin panel, modeling commerce entities and persisting the full state in the browser.",
+          "problem": "Many e-commerce demos show UI, but they do not prove business rules, persistence, domain separation, or administrative operation when remote infrastructure does not exist yet.",
+          "solution": "I built a Next.js App Router application that separates storefront, checkout, admin panel, and local persistence through domain modules and browser repositories.",
           "features": [
-            "Conversion-oriented catalog and product detail flows",
-            "Cart and checkout with state persisted across sessions",
-            "Back-office tools for products, discounts, orders, and settings",
-            "Local data layer that works without remote infrastructure"
+            "Public storefront with home, categories, new arrivals, offers, and product detail pages",
+            "Cart, checkout, and final confirmation with browser-persisted state",
+            "Local admin panel for products, discounts, sales, settings, and demo credentials",
+            "Architecture ready to migrate from local persistence to remote services"
           ],
           "challenges": [
-            "Keeping the public experience and admin panel consistent through a shared domain model",
-            "Simulating realistic business rules without shallow mocks",
-            "Designing reliable local persistence for catalog and order data"
+            "Keeping the public and admin experiences separated without duplicating the domain",
+            "Starting from a stable seeded catalog and then reflecting local admin changes in the browser",
+            "Avoiding deep coupling to native browser APIs so a future migration stays viable"
           ],
           "outcomes": [
-            "A stronger portfolio piece for product thinking and frontend architecture",
+            "A stronger case study for product thinking, architecture, and business modeling",
             "A reusable foundation for future demos with a real backend or remote sync",
-            "An end-to-end experience that communicates scope, not only UI"
+            "An end-to-end experience that communicates technical scope, not only UI"
+          ],
+          "credentials": [
+            {
+              "label": "Admin email",
+              "value": "admin@lumen.local"
+            },
+            {
+              "label": "Admin password",
+              "value": "lumen-demo"
+            }
+          ],
+          "diagrams": [
+            {
+              "title": "System architecture",
+              "description": "Summarizes the separation between actors, application, domain modules, and local persistence, showing why screens do not depend directly on IndexedDB.",
+               "image": "/projects/lumen/diagrams/system-architecture.png"
+            },
+            {
+              "title": "Data model and local persistence",
+              "description": "Shows the main domain entities and how they are distributed across IndexedDB, sessionStorage, and localStorage inside the browser.",
+               "image": "/projects/lumen/diagrams/Lumen_modelo_datos_persistencia.png"
+            },
+            {
+              "title": "Project structure",
+              "description": "Shows the responsibility split across routes, reusable components, business modules, seed data, and the storage layer.",
+               "image": "/projects/lumen/diagrams/project-structure.png"
+            }
+          ],
+          "blocks": [
+            {
+              "title": "Functional coverage",
+              "intro": "The README frames the project as three clear operational layers.",
+              "items": [
+                "Storefront: home, categories, new arrivals, offers, product detail, cart, checkout, and confirmation.",
+                "Admin panel: local login, dashboard, products, sales, settings, and editable demo credentials.",
+                "Local persistence: IndexedDB for core domain data, sessionStorage for admin session and drafts, localStorage for locally configured credentials."
+              ]
+            },
+            {
+              "title": "General architecture",
+              "paragraphs": [
+                "Lumen uses the App Router to separate public and administrative routes inside `src/app`, keeping pages thin and pushing behavior into components and domain modules.",
+                "Business logic lives in `src/features`, while `src/components` owns reusable UI and `src/shared/storage` encapsulates local persistence and browser repository creation.",
+                "The data flow combines a seeded catalog from `src/data/catalog.ts` with later hydration from IndexedDB so the first load stays stable while local admin changes still appear in the interactive browser experience."
+              ]
+            },
+            {
+              "title": "Technical decisions",
+              "items": [
+                "Local persistence is wrapped in its own IndexedDB layer instead of scattering native API calls across the application.",
+                "Domain repositories isolate data access for catalog, cart, orders, discounts, and settings.",
+                "The main organization follows business modules in `src/features` so types, logic, and workflows stay close together.",
+                "The storefront and admin panel share part of the data model while keeping routes, components, and interface flows separate.",
+                "Browser repository creation is centralized through `createBrowserRepositories()` and `getBrowserRepositories()`."
+              ]
+            },
+            {
+              "title": "Data model",
+              "items": [
+                "Product and ProductImage power the catalog, variants, and visual assets.",
+                "CartItem and Cart persist the shopping flow state.",
+                "Order captures checkout, totals, discount code, customer, address, and operational status.",
+                "Discount and StoreSettings support commercial rules and local store configuration.",
+                "An ephemeral admin session lives in sessionStorage to control panel access in the current browser."
+              ]
+            },
+            {
+              "title": "Current limits and next step",
+              "paragraphs": [
+                "Lumen's current value is not to simulate a real multi-user store, but to demonstrate product thinking, technical organization, and complete commerce flows inside a deployable self-contained application.",
+                "The deliberate limitation is that products, orders, discounts, and settings are not shared across users or devices because persistence remains local to the browser.",
+                "That makes the next natural step explicit: replace local persistence with a remote database and service layer without rewriting the whole application."
+              ]
+            }
           ]
         }
       }

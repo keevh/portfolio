@@ -17,6 +17,18 @@ export type ProjectDetailContent = {
   features: string[];
   challenges: string[];
   outcomes: string[];
+  credentials?: { label: string; value: string }[];
+  diagrams?: {
+    title: string;
+    description: string;
+    image: string;
+  }[];
+  blocks?: {
+    title: string;
+    intro?: string;
+    paragraphs?: string[];
+    items?: string[];
+  }[];
 };
 
 export type LocalizedProjectContent = {

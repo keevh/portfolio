@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowLeft, ExternalLink, Github, Link as LinkIcon } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import { ArrowLeft, ChevronLeft, ChevronRight, ExternalLink, Github, Link as LinkIcon, Maximize2, X } from 'lucide-react';
 import { useLanguage } from '../../hooks/useLanguage';
 import { translations } from '../../i18n/translations';
 import type { ProjectRecord } from '../../data/projects';
@@ -17,6 +18,12 @@ const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 function getHomeHref() {
   return BASE_PATH || '/';
+}
+
+function resolveAssetHref(path: string) {
+  if (/^https?:\/\//.test(path)) return path;
+  if (!path.startsWith('/')) return `${BASE_PATH}/${path}`.replace(/^\//, '/');
+  return `${BASE_PATH}${path}`.replace(/^\/\//, '/');
 }
 
 function getImageClass(imageFit: ProjectRecord['imageFit']) {
@@ -59,7 +66,13 @@ const uiCopy = {
     stack: 'Tecnologias utilizadas',
     build: 'Implementacion y arquitectura',
     gallery: 'Galeria del proyecto',
+    diagrams: 'Diagramas tecnicos',
     challenges: 'Retos tecnicos',
+    capabilities: 'Cobertura principal',
+    credentials: 'Credenciales demo',
+    outcomes: 'Por que importa',
+    expand: 'Ampliar imagen',
+    close: 'Cerrar vista ampliada',
     year: 'Ano',
     role: 'Rol',
     team: 'Equipo',
@@ -72,7 +85,13 @@ const uiCopy = {
     stack: 'Technologies used',
     build: 'Implementation and architecture',
     gallery: 'Project gallery',
+    diagrams: 'Technical diagrams',
     challenges: 'Technical challenges',
+    capabilities: 'Core coverage',
+    credentials: 'Demo credentials',
+    outcomes: 'Why it matters',
+    expand: 'Expand image',
+    close: 'Close expanded view',
     year: 'Year',
     role: 'Role',
     team: 'Team',
@@ -95,50 +114,138 @@ type Props = {
   project: ProjectRecord;
 };
 
+type LightboxKind = 'gallery' | 'diagram';
+
+type MediaItem = {
+  src: string;
+  alt: string;
+};
+
+function wrapIndex(index: number, length: number) {
+  if (length === 0) return 0;
+  return (index + length) % length;
+}
+
 export function ProjectDetailPage({ project }: Props) {
   const { language } = useLanguage();
   const copy = uiCopy[language];
   const content = project.i18n[language];
   const detail = content.detail;
   const images = project.gallery.length > 0 ? project.gallery : [project.image];
-  const [activeImage, setActiveImage] = useState(images[0] ?? project.image);
-  const thumbsRef = useRef<HTMLDivElement>(null);
+  const detailBlocks = detail.blocks ?? [];
+  const credentials = detail.credentials ?? [];
+  const diagrams = detail.diagrams ?? [];
+  const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
+  const [lightbox, setLightbox] = useState<{ open: boolean; kind: LightboxKind; index: number }>({ open: false, kind: 'gallery', index: 0 });
+  const [isGalleryHovered, setIsGalleryHovered] = useState(false);
+  const [isGalleryManuallyPaused, setIsGalleryManuallyPaused] = useState(false);
+  const mobileThumbsRef = useRef<HTMLDivElement>(null);
+  const desktopThumbsRef = useRef<HTMLDivElement>(null);
+  const manualPauseTimeoutRef = useRef<number | null>(null);
   const tags = project.tags.map((tag) => ({ ...tag, label: resolveTagLabel(tag, language) }));
   const links = project.links.filter((link) => link.url && link.url !== '#').map((link) => ({
     ...link,
     label: resolveLinkLabel(link, language),
   }));
+  const galleryItems = useMemo<MediaItem[]>(() => images.map((image, index) => ({
+    src: resolveAssetHref(image),
+    alt: `${content.title} media ${index + 1}`,
+  })), [content.title, images]);
+  const diagramItems = useMemo<MediaItem[]>(() => diagrams.map((diagram) => ({
+    src: resolveAssetHref(diagram.image),
+    alt: diagram.title,
+  })), [diagrams]);
+  const activeGalleryItem = galleryItems[activeGalleryIndex] ?? galleryItems[0];
+  const lightboxItems = lightbox.kind === 'diagram' ? diagramItems : galleryItems;
+  const activeLightboxItem = lightboxItems[lightbox.index] ?? lightboxItems[0];
+  const isGalleryPaused = isGalleryHovered || isGalleryManuallyPaused || lightbox.open;
+
+  const pauseGalleryTemporarily = (duration = 8000) => {
+    if (manualPauseTimeoutRef.current) window.clearTimeout(manualPauseTimeoutRef.current);
+    setIsGalleryManuallyPaused(true);
+    manualPauseTimeoutRef.current = window.setTimeout(() => {
+      setIsGalleryManuallyPaused(false);
+      manualPauseTimeoutRef.current = null;
+    }, duration);
+  };
+
+  const goToGalleryIndex = (nextIndex: number, pause = false) => {
+    if (pause) pauseGalleryTemporarily();
+    setActiveGalleryIndex(wrapIndex(nextIndex, galleryItems.length));
+  };
+
+  const stepGallery = (direction: number) => {
+    if (galleryItems.length < 2) return;
+    goToGalleryIndex(activeGalleryIndex + direction, true);
+  };
+
+  const openLightbox = (kind: LightboxKind, index: number) => {
+    pauseGalleryTemporarily();
+    setLightbox({ open: true, kind, index });
+  };
+
+  const closeLightbox = () => {
+    setLightbox((current) => ({ ...current, open: false }));
+  };
+
+  const stepLightbox = (direction: number) => {
+    if (lightboxItems.length < 2) return;
+    setLightbox((current) => ({
+      ...current,
+      index: wrapIndex(current.index + direction, lightboxItems.length),
+    }));
+  };
 
   useEffect(() => {
-    const container = thumbsRef.current;
-    if (!container) return;
+    const mobileContainer = mobileThumbsRef.current;
+    const desktopContainer = desktopThumbsRef.current;
 
-    const activeButton = container.querySelector<HTMLButtonElement>('[data-active="true"]');
-    if (!activeButton) return;
+    if (mobileContainer) {
+      const activeButton = mobileContainer.querySelector<HTMLButtonElement>('[data-active="true"]');
+      if (activeButton) {
+        const buttonLeft = activeButton.offsetLeft;
+        const buttonRight = buttonLeft + activeButton.clientWidth;
+        const viewLeft = mobileContainer.scrollLeft;
+        const viewRight = viewLeft + mobileContainer.clientWidth;
 
-    const buttonLeft = activeButton.offsetLeft;
-    const buttonRight = buttonLeft + activeButton.clientWidth;
-    const viewLeft = container.scrollLeft;
-    const viewRight = viewLeft + container.clientWidth;
-
-    if (buttonLeft < viewLeft || buttonRight > viewRight) {
-      container.scrollTo({ left: activeButton.offsetLeft, behavior: 'smooth' });
+        if (buttonLeft < viewLeft || buttonRight > viewRight) {
+          mobileContainer.scrollTo({ left: activeButton.offsetLeft, behavior: 'smooth' });
+        }
+      }
     }
-  }, [activeImage]);
+
+    if (desktopContainer) {
+      const activeButton = desktopContainer.querySelector<HTMLButtonElement>('[data-active="true"]');
+      if (activeButton) activeButton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [activeGalleryIndex]);
 
   useEffect(() => {
-    if (images.length < 2) return;
+    if (galleryItems.length < 2 || isGalleryPaused) return;
 
     const intervalId = window.setInterval(() => {
-      setActiveImage((current) => {
-        const currentIndex = images.indexOf(current);
-        const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % images.length;
-        return images[nextIndex] ?? images[0];
-      });
+      setActiveGalleryIndex((current) => wrapIndex(current + 1, galleryItems.length));
     }, 5000);
 
     return () => window.clearInterval(intervalId);
-  }, [images]);
+  }, [galleryItems.length, isGalleryPaused]);
+
+  useEffect(() => {
+    if (!lightbox.open) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowLeft') stepLightbox(-1);
+      if (event.key === 'ArrowRight') stepLightbox(1);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightbox.open, lightboxItems.length]);
+
+  useEffect(() => () => {
+    if (manualPauseTimeoutRef.current) window.clearTimeout(manualPauseTimeoutRef.current);
+  }, []);
 
   const proseClass = 'font-body-md text-base leading-8 text-on-surface-variant sm:text-lg';
   const metaItems = useMemo(() => [
@@ -153,7 +260,7 @@ export function ProjectDetailPage({ project }: Props) {
     <div className="min-h-screen bg-background text-on-surface">
       <section className="relative h-[38vh] min-h-[300px] w-full overflow-hidden sm:h-[44vh] sm:min-h-[400px]">
         <img
-          src={project.image}
+          src={resolveAssetHref(project.image)}
           alt={content.title}
           className={`absolute inset-0 h-full w-full ${getImageClass(project.imageFit)}`}
         />
@@ -240,32 +347,65 @@ export function ProjectDetailPage({ project }: Props) {
           )}
 
           {images.length > 1 && (
-            <div className="mt-10 border-t border-white/8 pt-8">
+            <motion.div
+              className="mt-10 border-t border-white/8 pt-8"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.55 }}
+            >
               <h2 className="mb-5 font-headline-md text-2xl text-white">{copy.gallery}</h2>
               <div className="-mx-6 sm:mx-0">
-                <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_300px] xl:items-start">
-                  <div className="space-y-4">
-                    <div className="relative aspect-[16/10] overflow-hidden rounded-none border border-white/8 bg-white/[0.02] sm:min-h-[420px] sm:rounded-[28px]">
-                      <img
-                        src={activeImage}
-                        alt={`${content.title} featured media`}
-                        className={`absolute inset-0 h-full w-full ${getImageClass(project.imageFit)}`}
-                      />
+                <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-stretch">
+                  <div
+                    className="space-y-4"
+                    onMouseEnter={() => setIsGalleryHovered(true)}
+                    onMouseLeave={() => setIsGalleryHovered(false)}
+                  >
+                    <div className="relative aspect-[16/10] overflow-hidden rounded-none border border-white/8 bg-white/[0.02] sm:min-h-[420px] sm:rounded-[28px] xl:h-[520px] xl:min-h-0 xl:aspect-auto">
+                      <motion.button
+                        type="button"
+                        onClick={() => openLightbox('gallery', activeGalleryIndex)}
+                        aria-label={copy.expand}
+                        whileTap={{ scale: 0.94 }}
+                        className="absolute right-4 top-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/45 text-white backdrop-blur-md transition hover:bg-black/65"
+                      >
+                        <Maximize2 size={18} />
+                      </motion.button>
+
+                      <AnimatePresence mode="wait">
+                        <motion.img
+                          key={activeGalleryItem?.src}
+                          src={activeGalleryItem?.src}
+                          alt={activeGalleryItem?.alt ?? `${content.title} featured media`}
+                          initial={{ opacity: 0, scale: 1.02, x: 14 }}
+                          animate={{ opacity: 1, scale: 1, x: 0 }}
+                          exit={{ opacity: 0, scale: 0.985, x: -14 }}
+                          transition={{ duration: 0.32, ease: [0.4, 0, 0.2, 1] }}
+                          className={`absolute inset-0 h-full w-full ${getImageClass(project.imageFit)}`}
+                        />
+                      </AnimatePresence>
                       <div className="absolute inset-0 bg-linear-to-t from-background/70 to-transparent" />
                     </div>
                   </div>
 
-                  <div ref={thumbsRef} className="flex gap-[10px] overflow-x-auto px-4 pb-2 sm:hidden scroll-smooth [&::-webkit-scrollbar]:h-4 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/20">
-                    {images.map((image, index) => {
-                      const isActive = activeImage === image;
+                  <div
+                    ref={mobileThumbsRef}
+                    onMouseEnter={() => setIsGalleryHovered(true)}
+                    onMouseLeave={() => setIsGalleryHovered(false)}
+                    className="flex gap-[10px] overflow-x-auto px-4 pb-2 sm:hidden scroll-smooth [&::-webkit-scrollbar]:h-4 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/20"
+                  >
+                    {galleryItems.map((item, index) => {
+                      const isActive = activeGalleryIndex === index;
 
                       return (
-                        <button
-                          key={`${image}-${index}-mobile`}
+                        <motion.button
+                          key={`${item.src}-${index}-mobile`}
                           type="button"
-                          onClick={() => setActiveImage(image)}
+                          onClick={() => goToGalleryIndex(index, true)}
                           aria-label={`Go to media ${index + 1}`}
                           data-active={isActive}
+                          whileTap={{ scale: 0.96 }}
                           className={`relative h-20 w-32 flex-none snap-start overflow-hidden border-2 transition-all ${
                             isActive
                               ? 'border-white shadow-[0_0_18px_rgba(255,255,255,0.25)]'
@@ -273,36 +413,44 @@ export function ProjectDetailPage({ project }: Props) {
                           }`}
                         >
                           <img
-                            src={image}
+                            src={item.src}
                             alt={`${content.title} thumbnail ${index + 1}`}
                             className={`h-full w-full ${getImageClass(project.imageFit)}`}
                           />
-                        </button>
+                        </motion.button>
                       );
                     })}
                   </div>
 
-                  <div className="hidden gap-[10px] sm:grid sm:grid-cols-3 xl:grid-cols-1">
-                    {images.map((image, index) => (
-                      <button
-                        key={`${image}-${index}`}
+                  <div
+                    ref={desktopThumbsRef}
+                    onMouseEnter={() => setIsGalleryHovered(true)}
+                    onMouseLeave={() => setIsGalleryHovered(false)}
+                    className="hidden gap-[10px] pr-2 sm:grid sm:grid-cols-3 xl:mt-0 xl:h-[520px] xl:self-stretch xl:content-start xl:grid-cols-1 xl:overflow-y-auto sm:[&::-webkit-scrollbar]:w-2 sm:[&::-webkit-scrollbar-track]:bg-transparent sm:[&::-webkit-scrollbar-thumb]:rounded-full sm:[&::-webkit-scrollbar-thumb]:bg-white/20"
+                  >
+                    {galleryItems.map((item, index) => (
+                      <motion.button
+                        key={`${item.src}-${index}`}
                         type="button"
-                        onClick={() => setActiveImage(image)}
-                        className={`group relative overflow-hidden rounded-[24px] border bg-white/[0.02] transition-all ${
-                          activeImage === image ? 'border-white shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'border-white/8 hover:border-white/20'
+                        data-active={activeGalleryIndex === index}
+                        onClick={() => goToGalleryIndex(index, true)}
+                        whileHover={{ y: -2 }}
+                        whileTap={{ scale: 0.985 }}
+                        className={`group relative overflow-hidden rounded-[24px] border bg-white/[0.02] transition-all xl:min-h-[160px] ${
+                          activeGalleryIndex === index ? 'border-white shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'border-white/8 hover:border-white/20'
                         }`}
                       >
                         <img
-                          src={image}
+                          src={item.src}
                           alt={`${content.title} gallery ${index + 1}`}
-                          className={`h-28 w-full ${getImageClass(project.imageFit)}`}
+                          className={`h-28 w-full xl:h-40 ${getImageClass(project.imageFit)}`}
                         />
-                      </button>
+                      </motion.button>
                     ))}
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
         </div>
 
@@ -315,6 +463,34 @@ export function ProjectDetailPage({ project }: Props) {
                 <p key={index} className={proseClass}>{paragraph}</p>
               ))}
             </div>
+          </section>
+
+          <section className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_320px] xl:items-start">
+            <div className="space-y-6 rounded-[28px] border border-white/8 bg-white/[0.02] p-6 sm:p-8">
+              <h2 className="font-headline-md text-3xl text-white">{copy.capabilities}</h2>
+              <div className="grid gap-4 md:grid-cols-2">
+                {detail.features.map((item, index) => (
+                  <div key={item} className="rounded-[24px] border border-white/8 bg-background/40 p-5">
+                    <p className="font-label-caps text-[11px] tracking-[0.18em] text-primary-container">0{index + 1}</p>
+                    <p className="mt-3 font-body-md text-sm leading-7 text-on-surface-variant sm:text-base">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {credentials.length > 0 && (
+              <aside className="space-y-4 rounded-[28px] border border-white/8 bg-white/[0.02] p-6 sm:p-8">
+                <h2 className="font-headline-md text-2xl text-white">{copy.credentials}</h2>
+                <div className="space-y-3">
+                  {credentials.map((item) => (
+                    <div key={`${item.label}-${item.value}`} className="rounded-[22px] border border-white/8 bg-background/50 p-4">
+                      <p className="font-label-caps text-[11px] tracking-[0.18em] text-on-surface-variant">{item.label}</p>
+                      <p className="mt-2 break-all font-code-sm text-sm text-white sm:text-base">{item.value}</p>
+                    </div>
+                  ))}
+                </div>
+              </aside>
+            )}
           </section>
 
           {project.stack.length > 0 && (
@@ -365,6 +541,88 @@ export function ProjectDetailPage({ project }: Props) {
             )}
           </section>
 
+          {detailBlocks.map((block) => {
+            const hasParagraphs = (block.paragraphs?.length ?? 0) > 0;
+            const hasItems = (block.items?.length ?? 0) > 0;
+
+            return (
+              <section key={block.title} className="space-y-6 border-t border-white/8 pt-10">
+                <div className="max-w-4xl space-y-3">
+                  <h2 className="font-headline-md text-3xl text-white">{block.title}</h2>
+                  {block.intro && <p className={proseClass}>{block.intro}</p>}
+                </div>
+
+                {hasParagraphs && (
+                  <div className="max-w-5xl space-y-5">
+                    {block.paragraphs?.map((paragraph, index) => (
+                      <p key={`${block.title}-paragraph-${index}`} className={proseClass}>{paragraph}</p>
+                    ))}
+                  </div>
+                )}
+
+                {hasItems && (
+                  <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    {block.items?.map((item, index) => (
+                      <div key={`${block.title}-item-${index}`} className="rounded-[24px] border border-white/8 bg-white/[0.02] p-5">
+                        <p className="font-label-caps text-[11px] tracking-[0.18em] text-primary-container">0{index + 1}</p>
+                        <p className="mt-3 font-body-md text-sm leading-7 text-on-surface-variant sm:text-base">{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </section>
+            );
+          })}
+
+          {diagrams.length > 0 && (
+            <section className="space-y-8 border-t border-white/8 pt-10">
+              <div className="max-w-4xl space-y-3">
+                <h2 className="font-headline-md text-3xl text-white">{copy.diagrams}</h2>
+                <p className={proseClass}>
+                  {language === 'es'
+                    ? 'Tres vistas que condensan la arquitectura, el modelo de datos y la organizacion interna del proyecto.'
+                    : 'Three views that condense the architecture, data model, and internal organization of the project.'}
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                {diagrams.map((diagram, index) => (
+                  <motion.article
+                    key={diagram.image}
+                    className="mx-auto max-w-4xl space-y-4 rounded-[28px] border border-white/8 bg-white/[0.02] p-4 sm:p-6"
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.45, delay: index * 0.06 }}
+                  >
+                    <div className="space-y-2">
+                      <h3 className="font-headline-md text-2xl text-white">{diagram.title}</h3>
+                      <p className="font-body-md text-sm leading-7 text-on-surface-variant sm:text-base">{diagram.description}</p>
+                    </div>
+
+                    <div className="relative overflow-hidden rounded-[24px] border border-white/8 bg-surface/60 p-2 sm:p-4">
+                      <motion.button
+                        type="button"
+                        onClick={() => openLightbox('diagram', index)}
+                        aria-label={copy.expand}
+                        whileTap={{ scale: 0.94 }}
+                        className="absolute right-4 top-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/45 text-white backdrop-blur-md transition hover:bg-black/65"
+                      >
+                        <Maximize2 size={18} />
+                      </motion.button>
+                      <img
+                        src={resolveAssetHref(diagram.image)}
+                        alt={diagram.title}
+                        loading="lazy"
+                        className="mx-auto max-h-[240px] w-full object-contain sm:max-h-[300px]"
+                      />
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
+            </section>
+          )}
+
           {detail.challenges.length > 0 && (
             <section className="space-y-8 border-t border-white/8 pt-10">
               <div className="max-w-4xl">
@@ -382,8 +640,91 @@ export function ProjectDetailPage({ project }: Props) {
               </div>
             </section>
           )}
+
+          {detail.outcomes.length > 0 && (
+            <section className="space-y-6 border-t border-white/8 pt-10">
+              <h2 className="font-headline-md text-3xl text-white">{copy.outcomes}</h2>
+              <div className="grid gap-4 md:grid-cols-3">
+                {detail.outcomes.map((item) => (
+                  <div key={item} className="rounded-[24px] border border-white/8 bg-white/[0.02] p-5">
+                    <p className="font-body-md text-sm leading-7 text-on-surface-variant sm:text-base">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </article>
+
+      <AnimatePresence>
+        {lightbox.open && activeLightboxItem && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/88 p-4 backdrop-blur-md sm:p-8"
+            onClick={closeLightbox}
+            role="dialog"
+            aria-modal="true"
+            aria-label={copy.expand}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+          >
+            <motion.button
+              type="button"
+              onClick={closeLightbox}
+              aria-label={copy.close}
+              whileTap={{ scale: 0.94 }}
+              className="absolute right-4 top-4 z-30 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white transition hover:bg-white/20 sm:right-6 sm:top-6"
+            >
+              <X size={18} />
+            </motion.button>
+
+            {lightbox.kind === 'gallery' && lightboxItems.length > 1 && (
+              <>
+                <motion.button
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    stepLightbox(-1);
+                  }}
+                  aria-label="Previous media"
+                  whileTap={{ scale: 0.94 }}
+                  className="absolute left-3 top-1/2 z-30 inline-flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-white/6 text-white/45 transition hover:bg-white/12 hover:text-white sm:left-6"
+                >
+                  <ChevronLeft size={34} strokeWidth={1.75} />
+                </motion.button>
+                <motion.button
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    stepLightbox(1);
+                  }}
+                  aria-label="Next media"
+                  whileTap={{ scale: 0.94 }}
+                  className="absolute right-3 top-1/2 z-30 inline-flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-white/6 text-white/45 transition hover:bg-white/12 hover:text-white sm:right-6"
+                >
+                  <ChevronRight size={34} strokeWidth={1.75} />
+                </motion.button>
+              </>
+            )}
+
+            <div className="relative w-full max-w-[min(92vw,1600px)]" onClick={(event) => event.stopPropagation()}>
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={`${lightbox.kind}-${lightbox.index}-${activeLightboxItem.src}`}
+                  src={activeLightboxItem.src}
+                  alt={activeLightboxItem.alt}
+                  initial={{ opacity: 0, scale: 0.985 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.985 }}
+                  transition={{ duration: 0.24, ease: [0.4, 0, 0.2, 1] }}
+                  className="max-h-[90vh] w-full rounded-[24px] border border-white/10 bg-surface/80 object-contain"
+                />
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
