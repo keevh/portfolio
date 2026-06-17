@@ -63,11 +63,11 @@
           "team": "1 desarrollador",
           "context": "Panadería colombiana que vende al por mayor y para eventos. El reto era trasladar su operación a la web respetando sus reglas reales: mínimos por producto, tiempos de fermentación y descuentos por volumen.",
           "features": [
-            { "text": "Tienda pública bilingüe (ES/EN) con catálogo por categorías: amasijos, hojaldres, dulces y galletería", "icon": "store" },
-            { "text": "Carrito y checkout con fecha de entrega, canal de contacto y mínimo de 48h de anticipación por fermentación", "icon": "cart" },
-            { "text": "Descuento por volumen del 15% en compras mayores a $100, con una única fuente de verdad compartida entre el carrito y la creación del pedido en el servidor", "icon": "shield" },
-            { "text": "Panel administrativo con autenticación, gestión de productos y seguimiento de pedidos por estados (pendiente, horneando, listo, entregado, cancelado)", "icon": "dashboard" },
-            { "text": "Backend en PostgreSQL con Drizzle ORM: esquema con restricciones e índices, datos seed y bootstrap automático", "icon": "server" }
+            { "label": "Tienda bilingüe", "text": "Tienda pública bilingüe (ES/EN) con catálogo por categorías: amasijos, hojaldres, dulces y galletería" },
+            { "label": "Carrito y checkout", "text": "Carrito y checkout con fecha de entrega, canal de contacto y mínimo de 48h de anticipación por fermentación" },
+            { "label": "Descuento por volumen", "text": "Descuento por volumen del 15% en compras mayores a $100, con una única fuente de verdad compartida entre el carrito y la creación del pedido en el servidor" },
+            { "label": "Panel administrativo", "text": "Panel administrativo con autenticación, gestión de productos y seguimiento de pedidos por estados (pendiente, horneando, listo, entregado, cancelado)" },
+            { "label": "Backend PostgreSQL", "text": "Backend en PostgreSQL con Drizzle ORM: esquema con restricciones e índices, datos seed y bootstrap automático" }
           ],
           "outcomes": [
             "Demuestra trabajo full-stack real: dominio, base de datos PostgreSQL, server actions y DevOps con Docker",
@@ -101,11 +101,11 @@
           "team": "1 developer",
           "context": "A Colombian bakery selling wholesale and for events. The challenge was moving its operation online while honoring its real rules: per-product minimums, fermentation lead times, and volume discounts.",
           "features": [
-            { "text": "Bilingual public storefront (ES/EN) with a category catalog: amasijos, hojaldres, sweets, and biscuits", "icon": "store" },
-            { "text": "Cart and checkout with delivery date, contact channel, and a 48h minimum lead time for fermentation", "icon": "cart" },
-            { "text": "15% volume discount on orders over $100, with a single source of truth shared between the cart and server-side order creation", "icon": "shield" },
-            { "text": "Admin panel with authentication, product management, and status-based order tracking (pending, baking, ready, delivered, cancelled)", "icon": "dashboard" },
-            { "text": "PostgreSQL backend with Drizzle ORM: schema with constraints and indexes, seed data, and automatic bootstrap", "icon": "server" }
+            { "label": "Bilingual storefront", "text": "Bilingual public storefront (ES/EN) with a category catalog: amasijos, hojaldres, sweets, and biscuits" },
+            { "label": "Cart & checkout", "text": "Cart and checkout with delivery date, contact channel, and a 48h minimum lead time for fermentation" },
+            { "label": "Volume discount", "text": "15% volume discount on orders over $100, with a single source of truth shared between the cart and server-side order creation" },
+            { "label": "Admin panel", "text": "Admin panel with authentication, product management, and status-based order tracking (pending, baking, ready, delivered, cancelled)" },
+            { "label": "PostgreSQL backend", "text": "PostgreSQL backend with Drizzle ORM: schema with constraints and indexes, seed data, and automatic bootstrap" }
           ],
           "outcomes": [
             "Demonstrates real full-stack work: domain, PostgreSQL database, server actions, and DevOps with Docker",
@@ -189,10 +189,10 @@
           "timeline": "Proyecto personal",
           "team": "1 desarrollador",
           "features": [
-            { "text": "Tienda pública con home, categorías, novedades, ofertas y detalle de producto", "icon": "store" },
-            { "text": "Carrito, checkout y confirmación final con estado persistente en el navegador", "icon": "cart" },
-            { "text": "Panel administrativo local para gestionar productos, descuentos, ventas, configuración y credenciales demo", "icon": "dashboard" },
-            { "text": "Arquitectura preparada para migrar desde persistencia local hacia servicios remotos", "icon": "server" }
+            { "label": "Tienda pública", "text": "Tienda pública con home, categorías, novedades, ofertas y detalle de producto" },
+            { "label": "Carrito y checkout", "text": "Carrito, checkout y confirmación final con estado persistente en el navegador" },
+            { "label": "Panel administrativo", "text": "Panel administrativo local para gestionar productos, descuentos, ventas, configuración y credenciales demo" },
+            { "label": "Arquitectura evolutiva", "text": "Arquitectura preparada para migrar desde persistencia local hacia servicios remotos" }
           ],
           "outcomes": [
             "Caso de estudio sólido para mostrar criterio de producto, arquitectura frontend y modelado del negocio",
@@ -249,10 +249,10 @@
           "timeline": "Personal project",
           "team": "1 developer",
           "features": [
-            { "text": "Public storefront with home, categories, new arrivals, offers, and product detail pages", "icon": "store" },
-            { "text": "Cart, checkout, and final confirmation with browser-persisted state", "icon": "cart" },
-            { "text": "Local admin panel for products, discounts, sales, settings, and demo credentials", "icon": "dashboard" },
-            { "text": "Architecture ready to migrate from local persistence to remote services", "icon": "server" }
+            { "label": "Public storefront", "text": "Public storefront with home, categories, new arrivals, offers, and product detail pages" },
+            { "label": "Cart & checkout", "text": "Cart, checkout, and final confirmation with browser-persisted state" },
+            { "label": "Admin panel", "text": "Local admin panel for products, discounts, sales, settings, and demo credentials" },
+            { "label": "Evolution-ready architecture", "text": "Architecture ready to migrate from local persistence to remote services" }
           ],
           "outcomes": [
             "A stronger case study for product thinking, architecture, and business modeling",
@@ -346,11 +346,11 @@
           "timeline": "Proyecto personal",
           "team": "1 desarrollador",
           "features": [
-            { "text": "Creación de enlaces cortos desde la interfaz o vía API REST (POST /api/links)", "icon": "link" },
-            { "text": "Alias personalizados y redirección pública en /t/:slug", "icon": "shuffle" },
-            { "text": "Página de estadísticas públicas por enlace en /s/:slug, sin autenticación", "icon": "chart" },
-            { "text": "Borrado privado mediante token de gestión y rate limiting por IP", "icon": "shield" },
-            { "text": "Expiración automática configurable de enlaces y despliegue con Docker Compose", "icon": "container" }
+            { "label": "Enlaces cortos", "text": "Creación de enlaces cortos desde la interfaz o vía API REST (POST /api/links)" },
+            { "label": "Alias y redirección", "text": "Alias personalizados y redirección pública en /t/:slug" },
+            { "label": "Estadísticas públicas", "text": "Página de estadísticas públicas por enlace en /s/:slug, sin autenticación" },
+            { "label": "Borrado y rate limiting", "text": "Borrado privado mediante token de gestión y rate limiting por IP" },
+            { "label": "Expiración y Docker", "text": "Expiración automática configurable de enlaces y despliegue con Docker Compose" }
           ],
           "outcomes": [
             "Demuestra trabajo full-stack real: API, base de datos PostgreSQL y DevOps con Docker",
@@ -373,11 +373,11 @@
           "timeline": "Personal project",
           "team": "1 developer",
           "features": [
-            { "text": "Short-link creation from the UI or via REST API (POST /api/links)", "icon": "link" },
-            { "text": "Custom aliases and public redirection at /t/:slug", "icon": "shuffle" },
-            { "text": "Public per-link statistics page at /s/:slug, no authentication required", "icon": "chart" },
-            { "text": "Private deletion via a management token and per-IP rate limiting", "icon": "shield" },
-            { "text": "Configurable automatic link expiration and Docker Compose deployment", "icon": "container" }
+            { "label": "Short links", "text": "Short-link creation from the UI or via REST API (POST /api/links)" },
+            { "label": "Aliases & redirection", "text": "Custom aliases and public redirection at /t/:slug" },
+            { "label": "Public statistics", "text": "Public per-link statistics page at /s/:slug, no authentication required" },
+            { "label": "Deletion & rate limiting", "text": "Private deletion via a management token and per-IP rate limiting" },
+            { "label": "Expiration & Docker", "text": "Configurable automatic link expiration and Docker Compose deployment" }
           ],
           "outcomes": [
             "Demonstrates real full-stack work: API, PostgreSQL database, and DevOps with Docker",
@@ -448,11 +448,11 @@
           "timeline": "Proyecto personal",
           "team": "1 desarrollador",
           "features": [
-            { "text": "Modos de 1 y 2 jugadores locales con tres dificultades (Cadete, Capitán, Leyenda)", "icon": "gamepad" },
-            { "text": "Oleadas de enemigos procedurales y un jefe final", "icon": "swords" },
-            { "text": "Sobrecalentamiento de armas con ventana de enfriamiento, dash e invulnerabilidad temporal", "icon": "flame" },
-            { "text": "Música y efectos de sonido generados en tiempo real con la Web Audio API", "icon": "audio" },
-            { "text": "Leaderboard remoto vía MockAPI con respaldo en memoria si la API no responde", "icon": "trophy" }
+            { "label": "1 y 2 jugadores", "text": "Modos de 1 y 2 jugadores locales con tres dificultades (Cadete, Capitán, Leyenda)" },
+            { "label": "Oleadas y jefe final", "text": "Oleadas de enemigos procedurales y un jefe final" },
+            { "label": "Sobrecalentamiento", "text": "Sobrecalentamiento de armas con ventana de enfriamiento, dash e invulnerabilidad temporal" },
+            { "label": "Audio sintetizado", "text": "Música y efectos de sonido generados en tiempo real con la Web Audio API" },
+            { "label": "Leaderboard remoto", "text": "Leaderboard remoto vía MockAPI con respaldo en memoria si la API no responde" }
           ],
           "outcomes": [
             "Demuestra dominio del game loop, las colisiones y la IA de enemigos sin frameworks",
@@ -475,11 +475,11 @@
           "timeline": "Personal project",
           "team": "1 developer",
           "features": [
-            { "text": "1 and 2 local player modes with three difficulties (Cadet, Captain, Legend)", "icon": "gamepad" },
-            { "text": "Procedural enemy waves and a final boss", "icon": "swords" },
-            { "text": "Weapon overheating with a vent cooldown window, dash, and temporary invulnerability", "icon": "flame" },
-            { "text": "Music and sound effects generated in real time with the Web Audio API", "icon": "audio" },
-            { "text": "Remote leaderboard via MockAPI with an in-memory fallback when the API is unavailable", "icon": "trophy" }
+            { "label": "1 & 2 players", "text": "1 and 2 local player modes with three difficulties (Cadet, Captain, Legend)" },
+            { "label": "Waves & final boss", "text": "Procedural enemy waves and a final boss" },
+            { "label": "Weapon overheating", "text": "Weapon overheating with a vent cooldown window, dash, and temporary invulnerability" },
+            { "label": "Synthesized audio", "text": "Music and sound effects generated in real time with the Web Audio API" },
+            { "label": "Remote leaderboard", "text": "Remote leaderboard via MockAPI with an in-memory fallback when the API is unavailable" }
           ],
           "outcomes": [
             "Demonstrates command of the game loop, collisions, and enemy AI without frameworks",
@@ -550,11 +550,11 @@
           "timeline": "Proyecto personal",
           "team": "1 desarrollador",
           "features": [
-            { "text": "Drag and drop con validación de movimientos y soporte táctil en móvil", "icon": "hand" },
-            { "text": "Cantidad configurable de discos entre 3 y 8, con temporizador y contador de movimientos", "icon": "sliders" },
-            { "text": "Ranking por dificultad persistido con localStorage y MockAPI", "icon": "trophy" },
-            { "text": "Música ambiental con control de volumen y efectos de sonido vía Web Audio API", "icon": "audio" },
-            { "text": "Preferencias persistentes (apodo, música, volumen) y diseño responsive, incluso en iframes", "icon": "settings" }
+            { "label": "Drag and drop", "text": "Drag and drop con validación de movimientos y soporte táctil en móvil" },
+            { "label": "Discos configurables", "text": "Cantidad configurable de discos entre 3 y 8, con temporizador y contador de movimientos" },
+            { "label": "Ranking persistente", "text": "Ranking por dificultad persistido con localStorage y MockAPI" },
+            { "label": "Audio ambiental", "text": "Música ambiental con control de volumen y efectos de sonido vía Web Audio API" },
+            { "label": "Preferencias y responsive", "text": "Preferencias persistentes (apodo, música, volumen) y diseño responsive, incluso en iframes" }
           ],
           "outcomes": [
             "Convierte un problema algorítmico clásico en una experiencia jugable y accesible",
@@ -577,11 +577,11 @@
           "timeline": "Personal project",
           "team": "1 developer",
           "features": [
-            { "text": "Drag-and-drop moves with validation and touch support on mobile", "icon": "hand" },
-            { "text": "Configurable disk count from 3 to 8, with timer and move counter", "icon": "sliders" },
-            { "text": "Per-difficulty ranking persisted with localStorage and MockAPI", "icon": "trophy" },
-            { "text": "Ambient music with volume control and sound effects via the Web Audio API", "icon": "audio" },
-            { "text": "Persistent preferences (nickname, music, volume) and responsive design, even inside iframes", "icon": "settings" }
+            { "label": "Drag and drop", "text": "Drag-and-drop moves with validation and touch support on mobile" },
+            { "label": "Configurable disks", "text": "Configurable disk count from 3 to 8, with timer and move counter" },
+            { "label": "Persistent ranking", "text": "Per-difficulty ranking persisted with localStorage and MockAPI" },
+            { "label": "Ambient audio", "text": "Ambient music with volume control and sound effects via the Web Audio API" },
+            { "label": "Preferences & responsive", "text": "Persistent preferences (nickname, music, volume) and responsive design, even inside iframes" }
           ],
           "outcomes": [
             "Turns a classic algorithmic problem into a playable, accessible experience",

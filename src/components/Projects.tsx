@@ -60,6 +60,7 @@ export function Projects() {
                   alt={project.title}
                   src={project.image}
                   loading="lazy"
+                  style={{ viewTransitionName: `project-img-${project.slug}` }}
                   className={`w-full h-full transition-transform duration-700 ${
                     project.imageFit === 'contain'
                       ? 'object-contain bg-surface'

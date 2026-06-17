@@ -1,5 +1,6 @@
 ---
 import '../index.css';
+import { ClientRouter } from 'astro:transitions';
 
 const {
   title = 'Kevin Gallardo - Full Stack Developer',
@@ -48,6 +49,8 @@ const imageUrl = new URL(imagePath, site).toString();
 
     <meta name="theme-color" content="#111316" />
     <meta name="color-scheme" content="dark" />
+
+    <ClientRouter />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

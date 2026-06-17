@@ -1,12 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import {
-  ArrowLeft, ArrowUpRight, BarChart3, Boxes, ChevronLeft, ChevronRight, Container,
-  ExternalLink, Flame, Gamepad2, Github, Hand, LayoutDashboard, Link as LinkIcon,
-  Link2, Maximize2, Server, Settings, ShieldCheck, ShoppingCart, Shuffle, SlidersHorizontal,
-  Sparkles, Store, Swords, Target, Trophy, Volume2, X,
+  ArrowLeft, ArrowUpRight, Boxes, ChevronLeft, ChevronRight,
+  ExternalLink, Github, Link as LinkIcon, Maximize2, Target, X,
 } from 'lucide-react';
-import type { ElementType } from 'react';
 import { useLanguage } from '../../hooks/useLanguage';
 import { translations } from '../../i18n/translations';
 import type { ProjectRecord } from '../../data/projects';
@@ -63,39 +60,6 @@ function getStackVisual(stackItem: string): StackVisual {
   if (value.includes('analytics')) return { label: 'Analytics' };
 
   return { label: stackItem };
-}
-
-const FEATURE_ICONS: Record<string, ElementType> = {
-  store: Store,
-  cart: ShoppingCart,
-  dashboard: LayoutDashboard,
-  server: Server,
-  container: Container,
-  link: Link2,
-  shuffle: Shuffle,
-  chart: BarChart3,
-  shield: ShieldCheck,
-  gamepad: Gamepad2,
-  swords: Swords,
-  flame: Flame,
-  audio: Volume2,
-  trophy: Trophy,
-  hand: Hand,
-  sliders: SlidersHorizontal,
-  settings: Settings,
-  sparkles: Sparkles,
-};
-
-function getFeatureIcon(iconKey?: string): ElementType {
-  return (iconKey && FEATURE_ICONS[iconKey]) || Sparkles;
-}
-
-function getBentoSpan(index: number, total: number): string {
-  const wideFirst = total % 3 !== 0;
-  const wideLast = total % 3 === 1;
-  if (index === 0 && wideFirst) return 'sm:col-span-2';
-  if (index === total - 1 && wideLast && total > 1) return 'sm:col-span-2';
-  return '';
 }
 
 const uiCopy = {
@@ -381,6 +345,7 @@ export function ProjectDetailPage({ project }: Props) {
                 <img
                   src={resolveAssetHref(project.image)}
                   alt={content.title}
+                  style={{ viewTransitionName: `project-img-${project.slug}` }}
                   className={`h-full w-full ${getImageClass(project.imageFit)}`}
                 />
               </div>
@@ -516,24 +481,19 @@ export function ProjectDetailPage({ project }: Props) {
                   <h2 className={sectionHeadingClass}>{copy.capabilities}</h2>
                 </div>
                 <div className="grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {detail.features.map((item, index) => {
-                    const Icon = getFeatureIcon(item.icon);
-                    return (
-                      <motion.div
-                        key={item.text}
-                        className={`flex flex-col gap-4 glass-panel rounded-[24px] p-6 transition-all hover:-translate-y-1 hover:border-primary-container/30 ${getBentoSpan(index, detail.features.length)}`}
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: '-40px' }}
-                        transition={{ duration: 0.4, delay: (index % 3) * 0.06 }}
-                      >
-                        <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-primary-container/30 bg-primary-container/10 text-primary-container">
-                          <Icon size={22} />
-                        </span>
-                        <p className="font-body-md text-sm leading-7 text-on-surface-variant sm:text-base">{item.text}</p>
-                      </motion.div>
-                    );
-                  })}
+                  {detail.features.map((item, index) => (
+                    <motion.div
+                      key={item.text}
+                      className="flex flex-col justify-center gap-3 glass-panel rounded-[24px] p-6 transition-all hover:-translate-y-1 hover:border-primary-container/30"
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-40px' }}
+                      transition={{ duration: 0.4, delay: (index % 3) * 0.06 }}
+                    >
+                      <h3 className="font-headline-md text-lg leading-snug text-white sm:text-xl">{item.label}</h3>
+                      <p className="font-body-md text-sm leading-7 text-on-surface-variant sm:text-base">{item.text}</p>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
 
