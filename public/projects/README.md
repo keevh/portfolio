@@ -20,6 +20,7 @@ Naming rules:
 
 Current project slugs:
 
+- `bakery`
 - `lumen`
 - `trimly`
 - `alien-monster-hunter`

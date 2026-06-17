@@ -1,5 +1,132 @@
 [
   {
+    "id": "bakery",
+    "slug": "bakery",
+    "category": "fullstack",
+    "year": 2026,
+    "stack": [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS",
+      "Drizzle ORM",
+      "PostgreSQL",
+      "Zustand",
+      "Docker"
+    ],
+    "image": "/projects/bakery/hero/cover.png",
+    "gallery": [
+      "/projects/bakery/gallery/landing.png",
+      "/projects/bakery/gallery/menu.png",
+      "/projects/bakery/gallery/cart.png",
+      "/projects/bakery/gallery/checkout.png",
+      "/projects/bakery/gallery/about.png",
+      "/projects/bakery/gallery/blog.png",
+      "/projects/bakery/gallery/contact.png",
+      "/projects/bakery/gallery/404.png",
+      "/projects/bakery/gallery/admin.png",
+      "/projects/bakery/gallery/admin_orders.png",
+      "/projects/bakery/gallery/admin_products.png"
+    ],
+    "liveUrl": "https://bakery.keevh.dev",
+    "tags": [
+      {
+        "labelKey": "proj.frontend",
+        "color": "bg-secondary"
+      },
+      {
+        "labelKey": "proj.utility",
+        "color": "bg-primary-container"
+      }
+    ],
+    "links": [
+      {
+        "type": "demo",
+        "url": "https://bakery.keevh.dev",
+        "labelKey": "proj.demo",
+        "icon": "ExternalLink"
+      }
+    ],
+    "i18n": {
+      "es": {
+        "title": "Bakery",
+        "desc": "E-commerce full-stack para una panadería colombiana, con catálogo bilingüe, carrito, checkout y panel administrativo sobre Next.js, Drizzle y PostgreSQL.",
+        "highlights": [
+          "Problema: llevar el pedido al por mayor de una panadería artesanal a la web sin perder sus reglas de negocio reales",
+          "Arquitectura: app full-stack con arquitectura hexagonal por módulos (Next.js 16, React 19, Drizzle ORM y PostgreSQL)",
+          "Negocio: descuento por volumen, pedidos con 48h de anticipación y gestión de pedidos por estados desde el panel admin"
+        ],
+        "detail": {
+          "tagline": "Tienda full-stack para una panadería colombiana, con catálogo bilingüe, checkout con reglas de negocio reales y panel administrativo, sobre una arquitectura hexagonal.",
+          "role": "Diseño de producto, modelado del dominio y desarrollo full-stack.",
+          "timeline": "Proyecto personal",
+          "team": "1 desarrollador",
+          "context": "Panadería colombiana que vende al por mayor y para eventos. El reto era trasladar su operación a la web respetando sus reglas reales: mínimos por producto, tiempos de fermentación y descuentos por volumen.",
+          "features": [
+            { "text": "Tienda pública bilingüe (ES/EN) con catálogo por categorías: amasijos, hojaldres, dulces y galletería", "icon": "store" },
+            { "text": "Carrito y checkout con fecha de entrega, canal de contacto y mínimo de 48h de anticipación por fermentación", "icon": "cart" },
+            { "text": "Descuento por volumen del 15% en compras mayores a $100, con una única fuente de verdad compartida entre el carrito y la creación del pedido en el servidor", "icon": "shield" },
+            { "text": "Panel administrativo con autenticación, gestión de productos y seguimiento de pedidos por estados (pendiente, horneando, listo, entregado, cancelado)", "icon": "dashboard" },
+            { "text": "Backend en PostgreSQL con Drizzle ORM: esquema con restricciones e índices, datos seed y bootstrap automático", "icon": "server" }
+          ],
+          "outcomes": [
+            "Demuestra trabajo full-stack real: dominio, base de datos PostgreSQL, server actions y DevOps con Docker",
+            "Arquitectura hexagonal por módulos que mantiene la lógica de negocio aislada de la UI y la persistencia",
+            "Caso de estudio que comunica criterio de producto y modelado fiel de las reglas de un negocio real"
+          ],
+          "credentials": [
+            {
+              "label": "Admin email",
+              "value": "admin@bakery.com"
+            },
+            {
+              "label": "Admin password",
+              "value": "admin1234"
+            }
+          ]
+        }
+      },
+      "en": {
+        "title": "Bakery",
+        "desc": "Full-stack e-commerce for a Colombian bakery, with a bilingual catalog, cart, checkout, and admin panel built on Next.js, Drizzle, and PostgreSQL.",
+        "highlights": [
+          "Problem: bring an artisan bakery's wholesale ordering to the web without losing its real business rules",
+          "Architecture: full-stack app with a modular hexagonal architecture (Next.js 16, React 19, Drizzle ORM, and PostgreSQL)",
+          "Business: volume discount, 48h lead-time orders, and status-based order management from the admin panel"
+        ],
+        "detail": {
+          "tagline": "Full-stack storefront for a Colombian bakery, with a bilingual catalog, checkout driven by real business rules, and an admin panel, built on a hexagonal architecture.",
+          "role": "Product design, domain modeling, and full-stack development.",
+          "timeline": "Personal project",
+          "team": "1 developer",
+          "context": "A Colombian bakery selling wholesale and for events. The challenge was moving its operation online while honoring its real rules: per-product minimums, fermentation lead times, and volume discounts.",
+          "features": [
+            { "text": "Bilingual public storefront (ES/EN) with a category catalog: amasijos, hojaldres, sweets, and biscuits", "icon": "store" },
+            { "text": "Cart and checkout with delivery date, contact channel, and a 48h minimum lead time for fermentation", "icon": "cart" },
+            { "text": "15% volume discount on orders over $100, with a single source of truth shared between the cart and server-side order creation", "icon": "shield" },
+            { "text": "Admin panel with authentication, product management, and status-based order tracking (pending, baking, ready, delivered, cancelled)", "icon": "dashboard" },
+            { "text": "PostgreSQL backend with Drizzle ORM: schema with constraints and indexes, seed data, and automatic bootstrap", "icon": "server" }
+          ],
+          "outcomes": [
+            "Demonstrates real full-stack work: domain, PostgreSQL database, server actions, and DevOps with Docker",
+            "A modular hexagonal architecture that keeps business logic isolated from UI and persistence",
+            "A case study that communicates product thinking and faithful modeling of a real business's rules"
+          ],
+          "credentials": [
+            {
+              "label": "Admin email",
+              "value": "admin@bakery.com"
+            },
+            {
+              "label": "Admin password",
+              "value": "admin1234"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
     "id": "lumen",
     "slug": "lumen",
     "category": "fullstack",
