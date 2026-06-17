@@ -7,10 +7,10 @@
 % Compilar: lualatex cv_v3_custom.tex
 %-------------------------
 
-\documentclass[a4paper,10.5pt]{article}
+\documentclass[legalpaper,11pt]{article}
 
 \usepackage[
-  top=1.3cm, bottom=1.3cm, left=1.6cm, right=1.6cm
+  top=1.1cm, bottom=1.1cm, left=1.9cm, right=1.9cm
 ]{geometry}
 
 \usepackage[dvipsnames,table]{xcolor}
@@ -44,16 +44,17 @@
   {}{0em}
   {\MakeUppercase}
   [{\color{rule}\titlerule[1pt]}]
-\titlespacing{\section}{0pt}{10pt}{5pt}
+\titlespacing{\section}{0pt}{6pt}{3pt}
 
 % --- Listas -------------------------------------------------------------
 \setlist[itemize]{
-  leftmargin=1.1em, itemsep=1.2pt, topsep=2pt, parsep=0pt,
+  leftmargin=1.1em, itemsep=1.5pt, topsep=2pt, parsep=0pt,
   label=\textcolor{accent}{\small\textbullet}
 }
 
 \setlength{\parindent}{0pt}
 \pagestyle{empty}
+\linespread{1.0}
 
 % --- Helpers ------------------------------------------------------------
 % Entrada con titulo a la izquierda y fecha a la derecha
@@ -65,12 +66,23 @@
 % Subtitulo en itálica gris
 \newcommand{\subentry}[1]{{\color{muted}\itshape #1}\par\vspace{2pt}}
 % Pildora de stack
-\newcommand{\stack}[1]{{\color{accentdark}\small\itshape #1}\par\vspace{1pt}}
+\newcommand{\stack}[1]{{\color{accentdark}\small\itshape #1}\par\vspace{2pt}}
 % Item de la barra de habilidades
 \newcommand{\skillrow}[2]{%
   \noindent\begin{tabularx}{\textwidth}{@{}p{3.1cm}@{}X@{}}
     \textbf{\color{ink}#1} & #2
-  \end{tabularx}\par\vspace{2pt}
+  \end{tabularx}\par\vspace{2.5pt}
+}
+% Curso en una sola línea: titulo + institución gris, año a la derecha.
+% Se usa tabular* (no tabularx) porque la columna X hace expansión de prueba
+% que rompe con cambios de fuente/color en la misma celda.
+% #4 = URL del certificado: el título se vuelve enlace (accentdark) y se añade
+% un ícono de premio como pista de que abre algo.
+\newcommand{\course}[4]{%
+  \noindent\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    \href{#4}{\color{accentdark}\textbf{#1}}\,{\color{muted}\small$\cdot$\,#2}\,%
+      \href{#4}{\color{accent}\footnotesize\faAward} & {\color{muted}\small #3}
+  \end{tabular*}\par\vspace{3pt}
 }
 
 %-------------------------------------------------------------------------
@@ -78,10 +90,10 @@
 
 % ============ ENCABEZADO ============
 {\fontsize{26}{30}\selectfont\bfseries\color{ink} Kevin Andrés Gallardo Robles}\\[3pt]
-{\color{accent}\large Desarrollador Web Junior\, \textcolor{muted}{$|$}\, JavaScript \textcolor{muted}{$|$} React \textcolor{muted}{$|$} Node.js}\\[6pt]
-{\color{rule}\rule{\textwidth}{1pt}}\\[5pt]
+{\color{accent}\large Desarrollador Web Junior\, \textcolor{muted}{$|$}\, JavaScript \textcolor{muted}{$|$} React \textcolor{muted}{$|$} Node.js}\\[7pt]
+{\color{rule}\rule{\textwidth}{1pt}}\\[6pt]
 {\small
-\faGlobe~\href{https://keevh.dev/}{keevh.dev}\quad
+\faGlobe~Portafolio: \href{https://keevh.dev/}{keevh.dev}\quad
 \faGithub~\href{https://github.com/keevh}{github.com/keevh}\quad
 \faEnvelope~\href{mailto:andreskevin2606@gmail.com}{andreskevin2606@gmail.com}\quad
 \faWhatsapp~3172172768
@@ -104,7 +116,7 @@ Git/GitHub y disposición para aprender nuevas tecnologías según las necesidad
 \skillrow{Backend}{Node.js, Express, Fastify, APIs REST, autenticación, validación de datos}
 \skillrow{Bases de datos}{MongoDB, PostgreSQL, MySQL}
 \skillrow{Herramientas}{Git, GitHub, Docker, npm, pnpm, despliegue web, documentación técnica}
-\skillrow{Complementario}{Python, Java, IoT, MQTT, IA aplicada, Excel}
+\skillrow{Complementario}{Python, Java, C\#, IoT, MQTT, IA aplicada, Excel}
 
 % ============ PROYECTOS ============
 \section{Proyectos Destacados}
@@ -117,9 +129,9 @@ Git/GitHub y disposición para aprender nuevas tecnologías según las necesidad
   \item Persistencia local con \textbf{IndexedDB} para simular un flujo completo de compra y administración sin backend externo.
   \item Arquitectura por capas (\textbf{Repository Pattern}) que desacopla la UI del almacenamiento y queda lista para evolucionar hacia una API real.
 \end{itemize}
-\vspace{4pt}
+\vspace{2.5pt}
 
-\entry{Trimly~\textcolor{muted}{\small— Acortador de URLs open source y autoalojable}}{\href{https://github.com/keevh/trimly}{\color{accentdark}\small github.com/keevh/trimly}}
+\entry{Trimly~\textcolor{muted}{\small— Acortador de URLs open source y autoalojable}}{\href{https://trimly.keevh.dev}{\color{accentdark}\small trimly.keevh.dev}}
 \stack{TypeScript · Astro · React · Node.js · PostgreSQL · Docker}
 \begin{itemize}
   \small
@@ -127,7 +139,17 @@ Git/GitHub y disposición para aprender nuevas tecnologías según las necesidad
   \item Estadísticas públicas por enlace sin login, alias personalizados y expiración automática configurable.
   \item Borrado privado mediante token de gestión y \textbf{rate limiting por IP}; redirección separada del registro de analítica para no penalizar la latencia.
 \end{itemize}
-\vspace{4pt}
+\vspace{2.5pt}
+
+\entry{Bakery~\textcolor{muted}{\small— E-commerce de panadería full-stack}}{\href{https://bakery.keevh.dev}{\color{accentdark}\small bakery.keevh.dev}}
+\stack{Next.js 15 · React 19 · TypeScript · Tailwind CSS · Drizzle ORM · PostgreSQL · Zustand}
+\begin{itemize}
+  \small
+  \item Tienda en línea con catálogo de productos y panel administrativo para gestionar el negocio.
+  \item API REST propia para productos y pedidos sobre \textbf{PostgreSQL} con \textbf{Drizzle ORM} y manejo de estado con Zustand.
+  \item Arquitectura modular por capas (infraestructura y presentación) sobre Next.js App Router, con optimización SEO (sitemap y robots).
+\end{itemize}
+\vspace{2.5pt}
 
 \entry{Otros proyectos}{\textcolor{muted}{\small juegos web desde cero}}
 \begin{itemize}
@@ -152,5 +174,11 @@ Git/GitHub y disposición para aprender nuevas tecnologías según las necesidad
 \section{Educación}
 \entry{Universidad Industrial de Santander (UIS)}{2019 -- En curso}
 \subentry{Ingeniería de Sistemas — últimos semestres · Bucaramanga, Colombia}
+
+% ============ CURSOS ============
+\section{Cursos y Certificaciones}
+\course{Flutter — Móvil: De cero a experto}{DevTalles $\cdot$ Fernando Herrera $\cdot$ 50 h}{2026}{https://keevh.dev/cv/certificados/curso_flutter.pdf}
+\course{C\# TOTAL — Programador Experto en 28 días}{Udemy $\cdot$ Denis Panjuta $\cdot$ 37 h}{2026}{https://keevh.dev/cv/certificados/curso_csharp.pdf}
+\course{Nest: Desarrollo backend escalable con Node}{Udemy $\cdot$ DevTalles $\cdot$ Fernando Herrera $\cdot$ 24 h}{2026}{https://keevh.dev/cv/certificados/curso_nest.pdf}
 
 \end{document}
