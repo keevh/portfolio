@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { resolveProjects } from '../data/projects';
 
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -11,6 +11,7 @@ function getProjectHref(slug: string) {
 
 export function Projects() {
   const { t, language } = useLanguage();
+  const shouldReduceMotion = useReducedMotion();
 
   const projects = useMemo(
     () => resolveProjects(t as (key: string) => string, language),
@@ -24,10 +25,10 @@ export function Projects() {
       {/* Header */}
       <motion.div
         className="flex flex-col items-center text-center gap-4 mb-16"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+        whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-50px' }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: shouldReduceMotion ? 0 : 0.35, ease: [0.4, 0, 0.2, 1] }}
       >
         <span className="font-code-sm text-secondary uppercase tracking-widest block">{t('proj.subtitle')}</span>
         <h2 className="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface">{t('proj.title')}</h2>
@@ -40,11 +41,11 @@ export function Projects() {
           return (
             <motion.article
               key={project.id}
-              className={`glass-panel rounded-[24px] overflow-hidden group relative flex flex-col ${reversed ? 'md:flex-row-reverse' : 'md:flex-row'}`}
-              initial={{ opacity: 0, x: reversed ? 40 : -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className={`rounded-[24px] overflow-hidden group relative flex flex-col bg-white/[0.04] border border-white/10 ${reversed ? 'md:flex-row-reverse' : 'md:flex-row'}`}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+              whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.35, ease: [0.4, 0, 0.2, 1] }}
               whileHover={{ y: -6, boxShadow: '0 0 40px rgba(75,226,119,0.12)' }}
             >
               <a
