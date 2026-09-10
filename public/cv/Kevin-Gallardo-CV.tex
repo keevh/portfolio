@@ -19,7 +19,8 @@
 \usepackage{fontawesome5}
 \usepackage[hidelinks]{hyperref}
 \usepackage{tabularx}
-\usepackage[spanish]{babel}
+\usepackage{babel}
+\babelprovide[main]{spanish}
 
 % Fira Sans como fuente principal (provista por el paquete fira de TeX Live).
 % Bajo lualatex se carga vía fontspec con UTF-8 nativo, por eso NO se usa
@@ -96,18 +97,19 @@
 \faGlobe~Portafolio: \href{https://keevh.dev/}{keevh.dev}\quad
 \faGithub~\href{https://github.com/keevh}{github.com/keevh}\quad
 \faEnvelope~\href{mailto:andreskevin2606@gmail.com}{andreskevin2606@gmail.com}\quad
-\faWhatsapp~3172172768
+\faWhatsapp~\href{https://wa.me/573172172768?text=Hola\%20he\%20visto\%20tu\%20CV\%20y\%20me\%20gustar\%C3\%ADa\%20hablar\%20contigo\%20sobre\%20una\%20oportunidad\%20laboral.}{3172172768}
 }
 
 % ============ PERFIL ============
 \section{Perfil Profesional}
 \small
-Desarrollador web junior y estudiante de \textbf{Ingeniería de Sistemas} en últimos semestres,
-con experiencia práctica construyendo proyectos frontend y full stack con \textbf{JavaScript,
+\begin{sloppypar}
+Desarrollador web junior, estudiante de \textbf{Ingeniería de Sistemas} (último semestre), con disponibilidad inmediata para trabajar a tiempo completo. Cuento con experiencia práctica construyendo proyectos full stack con \textbf{JavaScript,
 TypeScript, React, Next.js, Astro, Node.js, Express} y \textbf{Fastify}, además de bases de
 datos relacionales y NoSQL. Oriento mi trabajo a interfaces web, consumo de APIs, lógica de
 negocio, persistencia de datos, rendimiento y diseño responsive, con buen manejo de
 Git/GitHub y disposición para aprender nuevas tecnologías según las necesidades del equipo.
+\end{sloppypar}
 
 % ============ HABILIDADES ============
 \section{Habilidades Técnicas}
@@ -173,7 +175,8 @@ Git/GitHub y disposición para aprender nuevas tecnologías según las necesidad
 % ============ EDUCACION ============
 \section{Educación}
 \entry{Universidad Industrial de Santander (UIS)}{2019 -- En curso}
-\subentry{Ingeniería de Sistemas — últimos semestres · Bucaramanga, Colombia}
+\subentry{Ingeniería de Sistemas — último semestre · Bucaramanga, Colombia}
+\subentry{Disponibilidad inmediata para trabajar a tiempo completo}
 
 % ============ CURSOS ============
 \section{Cursos y Certificaciones}
