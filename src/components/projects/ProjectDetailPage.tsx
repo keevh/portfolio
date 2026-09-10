@@ -433,6 +433,7 @@ export function ProjectDetailPage({ project }: Props) {
                         <img
                           src={item.src}
                           alt={`${content.title} thumbnail ${index + 1}`}
+                          loading="lazy"
                           className={`h-full w-full ${getImageClass(project.imageFit)}`}
                         />
                       </motion.button>
@@ -461,6 +462,7 @@ export function ProjectDetailPage({ project }: Props) {
                       <img
                         src={item.src}
                         alt={`${content.title} gallery ${index + 1}`}
+                        loading="lazy"
                         className={`h-28 w-full xl:h-40 ${getImageClass(project.imageFit)}`}
                       />
                     </motion.button>

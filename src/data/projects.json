@@ -14,19 +14,19 @@
       "Zustand",
       "Docker"
     ],
-    "image": "/projects/bakery/hero/cover.png",
+    "image": "/projects/bakery/hero/cover.avif",
     "gallery": [
-      "/projects/bakery/gallery/landing.png",
-      "/projects/bakery/gallery/menu.png",
-      "/projects/bakery/gallery/cart.png",
-      "/projects/bakery/gallery/checkout.png",
-      "/projects/bakery/gallery/about.png",
-      "/projects/bakery/gallery/blog.png",
-      "/projects/bakery/gallery/contact.png",
-      "/projects/bakery/gallery/404.png",
-      "/projects/bakery/gallery/admin.png",
-      "/projects/bakery/gallery/admin_orders.png",
-      "/projects/bakery/gallery/admin_products.png"
+      "/projects/bakery/gallery/landing.avif",
+      "/projects/bakery/gallery/menu.avif",
+      "/projects/bakery/gallery/cart.avif",
+      "/projects/bakery/gallery/checkout.avif",
+      "/projects/bakery/gallery/about.avif",
+      "/projects/bakery/gallery/blog.avif",
+      "/projects/bakery/gallery/contact.avif",
+      "/projects/bakery/gallery/404.avif",
+      "/projects/bakery/gallery/admin.avif",
+      "/projects/bakery/gallery/admin_orders.avif",
+      "/projects/bakery/gallery/admin_products.avif"
     ],
     "liveUrl": "https://bakery.keevh.dev",
     "tags": [
@@ -138,22 +138,22 @@
       "Tailwind CSS",
       "IndexedDB"
     ],
-    "image": "/projects/lumen/hero/screenshot_20260615_224439.png",
+    "image": "/projects/lumen/hero/screenshot_20260615_224439.avif",
     "imageFit": "contain",
     "gallery": [
-      "/projects/lumen/gallery/screenshot_20260615_224404.png",
-      "/projects/lumen/gallery/screenshot_20260615_224406.png",
-      "/projects/lumen/gallery/screenshot_20260615_224409.png",
-      "/projects/lumen/gallery/screenshot_20260615_224416.png",
-      "/projects/lumen/gallery/screenshot_20260615_224424.png",
-      "/projects/lumen/gallery/screenshot_20260615_224430.png",
-      "/projects/lumen/gallery/screenshot_20260615_224433.png",
-      "/projects/lumen/gallery/screenshot_20260615_224439.png",
-      "/projects/lumen/gallery/screenshot_20260615_224446.png",
-      "/projects/lumen/gallery/screenshot_20260615_224448.png",
-      "/projects/lumen/gallery/screenshot_20260615_224456.png",
-      "/projects/lumen/gallery/screenshot_20260615_224459.png",
-      "/projects/lumen/gallery/screenshot_20260615_224502.png"
+      "/projects/lumen/gallery/screenshot_20260615_224404.avif",
+      "/projects/lumen/gallery/screenshot_20260615_224406.avif",
+      "/projects/lumen/gallery/screenshot_20260615_224409.avif",
+      "/projects/lumen/gallery/screenshot_20260615_224416.avif",
+      "/projects/lumen/gallery/screenshot_20260615_224424.avif",
+      "/projects/lumen/gallery/screenshot_20260615_224430.avif",
+      "/projects/lumen/gallery/screenshot_20260615_224433.avif",
+      "/projects/lumen/gallery/screenshot_20260615_224439.avif",
+      "/projects/lumen/gallery/screenshot_20260615_224446.avif",
+      "/projects/lumen/gallery/screenshot_20260615_224448.avif",
+      "/projects/lumen/gallery/screenshot_20260615_224456.avif",
+      "/projects/lumen/gallery/screenshot_20260615_224459.avif",
+      "/projects/lumen/gallery/screenshot_20260615_224502.avif"
     ],
     "liveUrl": "https://lumen.keevh.dev/",
     "tags": [
@@ -213,7 +213,7 @@
             {
               "title": "Arquitectura general",
               "description": "La aplicación sigue una arquitectura por capas que separa la interfaz, los módulos de dominio y la persistencia local. Las pantallas no dependen directamente de IndexedDB, sino de una capa de acceso a datos inspirada en el Repository Pattern, lo que desacopla la UI del almacenamiento y facilita evolucionar el proyecto hacia una API real en el futuro.",
-               "image": "/projects/lumen/diagrams/system-architecture.png"
+               "image": "/projects/lumen/diagrams/system-architecture.avif"
             },
             {
               "title": "Modelo de datos y persistencia local",
@@ -221,7 +221,7 @@
                 "El sistema modela las entidades principales del dominio comercial, como productos, categorías, carrito, órdenes y configuración administrativa, distribuyéndolas entre IndexedDB, sessionStorage y localStorage según su propósito.", 
                 "IndexedDB se usa para datos estructurados y persistentes, sessionStorage para información temporal de la sesión y localStorage para preferencias o configuraciones simples. Esta separación mantiene la persistencia local organizada y facilita una futura evolución hacia una API real."
               ],
-              "image": "/projects/lumen/diagrams/Lumen_modelo_datos_persistencia.png"
+              "image": "/projects/lumen/diagrams/Lumen_modelo_datos_persistencia.avif"
             },
             {
               "title": "Estructura del proyecto",
@@ -230,7 +230,7 @@
                 "Las rutas agrupan las pantallas principales de la tienda, el checkout y el panel administrativo. Los componentes reutilizables concentran piezas comunes de la interfaz, mientras que los módulos de negocio contienen la lógica asociada a productos, categorías, carrito, órdenes y configuración comercial.",
                 "Además, el proyecto incluye datos seed para inicializar el entorno de demostración y una capa de almacenamiento encargada de centralizar el acceso a IndexedDB, sessionStorage y localStorage, evitando que las pantallas dependan directamente de los mecanismos de persistencia del navegador."
               ],
-               "image": "/projects/lumen/diagrams/project-structure.png"
+               "image": "/projects/lumen/diagrams/project-structure.avif"
             }
           ]
         }
@@ -273,17 +273,17 @@
             {
               "title": "System architecture",
               "description": "Summarizes the separation between actors, application, domain modules, and local persistence, showing why screens do not depend directly on IndexedDB.",
-               "image": "/projects/lumen/diagrams/system-architecture.png"
+               "image": "/projects/lumen/diagrams/system-architecture.avif"
             },
             {
               "title": "Data model and local persistence",
               "description": "Shows the main domain entities and how they are distributed across IndexedDB, sessionStorage, and localStorage inside the browser.",
-               "image": "/projects/lumen/diagrams/Lumen_modelo_datos_persistencia.png"
+               "image": "/projects/lumen/diagrams/Lumen_modelo_datos_persistencia.avif"
             },
             {
               "title": "Project structure",
               "description": "Shows the responsibility split across routes, reusable components, business modules, seed data, and the storage layer.",
-               "image": "/projects/lumen/diagrams/project-structure.png"
+               "image": "/projects/lumen/diagrams/project-structure.avif"
             }
           ]
         }
@@ -303,12 +303,12 @@
       "PostgreSQL",
       "Docker"
     ],
-    "image": "/projects/trimly/hero/screenshot_20260616_015358.png",
+    "image": "/projects/trimly/hero/screenshot_20260616_015358.avif",
     "gallery": [
-      "/projects/trimly/gallery/screenshot_20260616_015358.png",
-      "/projects/trimly/gallery/screenshot_20260616_015409.png",
-      "/projects/trimly/gallery/screenshot_20260616_015426.png",
-      "/projects/trimly/gallery/screenshot_20260616_015440.png"
+      "/projects/trimly/gallery/screenshot_20260616_015358.avif",
+      "/projects/trimly/gallery/screenshot_20260616_015409.avif",
+      "/projects/trimly/gallery/screenshot_20260616_015426.avif",
+      "/projects/trimly/gallery/screenshot_20260616_015440.avif"
     ],
     "liveUrl": "https://trimly.keevh.dev",
     "tags": [
