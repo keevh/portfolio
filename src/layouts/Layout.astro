@@ -50,6 +50,15 @@ const imageUrl = new URL(imagePath, site).toString();
     <meta name="theme-color" content="#111316" />
     <meta name="color-scheme" content="dark" />
 
+    <!-- Google Analytics: site-wide page-view tracking. -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-LJ6T1SSBLR"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-LJ6T1SSBLR');
+    </script>
+
     <ClientRouter />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
