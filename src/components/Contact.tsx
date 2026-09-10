@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Github, Linkedin } from 'lucide-react';
+import { Mail, Github } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 import { motion } from 'motion/react';
 
@@ -95,7 +95,6 @@ export function Contact() {
             {[
               { href: 'mailto:andreskevin2606@gmail.com', icon: <Mail size={20} />, label: 'andreskevin2606@gmail.com' },
               { href: 'https://github.com/keevh', icon: <Github size={20} />, label: 'github.com/keevh' },
-              { href: 'https://www.linkedin.com/in/keevh/', icon: <Linkedin size={20} />, label: 'linkedin.com/in/keevh' },
             ].map(({ href, icon, label }) => (
               <a
                 key={label}

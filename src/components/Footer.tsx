@@ -18,9 +18,6 @@ export function Footer() {
         <a className="font-code-sm text-on-surface-variant hover:text-primary transition-colors" href="https://github.com/keevh" target="_blank" rel="noopener noreferrer">
           Github
         </a>
-        <a className="font-code-sm text-on-surface-variant hover:text-primary transition-colors" href="https://www.linkedin.com/in/keevh/" target="_blank" rel="noopener noreferrer">
-          LinkedIn
-        </a>
       </div>
     </footer>
   );
