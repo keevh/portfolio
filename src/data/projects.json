@@ -127,6 +127,119 @@
     }
   },
   {
+    "id": "voltia",
+    "slug": "voltia",
+    "category": "hardware",
+    "year": 2026,
+    "stack": [
+      "React 19",
+      "Vite",
+      "TypeScript",
+      "Fastify",
+      "MQTT",
+      "Docker"
+    ],
+    "image": "/projects/voltia/hero/register.png",
+    "gallery": [
+      "/projects/voltia/hero/register.png",
+      "/projects/voltia/hero/dashboard.png",
+      "/projects/voltia/hero/consumption.png",
+      "/projects/voltia/hero/devices.png",
+      "/projects/voltia/hero/settings.png"
+    ],
+    "liveUrl": "https://voltia.keevh.dev",
+    "tags": [
+      {
+        "labelKey": "proj.hardware",
+        "color": "bg-secondary"
+      },
+      {
+        "labelKey": "proj.energy",
+        "color": "bg-primary-container"
+      },
+      {
+        "labelKey": "proj.ds",
+        "color": "bg-[#7318ff]"
+      }
+    ],
+    "links": [
+      {
+        "type": "demo",
+        "url": "https://voltia.keevh.dev",
+        "labelKey": "proj.demo",
+        "icon": "ExternalLink"
+      },
+      {
+        "type": "repo",
+        "url": "https://github.com/keevh/voltiaz",
+        "labelKey": "proj.repo",
+        "icon": "Github"
+      }
+    ],
+    "i18n": {
+      "es": {
+        "title": "Voltia",
+        "desc": "Plataforma de monitoreo energético para el hogar que centraliza telemetría, consumo y dispositivos conectados, con una hoja de ruta NILM para reconocer electrodomésticos mediante machine learning.",
+        "highlights": [
+          "Problema: hacer visible el consumo eléctrico doméstico y los eventos de los dispositivos desde un único punto de monitoreo",
+          "Arquitectura: monorepo con frontend React/Vite y API Fastify organizada por módulos de dominio",
+          "NILM + ML: hoja de ruta para reconocer electrodomésticos desde un único punto de medición a partir de sus firmas eléctricas y eventos de consumo"
+        ],
+        "detail": {
+          "tagline": "Plataforma IoT para observar el consumo energético doméstico, gestionar dispositivos y evolucionar hacia el reconocimiento de electrodomésticos con NILM y machine learning.",
+          "role": "Desarrollo de la plataforma web y arquitectura de servicios.",
+          "timeline": "Proyecto académico",
+          "team": "Proyecto colaborativo",
+          "context": "Voltia reúne la gestión de hogares, medidores y electrodomésticos con datos de consumo eléctrico. Su hoja de ruta incorpora NILM (desagregación energética no intrusiva): inferir qué equipos consumen desde un único punto de medición, sin instalar un sensor en cada electrodoméstico. La demo pública usa datos de ejemplo para mostrar el flujo de la plataforma.",
+          "features": [
+            { "label": "Panel energético", "text": "Dashboard para consultar el consumo del hogar y su evolución desde una interfaz web." },
+            { "label": "Dispositivos y medidores", "text": "Registro y administración de viviendas, medidores y electrodomésticos conectados." },
+            { "label": "Telemetría y eventos", "text": "Ingesta de telemetría y flujo de detección, sugerencia y confirmación de eventos de consumo." },
+            { "label": "Reconocimiento NILM con ML", "text": "Línea de evolución para clasificar electrodomésticos a partir de sus firmas eléctricas: métricas de potencia, transitorios, geometría de curvas V–I, armónicos y descriptores estadísticos capturados desde un único medidor." },
+            { "label": "API modular", "text": "API en Fastify separada en módulos de autenticación, consumo, telemetría, dispositivos, privacidad y actualizaciones OTA." },
+            { "label": "Despliegue reproducible", "text": "Despliegue de la demo en Azure mediante Docker, Caddy y HTTPS, automatizable con GitHub Actions." }
+          ],
+          "outcomes": [
+            "La demo permite recorrer el consumo semanal, el costo estimado, la distribución por equipo y el ranking de los cinco electrodomésticos registrados",
+            "El flujo de producto ya cubre registrar una vivienda, asociar un medidor, administrar equipos y consultar su consumo desde una sola interfaz",
+            "La especificación NILM define las señales que alimentarán el modelo: potencia, armónicos, transitorios y geometría V–I capturados por el medidor",
+            "El despliegue en Azure publica una versión de demostración con Docker, Caddy y HTTPS"
+          ]
+        }
+      },
+      "en": {
+        "title": "Voltia",
+        "desc": "Home energy-monitoring platform that brings together telemetry, consumption, and connected devices, with a NILM roadmap for recognizing appliances through machine learning.",
+        "highlights": [
+          "Problem: make household electricity consumption and appliance events visible from a single monitoring point",
+          "Architecture: monorepo with a React/Vite frontend and a Fastify API organized around domain modules",
+          "NILM + ML: roadmap for recognizing appliances from a single measurement point using their electrical signatures and consumption events"
+        ],
+        "detail": {
+          "tagline": "An IoT platform for observing home energy use, managing devices, and evolving toward appliance recognition with NILM and machine learning.",
+          "role": "Web-platform development and service architecture.",
+          "timeline": "Academic project",
+          "team": "Collaborative project",
+          "context": "Voltia combines home, meter, and appliance management with electricity-consumption data. Its roadmap includes NILM (non-intrusive load monitoring): inferring which appliances are consuming from a single measurement point, without placing a sensor on every device. The public demo uses sample data to show the platform flow.",
+          "features": [
+            { "label": "Energy dashboard", "text": "Dashboard to consult household consumption and its evolution from a web interface." },
+            { "label": "Devices & meters", "text": "Registration and management of homes, meters, and connected appliances." },
+            { "label": "Telemetry & events", "text": "Telemetry ingestion and a flow for detecting, suggesting, and confirming consumption events." },
+            { "label": "NILM recognition with ML", "text": "An evolution path for classifying appliances from their electrical signatures: power metrics, transients, V–I curve geometry, harmonics, and statistical descriptors captured by a single meter." },
+            { "label": "Modular API", "text": "Fastify API split into authentication, consumption, telemetry, device, privacy, and OTA-update modules." },
+            { "label": "Reproducible deployment", "text": "Azure demo deployment with Docker, Caddy, and HTTPS, automatable through GitHub Actions." }
+          ],
+          "outcomes": [
+            "The demo lets visitors explore weekly consumption, estimated cost, per-appliance distribution, and the ranking of the five registered appliances",
+            "The product flow already covers registering a home, linking a meter, managing appliances, and checking their consumption from one interface",
+            "The NILM specification defines the signals that will feed the model: power, harmonics, transients, and V–I geometry captured by the meter",
+            "The Azure deployment publishes a demo version with Docker, Caddy, and HTTPS"
+          ]
+        }
+      }
+    }
+  },
+  {
     "id": "lumen",
     "slug": "lumen",
     "category": "fullstack",
