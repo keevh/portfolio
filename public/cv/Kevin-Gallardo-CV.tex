@@ -17,8 +17,10 @@
 \usepackage{enumitem}
 \usepackage{titlesec}
 \usepackage{fontawesome5}
+\usepackage{graphicx}
 \usepackage[hidelinks]{hyperref}
 \usepackage{tabularx}
+\usepackage{tikz}
 \usepackage{babel}
 \babelprovide[main]{spanish}
 
@@ -85,13 +87,27 @@
       \href{#4}{\color{accent}\footnotesize\faAward} & {\color{muted}\small #3}
   \end{tabular*}\par\vspace{3pt}
 }
+% Foto de perfil circular para el encabezado.
+\newcommand{\profilephoto}{%
+  \begin{tikzpicture}[baseline=(current bounding box.center)]
+    \clip (0,0) circle (1cm);
+    \node at (0,0) {\includegraphics[width=2cm,height=2cm]{Kevin-Gallardo-photo.png}};
+    \draw[accent, line width=0.8pt] (0,0) circle (1cm);
+  \end{tikzpicture}%
+}
 
 %-------------------------------------------------------------------------
 \begin{document}
 
 % ============ ENCABEZADO ============
+\noindent
+\begin{minipage}[c]{0.76\textwidth}
 {\fontsize{26}{30}\selectfont\bfseries\color{ink} Kevin Andrés Gallardo Robles}\\[3pt]
-{\color{accent}\large Desarrollador Web Junior\, \textcolor{muted}{$|$}\, JavaScript \textcolor{muted}{$|$} React \textcolor{muted}{$|$} Node.js}\\[7pt]
+{\color{accent}\large Desarrollador Web Junior\, \textcolor{muted}{$|$}\, JavaScript \textcolor{muted}{$|$} React \textcolor{muted}{$|$} Node.js}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.20\textwidth}
+\centering\profilephoto
+\end{minipage}\\[1pt]
 {\color{rule}\rule{\textwidth}{1pt}}\\[6pt]
 {\small
 \faGlobe~Portafolio: \href{https://keevh.dev/}{keevh.dev}\quad

@@ -76,7 +76,7 @@ function ParallaxPhoto({ src }: { src: string }) {
         style={{ x, y }}
         src={src}
         alt="Kevin Gallardo"
-        className="relative h-80 sm:h-96 lg:h-[520px] w-auto object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)] scale-x-[-1]"
+        className="relative h-72 w-72 sm:h-80 sm:w-80 lg:h-88 lg:w-88 rounded-full object-cover drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
         draggable={false}
       />
 
